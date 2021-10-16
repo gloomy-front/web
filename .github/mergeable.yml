@@ -1,0 +1,132 @@
+version: 2
+mergeable:
+  - when: pull_request.opened
+    name: "Greet a contributor"
+    validate: []
+    pass:
+      - do: assign
+        assignees: [ '@author' ] # only array accepted, use @author for PR/Issue author
+      - do: request_review
+        reviewers: ['Lee-sungheon', 'hyemingway2']
+      - do: labels
+        labels: [ 'status: pending' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'feat'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: feat' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'build'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: build' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'chore'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: chore' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'style'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: style' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'ci'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: ci' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'docs'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: docs' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'fix'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: fix' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'perf'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: perf' ]
+        mode: 'add'
+  - when: pull_request.opened
+    name: "Set Type Label"
+    validate:
+      - do: title
+        must_include:
+          regex: 'refactor'
+          message: 'Custom message...'
+    pass:
+      - do: labels
+        labels: [ 'type: refactor' ]
+        mode: 'add'
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check'
+    validate:
+      - do: approvals
+        required:
+          reviewers: [ Lee-sungheon, hyemingway2 ]
+          owners: false # Optional boolean. When true, the file .github/CODEOWNERS is read and owners made required reviewers
+          assignees: true # Optional boolean. When true, PR assignees are made required reviewers.
+          requested_reviewers: true # Optional boolean. When true, all the requested reviewer's approval is required
+          message: 'required'
+        block:
+          changes_requested: true # If true, block all approvals when one of the reviewers gave 'changes_requested' review
+          message: 'block'
+    pass:
+      - do: labels
+        labels: [ 'status: pending' ]
+        mode: 'delete'
+      - do: labels
+        labels: [ 'status: approved' ]
+        mode: 'add'

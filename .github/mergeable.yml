@@ -23,7 +23,7 @@ mergeable:
         labels: [ 'type: feat' ]
         mode: 'add'
   - when: pull_request.opened
-    name: "Set Type Label ss"
+    name: "Set Type Label"
     validate:
       - do: title
         must_include:

@@ -18,8 +18,12 @@
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@types/react": "17.0.30",
+<<<<<<< Updated upstream
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
+=======
+    "babel-plugin-styled-components": "^1.13.2",
+>>>>>>> Stashed changes
     "eslint": "8.0.1",
     "eslint-config-next": "11.1.2",
     "husky": "^7.0.0",

@@ -47,7 +47,7 @@ const Home: NextPage = () => {
           >
             <h2>Deploy &rarr;</h2>
             <p>
-              ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+              ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
             </p>
           </a>
         </div>

@@ -3,7 +3,12 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
+
 const Home: NextPage = () => {
+  const StyledDiv = styled.div`
+    background: yellow;
+  `;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -46,7 +51,7 @@ const Home: NextPage = () => {
           >
             <h2>Deploy &rarr;</h2>
             <p>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</p>
-            <DefaultStyle>hhhhh</DefaultStyle>
+            <StyledDiv>hhhhh</StyledDiv>
           </a>
         </div>
       </main>
@@ -66,9 +71,5 @@ const Home: NextPage = () => {
     </div>
   );
 };
-
-const DefaultStyle = styled.div`
-  background: yellow;
-`;
 
 export default Home;

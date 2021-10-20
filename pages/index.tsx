@@ -2,8 +2,13 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import styled from "styled-components";
 
 const Home: NextPage = () => {
+  const StyledDiv = styled.div`
+    background: yellow;
+  `;
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,9 +22,8 @@ const Home: NextPage = () => {
           Welcome to <a href="https://nextjs.org">혜밍웨이Next.js!</a>
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
+        <p>
+          Get started by editing <code>pages/index.js</code>
         </p>
 
         <div className={styles.grid}>
@@ -46,9 +50,8 @@ const Home: NextPage = () => {
             className={styles.card}
           >
             <h2>Deploy &rarr;</h2>
-            <p>
-              ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-            </p>
+            <p>ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</p>
+            <StyledDiv>hhhhh</StyledDiv>
           </a>
         </div>
       </main>

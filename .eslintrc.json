@@ -1,11 +1,6 @@
-// {
-//   "extends": "next/core-web-vitals"
-// } //20.10.17 Ham :: 주석처리
-
-//20.10.17 Ham :: 새로 삽입
+// .eslintrc.json
 {
   "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "plugin:prettier/recommended", "airbnb"],
   "rules": {
     "prettier/prettier": "error"
   }

@@ -5,5 +5,10 @@ myNextApplication:
       defaultLambda: GloomyLambda
       imageLambda: GloomyImageLambda
     bucketRegion: 'ap-northeast-2'
+    bucketName: 'gloomy-font-dev'
+    publicDirectoryCache:
+      value: public, max-age=31536000
+      test: /\.(gif|jpe?g|png|txt|xml)$/i
     cloudfront:
-      comment: 'next deploy'
+      distributionId: 'E2E4KZPO6OJ4XU'
+      comment: 'gloomy front dev'

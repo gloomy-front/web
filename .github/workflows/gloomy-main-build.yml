@@ -1,15 +1,15 @@
 name: GLOOMY MAIN BUILD
 on:
   push:
-    branches: gloomy/dev
+    branches: ci/serverless
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code.
-        uses: actions/checkout@gloomy/dev
+        uses: actions/checkout@ci/serverless
         with:
-          ref: gloomy/dev
+          ref: ci/serverless
 
       - name: Install Dependencies
         run: |

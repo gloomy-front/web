@@ -1,15 +1,15 @@
 import styled from "styled-components";
+import { flexColCenter } from "@/styles/theme";
 
-const StyledDiv = styled.div`
-  background-color: yellow;
-  width: 100vw;
-  height: 100vh;
+const CenterContainer = styled.div`
+  ${flexColCenter};
+  color: ${props => props.theme.RED};
 `;
 
-const Home = (): JSX.Element => {
+const IndexPage = (): JSX.Element => {
   return (
-    <StyledDiv>Gloomy Front</StyledDiv>
+    <CenterContainer>Gloomy Front</CenterContainer>
   );
 };
 
-export default Home;
+export default IndexPage;

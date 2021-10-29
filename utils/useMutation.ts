@@ -35,7 +35,8 @@ export interface Options<Input, Data, Error> {
 
 type Status = 'idle' | 'running' | 'success' | 'failure';
 
-function noop() {}
+function noop() {
+}
 
 function useGetLatest<Value>(value: Value): () => Value {
   const ref = useRef<Value>(value);
@@ -62,9 +63,7 @@ export default function useMutation<Input = any, Data = any, Error = any>(
     | { type: 'SUCCESS'; data: Data }
     | { type: 'FAILURE'; error: Error };
 
-  const [{ status, data, error }, unsafeDispatch] = useReducer<
-    Reducer<State, Action>
-    >(
+  const [{ status, data, error }, unsafeDispatch] = useReducer<Reducer<State, Action>>(
     function reducer(_, action) {
       if (action.type === 'RESET') {
         return { status: 'idle' };
@@ -90,10 +89,8 @@ export default function useMutation<Input = any, Data = any, Error = any>(
 
   const mutate = useCallback(async function mutate(
     input: Input,
-    config: Omit<
-      Options<Input, Data, Error>,
-      'onMutate' | 'useErrorBoundary'
-      > = {}
+    config: Omit<Options<Input, Data, Error>,
+      'onMutate' | 'useErrorBoundary'> = {}
     ) {
       const mutation = Date.now();
       latestMutation.current = mutation;

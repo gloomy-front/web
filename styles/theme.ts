@@ -1,10 +1,12 @@
-import { createGlobalStyle, css } from "styled-components";
+import { createGlobalStyle, css } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     height: 100vh;
-  },
+  }
+
+  ,
 `;
 
 export const flexColCenter = css`

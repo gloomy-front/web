@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { flexColCenter } from "@/styles/theme";
+import styled from 'styled-components';
+import { flexColCenter } from '@/styles/theme';
 
 const CenterContainer = styled.div`
   ${flexColCenter};

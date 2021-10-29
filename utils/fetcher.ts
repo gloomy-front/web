@@ -18,6 +18,7 @@ type RequestProps = {
 
 type ApiSuccess = ApiData
 type ApiFail = ApiData
+
 interface ErrorCode {
   errorCode: string | boolean;
   data?: any;

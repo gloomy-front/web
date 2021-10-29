@@ -1,8 +1,8 @@
-import type { AppProps } from "next/app";
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from "styled-components";
-import { COLOR } from "@/styles/index";
-import { GlobalStyles } from "@/styles/index";
+import { ThemeProvider } from 'styled-components';
+import { COLOR } from '@/styles/index';
+import { GlobalStyles } from '@/styles/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,12 +17,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
         <meta name="theme-color" content="#f8f8f7"/>
 
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"/>
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"/>
 
         <meta name="msapplication-TileColor" content="#f8f8f7"/>
       </Head>
       <ThemeProvider theme={COLOR}>
-        <GlobalStyles />
+        <GlobalStyles/>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

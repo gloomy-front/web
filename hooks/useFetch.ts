@@ -21,7 +21,7 @@ export type FetchReturnType = Promise<{
 }>;
 
 // @ts-ignore
-export const fetcher = async<T> (url: string): ApiData<T> => {
+export const fetcher = async <T>(url: string): ApiData<T> => {
   const authToken = '';
   const config = authToken ? { headers: { Authorization: `Bearer ${authToken}` }} : { headers: {}};
 

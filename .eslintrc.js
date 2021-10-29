@@ -5,12 +5,15 @@ module.exports = {
   extends: [
     "plugin:react/recommended",
     "airbnb",
-    "prettier", // new
-    "prettier/@typescript-eslint", // new
-    "prettier/react", // new
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react",
+    "next"
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
+    project: ["./tsconfig.json"],
+    tsconfigRootDir: __dirname,
     ecmaFeatures: {
       jsx: true,
     },

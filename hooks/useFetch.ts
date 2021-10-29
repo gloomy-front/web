@@ -28,7 +28,7 @@ export const fetcher = async<T> (url: string): ApiData<T> => {
   try {
     const res = await axios.get(url, config);
     return res.data;
-  } catch (e) {
+  } catch (e: any) {
     if (e.response.status === 401) {
       console.log('Your token invalid');
     }
@@ -36,7 +36,7 @@ export const fetcher = async<T> (url: string): ApiData<T> => {
   }
 };
 
-export const useFetch = ({ method = 'GET', url = '/', config = {}, apiUrl = API_URL }: RequestProps) => {
+export const useFetch = ({ method = 'GET', url = '/', config = {}, apiUrl = '/' }: RequestProps) => {
   const apiURL = `${apiUrl}${url}`;
 
   return (data?: any): FetchReturnType => {

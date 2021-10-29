@@ -116,18 +116,23 @@ export default function useMutation<Input = any, Data = any, Error = any>(
 
         return data;
       } catch (error) {
+        // @ts-ignore
         await onFailure({ error, rollback, input });
+        // @ts-ignore
         await (config.onFailure ?? noop)({ error, rollback, input });
 
+        // @ts-ignore
         await onSettled({ status: 'failure', error, input, rollback });
         await (config.onSettled ?? noop)({
           status: 'failure',
+          // @ts-ignore
           error,
           input,
           rollback,
         });
 
         if (latestMutation.current === mutation) {
+          // @ts-ignore
           safeDispatch({ type: 'FAILURE', error });
         }
 

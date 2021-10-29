@@ -1,27 +1,32 @@
 module.exports = {
-  env: {
-    es2021: true,
+  "root": true,
+  'env': {
+    'browser': true
   },
-  extends: [
-    "plugin:react/recommended",
-    "airbnb",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react",
+  'rules': {
+    'semi': 'warn',
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'no-empty-function': 'warn',
+    'object-curly-spacing': [
+      2,
+      'always',
+      {
+        'arraysInObjects': false,
+        'objectsInObjects': false
+      }
+    ],
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'react-hooks/rules-of-hooks': 'off',
+  },
+  "extends": [
     "next"
   ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: ["./tsconfig.json"],
-    tsconfigRootDir: __dirname,
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: "module",
-  },
-  plugins: ["react", "@typescript-eslint"],
-  rules: {
-    "prettier/prettier": ["error"], // new
-  },
-};
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "tsconfigRootDir": __dirname,
+  }
+}

@@ -29,6 +29,12 @@ export const Layout = {
     justify-content: flex-start;
     align-items: center;
   `,
+  flexColCenterStart: css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  `,
   flexColStartStart: css`
     display: flex;
     flex-direction: column;

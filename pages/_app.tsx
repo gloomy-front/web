@@ -1,8 +1,11 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import { COLOR } from '@/styles/index';
-import { GlobalStyles } from '@/styles/index';
+
+import { COLOR, GlobalStyles } from '@/styles/index';
+import { AsyncBoundary } from '@/components/error';
+import { Loading } from '@/components/molcules';
+import CommunityPage from '@/pages/community';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -24,7 +27,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ThemeProvider theme={COLOR}>
         <GlobalStyles/>
-        <Component {...pageProps} />
+        <AsyncBoundary
+          pendingFallback={<Loading />}
+          rejectedFallback={() => <CommunityPage />}
+          onError={() => {}}
+        >
+          <Component {...pageProps} />
+        </AsyncBoundary>
       </ThemeProvider>
     </>
   );

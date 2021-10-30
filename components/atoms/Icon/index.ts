@@ -1,11 +1,14 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, CSSProperties } from 'react';
 
 export type SVGIconProps = {
   fill?: string;
   height?: string;
   className?: string;
   onClick?: MouseEventHandler<SVGElement> | undefined;
+  style?: CSSProperties;
 };
 
 export { default as Heart } from './Heart';
 export { default as Comment } from './Comment';
+export { default as MyProfile } from './MyProfile';
+export { default as Search } from './Search';

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { AsyncBoundary } from '@/components/error';
 import { BoardLoading, PostItem } from '@/components/organisms';
 import { Layout } from '@/styles/theme';
 
@@ -18,13 +17,7 @@ export default function PostList(): JSX.Element {
   }, []);
 
   return (
-    <AsyncBoundary
-      pendingFallback={
-        <BoundarySection>
-          <BoardLoading/>
-        </BoundarySection>}
-      isRefresh={true}
-    >
+    <>
       {isLoading ?
       <BoundarySection>
         <BoardLoading/>
@@ -36,7 +29,7 @@ export default function PostList(): JSX.Element {
         ))}
       </>
       }
-    </AsyncBoundary>
+    </>
   );
 }
 

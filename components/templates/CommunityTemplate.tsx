@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLOR, Layout } from '@/styles/index';
-import { Title, Span } from '@/components/atoms';
-import { PostList } from '@/components/organisms';
+import { Title, Span, Icon } from '@/components/atoms';
+import { AsyncBoundary, BoardLoading, PostList } from '@/components/organisms';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -27,6 +27,10 @@ const HeaderNav = styled.section`
   ${Layout.flexRowBetweenCenter};
   width: 100%;
   height: 40px;
+`;
+
+const HeaderButtonArea = styled.div`
+  ${Layout.flexRowCenter}
 `;
 
 const HeaderMain = styled.section`
@@ -65,6 +69,10 @@ export default function CommunityTemplate(): JSX.Element {
       <HeaderContainer>
         <HeaderNav>
           <Title>{'Grooming'}</Title>
+          <HeaderButtonArea>
+            <Icon.MyProfile height={'24px'} style={{ marginRight: '10px' }}/>
+            <Icon.Search height={'28px'}/>
+          </HeaderButtonArea>
         </HeaderNav>
         <HeaderMain>
           <Circle/>
@@ -74,7 +82,13 @@ export default function CommunityTemplate(): JSX.Element {
         </HeaderMain>
       </HeaderContainer>
       <ContentContainer>
-        <PostList/>
+        <AsyncBoundary
+          pendingFallback={<BoardLoading/>}
+          isRefresh={true}
+          style={{ height: 'calc(100vh - 140px)' }}
+        >
+          <PostList/>
+        </AsyncBoundary>
       </ContentContainer>
     </MainContainer>
   );

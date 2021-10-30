@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 
 import { COLOR, GlobalStyles } from '@/styles/index';
-import { AsyncBoundary } from '@/components/error';
+import { AsyncBoundary } from '@/components/organisms';
 import { Loading } from '@/components/molcules';
 import CommunityPage from '@/pages/community';
 
@@ -29,8 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <GlobalStyles/>
         <AsyncBoundary
           pendingFallback={<Loading />}
-          rejectedFallback={() => <CommunityPage />}
-          onError={() => {}}
+          rejectedFallback={<CommunityPage />}
         >
           <Component {...pageProps} />
         </AsyncBoundary>

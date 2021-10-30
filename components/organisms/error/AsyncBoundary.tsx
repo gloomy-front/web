@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react';
+import { ComponentProps, CSSProperties, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 
 import { Layout } from '@/styles/index';
@@ -14,21 +14,22 @@ type ErrorBoundaryProps = ComponentProps<typeof ErrorBoundary>;
 
 interface Props extends Omit<ErrorBoundaryProps, 'renderFallback'> {
   pendingFallback: ComponentProps<typeof SSRSafeSuspense>['fallback'];
-  rejectedFallback?: ErrorBoundaryProps['fallbackRender'];
+  rejectedFallback?: ErrorBoundaryProps['fallback'];
   isRefresh?: boolean;
-  height?: string;
+  style?: CSSProperties;
   onError?: (error: Error, info: { componentStack: string }) => void;
+  children?: ReactNode;
 }
 
 const RefreshButton = ({
                          dispatch,
-                         height
+                         style
                        }: {
   dispatch: (flag: boolean) => void;
-  height?: string | number;
+  style?: CSSProperties;
 }): JSX.Element => {
   return (
-    <ButtonSection style={{ height: height }}>
+    <ButtonSection style={style}>
       <button
         style={{ padding: '5px' }}
         onClick={() => {
@@ -49,7 +50,7 @@ function AsyncBoundary({
                          pendingFallback,
                          rejectedFallback,
                          isRefresh,
-                         height,
+                         style,
                          onError,
                          children,
                          ...errorBoundaryProps
@@ -57,7 +58,7 @@ function AsyncBoundary({
   const [refresh, setRefresh] = useState<boolean>(false);
   return (
     <ErrorBoundary
-      fallbackRender={rejectedFallback}
+      fallback={rejectedFallback}
       resetKeys={[refresh]}
       onError={(error, info) => {
         isRefresh && setRefresh(true);
@@ -66,7 +67,7 @@ function AsyncBoundary({
       {...errorBoundaryProps}
     >
       <SSRSafeSuspense fallback={pendingFallback}>
-        {!refresh ? children : <RefreshButton dispatch={(flag) => setRefresh(flag)} height={height} />}
+        {!refresh ? children : <RefreshButton dispatch={(flag) => setRefresh(flag)} style={style} />}
       </SSRSafeSuspense>
     </ErrorBoundary>
   );

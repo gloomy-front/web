@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { AsyncBoundary } from '@/components/error';
@@ -10,6 +11,12 @@ const BoundarySection = styled.section`
 `;
 
 export default function PostList(): JSX.Element {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 3000);
+  }, []);
+
   return (
     <AsyncBoundary
       pendingFallback={
@@ -18,9 +25,17 @@ export default function PostList(): JSX.Element {
         </BoundarySection>}
       isRefresh={true}
     >
-      {FAKE_DATA.map((post) => (
-        <PostItem key={post.pk} post={post}/>
-      ))}
+      {isLoading ?
+      <BoundarySection>
+        <BoardLoading/>
+      </BoundarySection>
+      :
+      <>
+        {FAKE_DATA.map((post) => (
+          <PostItem key={post.pk} post={post}/>
+        ))}
+      </>
+      }
     </AsyncBoundary>
   );
 }

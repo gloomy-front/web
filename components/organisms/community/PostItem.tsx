@@ -1,8 +1,12 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import img from 'next/image';
+
 import { Layout, COLOR } from '@/styles/index';
 import { Span, Icon } from '@/components/atoms';
+import { Popup, Dropdown } from '@/components/molcules';
 import { useCalcRegisterDate } from '@/hooks/index';
+import { DROPDOWN_LIST } from '@/constants/index';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -38,7 +42,7 @@ const ContentSection = styled.div`
 
 const ContentSpan = styled(Span)`
   margin-bottom: 12px;
-  
+
   display: -webkit-box;
   word-wrap: break-word;
   overflow: hidden;
@@ -64,59 +68,109 @@ const ButtonArea = styled.div`
 `;
 
 export default function PostItem({ post }: { post: any }): JSX.Element {
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState<boolean>(false);
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
+  const [moreItem, setMoreItem] = useState<string>('');
+
+  useEffect(() => {
+    const clickOut = (e: MouseEvent) => {
+      if (e.target) {
+        setShowMore(false);
+      }
+    };
+    window.addEventListener('click', (e) => clickOut(e));
+    return window.removeEventListener('click', (e) => clickOut(e));
+  }, []);
+
+  useEffect(() => {
+    if (moreItem === '삭제') {
+      setShowPopup(true);
+      setMoreItem('');
+    }
+  }, [moreItem]);
 
   return (
-    <ItemSection>
-      <HeaderSection>
-        <div>
-          <Circle color={post.color}/>
-        </div>
-        <TitleSection>
-          <Span>
-            {post.title}
-          </Span>
+    <>
+      <ItemSection>
+        <HeaderSection>
+          <div>
+            <Circle color={post.color}/>
+          </div>
+          <TitleSection>
+            <Span>
+              {post.title}
+            </Span>
+            <Span style={{ fontSize: '10px' }}>
+              {registerDate}
+            </Span>
+          </TitleSection>
+          <div style={{ position: 'relative' }}>
+            <Icon.More style={{ cursor: 'pointer' }} onClick={(e) => { e.stopPropagation(); setShowMore(!showMore); }}/>
+            <Dropdown itemList={DROPDOWN_LIST} isVisible={showMore} closeDispatch={() => setShowMore(false)}
+                      selectDispatch={(v) => setMoreItem(v)}/>
+          </div>
+        </HeaderSection>
+        <ContentSection>
+          <ContentSpan>
+            {post.content}
+          </ContentSpan>
+          {post.thumbnail &&
+          <img
+            src={post.thumbnail}
+            alt={'thumnail'}
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+              borderRadius: '10px',
+              marginBottom: '12px'
+            }}
+          />}
+        </ContentSection>
+        <FooterSection>
+          <ButtonSection>
+            <ButtonArea>
+              <Icon.Heart height={'12px'}/>
+              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
+                {` 공감해요 ${post.likeCount}`}
+              </Span>
+            </ButtonArea>
+            <ButtonArea>
+              <Icon.Comment height={'14px'}/>
+              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
+                {`${post.commentCount}`}
+              </Span>
+            </ButtonArea>
+          </ButtonSection>
           <Span style={{ fontSize: '10px' }}>
-            {registerDate}
+            {post.createdAt}
           </Span>
-        </TitleSection>
-      </HeaderSection>
-      <ContentSection>
-        <ContentSpan>
-          {post.content}
-        </ContentSpan>
-        {post.thumbnail &&
-        <img
-          src={post.thumbnail}
-          alt={'thumnail'}
+        </FooterSection>
+      </ItemSection>
+
+      {showPopup && <Popup
+        useClose={true}
+        contentsStyle={{ width: '272px' }}
+        type={'TWO'}
+        successTitle={'확인'}
+        successCallback={() => {
+        }}
+        failTitle={'취소'}
+        failCallback={() => setShowPopup(false)}
+      >
+        <Span
           style={{
-            width: '100%',
-            height: '150px',
-            objectFit: 'cover',
-            borderRadius: '10px',
-            marginBottom: '12px'
-          }}
-        />}
-      </ContentSection>
-      <FooterSection>
-        <ButtonSection>
-          <ButtonArea>
-            <Icon.Heart height={'12px'}/>
-            <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-              {` 공감해요 ${post.likeCount}`}
-            </Span>
-          </ButtonArea>
-          <ButtonArea>
-            <Icon.Comment height={'14px'}/>
-            <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-              {`${post.commentCount}`}
-            </Span>
-          </ButtonArea>
-        </ButtonSection>
-        <Span style={{ fontSize: '10px' }}>
-          {post.createdAt}
+            color: COLOR.BLACK,
+            fontWeight: 600,
+            fontSize: '16px',
+            marginBottom: '25px',
+            marginTop: '14px',
+            display: 'block'
+          }}>
+          {'피드를 삭제하시겠어요?'}
         </Span>
-      </FooterSection>
-    </ItemSection>
+      </Popup>}
+    </>
   );
 }

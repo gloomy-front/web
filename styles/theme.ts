@@ -7,7 +7,9 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Noto Sans KR", sans-serif;
     color: #ffffff;
     background-color: #020615;
+    -ms-overflow-style: none;
   }
+  body::-webkit-scrollbar{ display:none; }
 `;
 
 export const Layout = {

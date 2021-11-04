@@ -10,3 +10,5 @@ export const POST_LIST_SIZE = 20;
 export const HOUR_TO_MIN = 60;
 export const DAY_TO_HOUR = 24;
 export const WEEK_TO_DAY = 7;
+
+export const DROPDOWN_LIST = ['삭제', '수정', '신고'];

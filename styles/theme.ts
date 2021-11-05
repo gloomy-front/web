@@ -25,6 +25,12 @@ export const Layout = {
     justify-content: flex-start;
     align-items: flex-end;
   `,
+  flexColEndCenter: css`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  `,
   flexColStartCenter: css`
     display: flex;
     flex-direction: column;

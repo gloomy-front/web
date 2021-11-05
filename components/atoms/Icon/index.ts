@@ -14,3 +14,4 @@ export { default as MyProfile } from './MyProfile';
 export { default as Search } from './Search';
 export { default as Close } from './Close';
 export { default as More } from './More';
+export { default as Check } from './Check';

@@ -12,3 +12,10 @@ export const DAY_TO_HOUR = 24;
 export const WEEK_TO_DAY = 7;
 
 export const DROPDOWN_LIST = ['삭제', '수정', '신고'];
+export const DECLARATION_LIST = {
+  advertisement: '광고 및 홍보성 내용',
+  abuse: '욕설 및 외설적인 언어 사용',
+  sensational: '선정적 · 폭력적 내용',
+  papering: '도배성 내용',
+  political: '정치적 · 사회적 의견 표출'
+};

@@ -1,4 +1,3 @@
-import { useState, forwardRef, ForwardedRef } from 'react';
 import styled from 'styled-components';
 
 import { Layout, COLOR } from '@/styles/index';

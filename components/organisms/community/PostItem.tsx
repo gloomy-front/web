@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import img from 'next/image';
 
 import { Layout, COLOR } from '@/styles/index';
 import { Span, Icon } from '@/components/atoms';
-import { Popup, Dropdown } from '@/components/molcules';
 import { useCalcRegisterDate } from '@/hooks/index';
-import { DROPDOWN_LIST } from '@/constants/index';
+import MoreComponent from './MoreComponent';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -68,27 +66,7 @@ const ButtonArea = styled.div`
 `;
 
 export default function PostItem({ post }: { post: any }): JSX.Element {
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [showMore, setShowMore] = useState<boolean>(false);
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
-  const [moreItem, setMoreItem] = useState<string>('');
-
-  useEffect(() => {
-    const clickOut = (e: MouseEvent) => {
-      if (e.target) {
-        setShowMore(false);
-      }
-    };
-    window.addEventListener('click', (e) => clickOut(e));
-    return window.removeEventListener('click', (e) => clickOut(e));
-  }, []);
-
-  useEffect(() => {
-    if (moreItem === '삭제') {
-      setShowPopup(true);
-      setMoreItem('');
-    }
-  }, [moreItem]);
 
   return (
     <>
@@ -105,11 +83,7 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
               {registerDate}
             </Span>
           </TitleSection>
-          <div style={{ position: 'relative' }}>
-            <Icon.More style={{ cursor: 'pointer' }} onClick={(e) => { e.stopPropagation(); setShowMore(!showMore); }}/>
-            <Dropdown itemList={DROPDOWN_LIST} isVisible={showMore} closeDispatch={() => setShowMore(false)}
-                      selectDispatch={(v) => setMoreItem(v)}/>
-          </div>
+          <MoreComponent />
         </HeaderSection>
         <ContentSection>
           <ContentSpan>
@@ -148,29 +122,6 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
           </Span>
         </FooterSection>
       </ItemSection>
-
-      {showPopup && <Popup
-        useClose={true}
-        contentsStyle={{ width: '272px' }}
-        type={'TWO'}
-        successTitle={'확인'}
-        successCallback={() => {
-        }}
-        failTitle={'취소'}
-        failCallback={() => setShowPopup(false)}
-      >
-        <Span
-          style={{
-            color: COLOR.BLACK,
-            fontWeight: 600,
-            fontSize: '16px',
-            marginBottom: '25px',
-            marginTop: '14px',
-            display: 'block'
-          }}>
-          {'피드를 삭제하시겠어요?'}
-        </Span>
-      </Popup>}
     </>
   );
 }

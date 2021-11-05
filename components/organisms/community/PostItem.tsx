@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import img from 'next/image';
+
 import { Layout, COLOR } from '@/styles/index';
 import { Span, Icon } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
+import MoreComponent from './MoreComponent';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -38,7 +40,7 @@ const ContentSection = styled.div`
 
 const ContentSpan = styled(Span)`
   margin-bottom: 12px;
-  
+
   display: -webkit-box;
   word-wrap: break-word;
   overflow: hidden;
@@ -67,56 +69,59 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
 
   return (
-    <ItemSection>
-      <HeaderSection>
-        <div>
-          <Circle color={post.color}/>
-        </div>
-        <TitleSection>
-          <Span>
-            {post.title}
-          </Span>
+    <>
+      <ItemSection>
+        <HeaderSection>
+          <div>
+            <Circle color={post.color}/>
+          </div>
+          <TitleSection>
+            <Span>
+              {post.title}
+            </Span>
+            <Span style={{ fontSize: '10px' }}>
+              {registerDate}
+            </Span>
+          </TitleSection>
+          <MoreComponent />
+        </HeaderSection>
+        <ContentSection>
+          <ContentSpan>
+            {post.content}
+          </ContentSpan>
+          {post.thumbnail &&
+          <img
+            src={post.thumbnail}
+            alt={'thumnail'}
+            style={{
+              width: '100%',
+              height: '150px',
+              objectFit: 'cover',
+              borderRadius: '10px',
+              marginBottom: '12px'
+            }}
+          />}
+        </ContentSection>
+        <FooterSection>
+          <ButtonSection>
+            <ButtonArea>
+              <Icon.Heart height={'12px'}/>
+              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
+                {` 공감해요 ${post.likeCount}`}
+              </Span>
+            </ButtonArea>
+            <ButtonArea>
+              <Icon.Comment height={'14px'}/>
+              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
+                {`${post.commentCount}`}
+              </Span>
+            </ButtonArea>
+          </ButtonSection>
           <Span style={{ fontSize: '10px' }}>
-            {registerDate}
+            {post.createdAt}
           </Span>
-        </TitleSection>
-      </HeaderSection>
-      <ContentSection>
-        <ContentSpan>
-          {post.content}
-        </ContentSpan>
-        {post.thumbnail &&
-        <img
-          src={post.thumbnail}
-          alt={'thumnail'}
-          style={{
-            width: '100%',
-            height: '150px',
-            objectFit: 'cover',
-            borderRadius: '10px',
-            marginBottom: '12px'
-          }}
-        />}
-      </ContentSection>
-      <FooterSection>
-        <ButtonSection>
-          <ButtonArea>
-            <Icon.Heart height={'12px'}/>
-            <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-              {` 공감해요 ${post.likeCount}`}
-            </Span>
-          </ButtonArea>
-          <ButtonArea>
-            <Icon.Comment height={'14px'}/>
-            <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-              {`${post.commentCount}`}
-            </Span>
-          </ButtonArea>
-        </ButtonSection>
-        <Span style={{ fontSize: '10px' }}>
-          {post.createdAt}
-        </Span>
-      </FooterSection>
-    </ItemSection>
+        </FooterSection>
+      </ItemSection>
+    </>
   );
 }

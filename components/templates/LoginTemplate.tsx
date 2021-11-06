@@ -14,7 +14,7 @@ const MainContainer = styled.main`
   background-color: ${({ theme }) => theme.BLACK};
 `;
 
-const TextContainer = styled.section`
+const TextArea = styled.div`
   ${Layout.flexRowStartCenter};
   width: 100%;
   height: 45px;
@@ -29,36 +29,34 @@ const LoginButtonContainer = styled.section`
   margin-top: 80%;
 `;
 
-export default function LoginTemplate(): JSX.Element {
-  const jsKey = '473b1a6bbe9f9cceeffa8a5a384fae27';
-  const kakaoScript = document.createElement('script');
-  kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
-  document.head.appendChild(kakaoScript);
-
-  const kakaoLoign = () => {
-    window.Kakao.init('473b1a6bbe9f9cceeffa8a5a384fae27');
-    window.Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:3000/kakao/signUp',
-    });
+declare const window: Window &
+  typeof globalThis & {
+    Kakao: any;
   };
 
-  //   const loginWithKakao = () => {
-  //     console.log('hello');
-  //     window.Kakao.Auth.authorize({
-  //       redirectUri: 'http://localhost:3000/kakao/signUp',
-  //     });
-  //   };
+export default function LoginTemplate(): JSX.Element {
+  const kakaoLoign = () => {
+    const kakaoScript = document.createElement('script');
+    kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+    document.head.appendChild(kakaoScript);
+    setTimeout(() => {
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
+      window.Kakao.Auth.authorize({
+        redirectUri: 'http://localhost:3000/kakao/signUp',
+      });
+    }, 10000);
+  };
 
   return (
     <MainContainer>
-      <TextContainer>
+      <TextArea>
         <Title size="h1">
           {'감정이'}
           <br /> {'말랑해지는 순간을'}
           <br />
           {'그루밍에서 경험하세요'}
         </Title>
-      </TextContainer>
+      </TextArea>
       <LoginButtonContainer onClick={kakaoLoign}>
         <img alt="kakaoLogin" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
       </LoginButtonContainer>

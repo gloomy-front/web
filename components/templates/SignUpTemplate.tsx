@@ -64,5 +64,5 @@ const ContentContainer = styled.section`
 `;
 
 export default function SingUpTemplate(): JSX.Element {
-  return <MainContainer>dma!</MainContainer>;
+  return <MainContainer>signUp화면</MainContainer>;
 }

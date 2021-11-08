@@ -1,6 +1,15 @@
 import React from 'react';
-import { SignUpTemplate } from '@/components/templates';
+import { GetServerSideProps } from 'next';
 
 export default function signUpPage(): JSX.Element {
-  return <SignUpTemplate />;
+  return <></>;
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: '/community',
+      permanent: false,
+    },
+  };
+};

@@ -12,3 +12,4 @@ export { default as Heart } from './Heart';
 export { default as Comment } from './Comment';
 export { default as MyProfile } from './MyProfile';
 export { default as Search } from './Search';
+export { default as Kakao } from './Kakao';

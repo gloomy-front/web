@@ -10,7 +10,7 @@ export default IndexPage;
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
     redirect: {
-      destination: '/community',
+      destination: '/kakao/login',
       permanent: false,
     },
   };

@@ -1,16 +1,14 @@
+import React from 'react';
 import { GetServerSideProps } from 'next';
-const IndexPage = (): JSX.Element => {
-  return (
-    <></>
-  );
-};
 
-export default IndexPage;
+export default function signUpPage(): JSX.Element {
+  return <></>;
+}
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {
     redirect: {
-      destination: '/kakao/login',
+      destination: '/community',
       permanent: false,
     },
   };

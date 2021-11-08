@@ -5,6 +5,7 @@ const { API_ENV } = publicRuntimeConfig;
 
 export const SITE_URL = API_ENV === 'development' ? 'https://d1gbspr5q497yq.cloudfront.net' : 'https://d1gbspr5q497yq.cloudfront.net';
 export const GLOOMY_TOKEN = 'gloomyToken';
+export const KAKAO_KEY='473b1a6bbe9f9cceeffa8a5a384fae27';
 
 export const POST_LIST_SIZE = 20;
 export const HOUR_TO_MIN = 60;

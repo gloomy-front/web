@@ -10,4 +10,8 @@ export const COLOR = {
   GRAY01: '#c4c4c4',
   GRAY02: '#e8e8e8',
   GRAY03: '#1C1C1C',
+  GRAY04: '#d9d9d9',
+  GRAY05: '#6D6D6D',
+  GRAY06: '#D2D2D2',
+  GRAY07: '#A0A0A0'
 };

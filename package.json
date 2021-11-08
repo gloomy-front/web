@@ -25,12 +25,14 @@
     "react-hook-form": "^7.15.4",
     "styled-components": "^5.3.3",
     "swr": "^1.0.1",
-    "use-safe-callback": "^1.0.2"
+    "use-safe-callback": "^1.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@types/react": "17.0.30",
+    "@types/uuid": "^8",
     "@typescript-eslint/parser": "^5.1.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",

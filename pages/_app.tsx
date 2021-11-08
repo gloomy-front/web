@@ -9,15 +9,11 @@ import { Loading } from '@/components/molcules';
 import CommunityPage from '@/pages/community';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const jsKey = '473b1a6bbe9f9cceeffa8a5a384fae27';
-
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
         <title>그루미</title>
-        {/* <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script>Kakao.init("{jsKey}");</script> */}
         <meta name="description" content="그루미 커뮤니티" />
         <meta name="keywords" content="커뮤니티, 우울" />
 

@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import img from 'next/image';
 import styled from 'styled-components';
 import { COLOR, Layout } from '@/styles/index';
 import { Title, Span, Icon } from '@/components/atoms';
-import { AsyncBoundary, BoardLoading, PostList } from '@/components/organisms';
+import { Loading } from '@/components/molcules';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -19,14 +20,14 @@ const TextArea = styled.div`
   width: 100%;
   height: 45px;
   margin-top: 25%;
-  padding-left: 8%;
+  left-padding: 8%;
 `;
 
-const LoginButtonContainer = styled.section`
+const LoginButtonArea = styled.section`
   ${Layout.flexRowStartCenter};
-  width: 100%;
-  height: 45px;
-  margin-top: 80%;
+  width: fit-content;
+  margin: auto;
+  text-align: center;
 `;
 
 declare const window: Window &
@@ -35,7 +36,9 @@ declare const window: Window &
   };
 
 export default function LoginTemplate(): JSX.Element {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const kakaoLoign = () => {
+    setIsLoading(false);
     const kakaoScript = document.createElement('script');
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     document.head.appendChild(kakaoScript);
@@ -44,7 +47,7 @@ export default function LoginTemplate(): JSX.Element {
       window.Kakao.Auth.authorize({
         redirectUri: 'http://localhost:3000/kakao/signUp',
       });
-    }, 10000);
+    }, 1000);
   };
 
   return (
@@ -57,9 +60,10 @@ export default function LoginTemplate(): JSX.Element {
           {'그루밍에서 경험하세요'}
         </Title>
       </TextArea>
-      <LoginButtonContainer onClick={kakaoLoign}>
+      <LoginButtonArea onClick={kakaoLoign}>
         <img alt="kakaoLogin" src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
-      </LoginButtonContainer>
+      </LoginButtonArea>
+      {isLoading ? <></> : <Loading />}
     </MainContainer>
   );
 }

@@ -8,7 +8,6 @@ import { KAKAO_KEY } from '@/constants/index';
 const MainContainer = styled.main`
   ${Layout.flexColCenter};
   width: 100%;
-  max-width: 600px;
   min-height: 100vh;
   margin: 0 auto;
   position: relative;
@@ -21,6 +20,7 @@ const MainContainer = styled.main`
 const TextArea = styled.div`
   ${Layout.flexRowStartCenter};
   width: 100%;
+  max-width: 600px;
   margin-bottom: 30%;
   padding-left: 35px;
   box-sizing: border-box;

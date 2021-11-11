@@ -16,3 +16,4 @@ export { default as Kakao } from './Kakao';
 export { default as Close } from './Close';
 export { default as More } from './More';
 export { default as Check } from './Check';
+export { default as Picture } from './Picture';

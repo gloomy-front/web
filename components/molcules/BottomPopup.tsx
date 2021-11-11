@@ -100,6 +100,7 @@ const PopupBtnContainer = styled.section`
 
 const Button = styled.button`
   border: none;
+  margin: 0;
   padding: 16px 0;
   color: ${({ theme }) => theme.WHITE};
   cursor: pointer;

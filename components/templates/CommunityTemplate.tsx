@@ -1,16 +1,15 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { COLOR, Layout } from '@/styles/index';
 import { Title, Span, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, PostList } from '@/components/organisms';
 
 const MainContainer = styled.main`
-  ${Layout.flexColStartStart};
+  ${Layout.flexColStartCenter};
   width: 100%;
-  max-width: 600px;
   min-height: 100vh;
   margin: 0 auto;
 
-  position: relative;
   background-color: ${({ theme }) => theme.BLACK};
 `;
 
@@ -64,6 +63,8 @@ const ContentContainer = styled.section`
 `;
 
 export default function CommunityTemplate(): JSX.Element {
+  const router = useRouter();
+
   return (
     <MainContainer>
       <HeaderContainer>
@@ -76,7 +77,7 @@ export default function CommunityTemplate(): JSX.Element {
         </HeaderNav>
         <HeaderMain>
           <Circle/>
-          <InputBox>
+          <InputBox onClick={() => router.push('/community/new')}>
             <Span style={{ color: COLOR.BLACK, fontWeight: 500 }}>{'나누고 싶은 생각이 있으신가요?'}</Span>
           </InputBox>
         </HeaderMain>

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
   width: 100%;
   min-height: 100vh;
+  padding-bottom: 50px;
   margin: 0 auto;
 
   background-color: ${({ theme }) => theme.BLACK};
@@ -40,30 +41,62 @@ const InputSection = styled.section`
   box-sizing: border-box;
 `;
 
-const ImageIconBox = styled.div`
+const ImageLabel = styled.label`
   position: fixed;
   bottom: 19px;
   left: 19px;
 `;
 
+interface Image {
+  filePK: string;
+  filePath: string;
+}
+
 export default function NewPostTemplate(): JSX.Element {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const methods = useForm({
+  const methods = useForm<{ content: string; postImages: Array<Image> }>({
     defaultValues: {
-      content: ''
+      content: '',
+      postImages: []
     }
   });
-  const { handleSubmit, register, watch } = methods;
-  const watchContent = watch('content');
+  const { handleSubmit, register, watch, setValue } = methods;
+  const [watchImages, watchContent] = watch(['postImages', 'content']);
 
   const requestNew = useCallback(async ({ content }) => {
-    console.log('New!');
+    // console.log('New!');
   }, []);
 
   const onError = useCallback(({ content }) => {
     if (content) {}
   }, []);
+
+  const registerFile = async (e: any) => {
+    const file = e.target.files[0] ?? null;
+    const reader = new FileReader();
+
+    if (file) {
+      setIsLoading(true);
+
+      reader.readAsDataURL(file);
+      reader.onloadend = (e) => {
+        setIsLoading(false);
+
+        if (typeof (e?.target?.result) === 'string') {
+          // dispatch({ filePath: e?.target?.result ?? '', filePK: res.data.filePK });
+          setValue('postImages', [{ filePath: e?.target?.result ?? '', filePK: '0' }]);
+
+          if (inputRef.current !== null) {
+            inputRef.current.value = '';
+          }
+        }
+      };
+      setIsLoading(false);
+    }
+  };
 
   return (
     <MainContainer>
@@ -78,13 +111,30 @@ export default function NewPostTemplate(): JSX.Element {
         <TextArea
           spellCheck={false}
           placeholder={'내용을 입력해주세요'}
-          style={{ minHeight: 'calc(100vh - 140px)' }}
+          style={{ minHeight: 'calc(400px)' }}
           {...register('content', {
             required: '내용을 입력해주세요'
           })}
         />
+        {watchImages.length > 0 &&
+        <img
+          src={watchImages[0].filePath}
+          alt={'게시글 사진'}
+          style={{ width: 'calc(100% - 32px)' }}
+        />
+        }
       </InputSection>
-      <ImageIconBox><Icon.Picture /></ImageIconBox>
+      <ImageLabel>
+        <Icon.Picture />
+        <input
+          ref={inputRef}
+          style={{ display: 'none' }}
+          type='file'
+          accept='image/*'
+          onChange={registerFile}
+          disabled={isLoading}
+        />
+      </ImageLabel>
     </MainContainer>
   );
 }

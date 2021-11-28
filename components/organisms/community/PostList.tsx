@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { BoardLoading, PostItem } from '@/components/organisms';
 import { Layout } from '@/styles/theme';
+import { useInfiniteScroll } from '@/hooks/index';
 
 const BoundarySection = styled.section`
   ${Layout.flexColStartCenter};
@@ -10,28 +11,46 @@ const BoundarySection = styled.section`
 `;
 
 export default function PostList(): JSX.Element {
+  const target = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [postList, setPostList] = useState<Array<any>>([]);
+
+  const { count } = useInfiniteScroll({
+    target: target,
+    targetArray: postList,
+    threshold: 0.2,
+    pageSize: 5,
+    endPoint: 3
+  });
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 3000);
+    setTimeout(() => setIsLoading(false), 1000);
   }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setPostList([...postList, ...FAKE_DATA]);
+      setIsLoading(false);
+    }, 500);
+  }, [count]);
 
   return (
     <>
-      {isLoading ?
-      <BoundarySection>
-        <BoardLoading/>
-      </BoundarySection>
-      :
-      <>
-        {FAKE_DATA.map((post) => (
-          <PostItem key={post.pk} post={post}/>
+      <section ref={target}>
+        {postList.map((post, idx) => (
+          <PostItem key={idx} post={post}/>
         ))}
-      </>
+      </section>
+      {isLoading &&
+        <BoundarySection>
+          <BoardLoading/>
+        </BoundarySection>
       }
     </>
   );
 }
+
 
 const FAKE_DATA = [
   {

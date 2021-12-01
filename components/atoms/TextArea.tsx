@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const TextArea = styled.textarea`
   width: 100%;
-  background-color: ${({ theme }) => theme.BLACK};
+  background-color: ${({ theme }) => theme.WHITE};
   font-size: 12px;
   line-height: 1.57;
   font-weight: 400;
-  color: ${({ theme }) => theme.WHITE};
+  color: ${({ theme }) => theme.BLACK};
   resize: none;
   border: none;
   padding: 12px;

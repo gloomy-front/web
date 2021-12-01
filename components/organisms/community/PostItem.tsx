@@ -2,49 +2,46 @@ import styled from 'styled-components';
 import img from 'next/image';
 
 import { Layout, COLOR } from '@/styles/index';
-import { Span, Icon } from '@/components/atoms';
+import { Span, Title } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
-import MoreComponent from './MoreComponent';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;
-  padding: 24px 16px;
+  padding: 16px;
   box-sizing: border-box;
-  border-bottom: ${({ theme }) => `12px solid ${theme.GRAY03}`};
+  border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
 
-const HeaderSection = styled.div`
-  ${Layout.flexRowStartCenter};
-  width: 100%;
-  margin-bottom: 14px;
+const CategoryBox = styled.div`
+  ${Layout.flexRowCenter};
+  width: 30px;
+  height: 20px;
+  border-radius: 2px;
+  font-size: 11px;
+  color: ${({ theme }) => theme.GRAY05};
+  background-color: ${({ theme }) => theme.GRAY02};
+  margin-bottom: 12px;
 `;
 
-const Circle = styled.div`
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  background-color: ${(props) => props.color || COLOR.GRAY01};
-`;
-
-const TitleSection = styled.section`
+const TextSection = styled.section`
   ${Layout.flexColCenterStart};
   width: 100%;
-  margin-left: 8px;
 `;
 
 const ContentSection = styled.div`
-  ${Layout.flexColCenterStart};
+  ${Layout.flexRowCenter};
   width: 100%;
 `;
 
 const ContentSpan = styled(Span)`
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  color: ${({ theme }) => theme.GRAY05};
 
   display: -webkit-box;
   word-wrap: break-word;
   overflow: hidden;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   white-space: pre-wrap;
@@ -62,7 +59,6 @@ const ButtonSection = styled.section`
 const ButtonArea = styled.div`
   ${Layout.flexRowStartCenter};
   cursor: pointer;
-  margin-right: 10px;
 `;
 
 export default function PostItem({ post }: { post: any }): JSX.Element {
@@ -71,54 +67,45 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
   return (
     <>
       <ItemSection>
-        <HeaderSection>
-          <div>
-            <Circle color={post.color}/>
-          </div>
-          <TitleSection>
-            <Span>
-              {post.title}
-            </Span>
-            <Span style={{ fontSize: '10px' }}>
-              {registerDate}
-            </Span>
-          </TitleSection>
-          <MoreComponent />
-        </HeaderSection>
+        <CategoryBox>{post.category}</CategoryBox>
         <ContentSection>
-          <ContentSpan>
-            {post.content}
-          </ContentSpan>
+          <TextSection>
+            <Title style={{ marginBottom: '8px' }}>
+              {post.title}
+            </Title>
+            <ContentSpan>
+              {post.content}
+            </ContentSpan>
+          </TextSection>
           {post.thumbnail &&
           <img
             src={post.thumbnail}
             alt={'thumnail'}
             style={{
-              width: '100%',
-              height: '150px',
+              width: '48px',
+              height: '48px',
               objectFit: 'cover',
               borderRadius: '10px',
-              marginBottom: '12px'
+              marginBottom: '12px',
+              marginLeft: '20px'
             }}
           />}
         </ContentSection>
         <FooterSection>
           <ButtonSection>
             <ButtonArea>
-              <Icon.Heart height={'12px'}/>
-              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-                {` 공감해요 ${post.likeCount}`}
+              <Span style={{ fontSize: '10px', marginRight: '3px', color: COLOR.GRAY05 }}>
+                {`❤️ 공감 ${post.likeCount} ·`}
               </Span>
             </ButtonArea>
             <ButtonArea>
-              <Icon.Comment height={'14px'}/>
-              <Span style={{ fontSize: '10px', marginLeft: '4px', marginBottom: '-4px' }}>
-                {`${post.commentCount}`}
+              <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>
+                {`💬 댓글 ${post.commentCount}`}
               </Span>
             </ButtonArea>
           </ButtonSection>
-          <Span style={{ fontSize: '10px' }}>
-            {post.createdAt}
+          <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>
+            {registerDate}
           </Span>
         </FooterSection>
       </ItemSection>

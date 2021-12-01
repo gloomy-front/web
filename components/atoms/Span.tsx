@@ -4,7 +4,7 @@ const Span = styled.span`
   font-size: 12px;
   line-height: 1.57;
   font-weight: 400;
-  color: ${({ theme }) => theme.WHITE};
+  color: ${({ theme }) => theme.BLACK};
   ${({ inline }: { inline?: boolean }) => { return inline ? 'display: inline-block' : null; }};
 `;
 

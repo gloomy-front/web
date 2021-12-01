@@ -24,15 +24,11 @@ export default function PostList(): JSX.Element {
   });
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1000);
-  }, []);
-
-  useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
       setPostList([...postList, ...FAKE_DATA]);
       setIsLoading(false);
-    }, 500);
+    }, 1000);
   }, [count]);
 
   return (
@@ -60,7 +56,8 @@ const FAKE_DATA = [
     likeCount: 5,
     commentCount: 3,
     createdAt: '2021-10-29 17:32',
-    color: '#EC0000'
+    color: '#EC0000',
+    category: '잡담'
   },
   {
     pk: 1,
@@ -70,7 +67,8 @@ const FAKE_DATA = [
     commentCount: 3,
     createdAt: '2021-10-29 19:32',
     thumbnail: 'http://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg',
-    color: '#0047FF'
+    color: '#0047FF',
+    category: '잡담'
   },
   {
     pk: 2,
@@ -79,7 +77,8 @@ const FAKE_DATA = [
     likeCount: 5,
     commentCount: 3,
     createdAt: '2021-10-29 23:32',
-    color: '#53D768'
+    color: '#53D768',
+    category: '잡담'
   },
   {
     pk: 3,
@@ -89,7 +88,8 @@ const FAKE_DATA = [
     commentCount: 3,
     createdAt: '2021-10-30 17:32',
     thumbnail: 'http://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg',
-    color: '#D6BD3D'
+    color: '#D6BD3D',
+    category: '잡담'
   },
   {
     pk: 4,
@@ -98,6 +98,7 @@ const FAKE_DATA = [
     likeCount: 5,
     commentCount: 3,
     createdAt: '2021-10-30 17:32',
-    color: 'purple'
+    color: 'purple',
+    category: '잡담'
   },
 ];

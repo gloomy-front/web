@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Title = styled.p`
   font-weight: 400;
   line-height: 1.27;
-  color: ${({ theme }) => theme.WHITE};
+  color: ${({ theme }) => theme.BLACK};
   margin: 0;
   ${({ size }: { size?: string }) => { 
     if (size === 'h1') {

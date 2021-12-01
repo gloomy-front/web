@@ -1,5 +1,5 @@
 export const COLOR = {
-  BLACK: '#020615',
+  BLACK: '#212025',
   WHITE: '#ffffff',
   RED: '#e74d5a',
   YELLOW: '#ffbd35',
@@ -8,11 +8,11 @@ export const COLOR = {
   DEEP_BLUE: '#1e45ac',
   DARK_BLUE: '#051248',
   GRAY01: '#c4c4c4',
-  GRAY02: '#e8e8e8',
+  GRAY02: '#F2F2F2',
   GRAY03: '#1C1C1C',
   GRAY04: '#d9d9d9',
-  GRAY05: '#6D6D6D',
+  GRAY05: '#828282',
   GRAY06: '#D2D2D2',
-  GRAY07: '#A0A0A0',
+  GRAY07: '#212025',
   GRAY08: '#5f5f5f'
 };

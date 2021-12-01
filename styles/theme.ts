@@ -4,9 +4,9 @@ export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     height: 100vh;
-    font-family: "Noto Sans KR", sans-serif;
-    color: #ffffff;
-    background-color: #020615;
+    font-family: "Apple SD Gothic Neo";
+    color: #212025;
+    background-color: white;
     -ms-overflow-style: none;
   }
   body::-webkit-scrollbar{ display:none; }

@@ -4,6 +4,7 @@ import img from 'next/image';
 import { Layout, COLOR } from '@/styles/index';
 import { Span, Title } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
+import { useRouter } from 'next/router';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -62,34 +63,33 @@ const ButtonArea = styled.div`
 `;
 
 export default function PostItem({ post }: { post: any }): JSX.Element {
+  const router = useRouter();
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
 
   return (
     <>
-      <ItemSection>
+      {/* 피드 상세 진입점 */}
+      <ItemSection onClick={() => router.push(`/community/detail?feedId=${post.pk}`)}>
         <CategoryBox>{post.category}</CategoryBox>
         <ContentSection>
           <TextSection>
-            <Title style={{ marginBottom: '8px' }}>
-              {post.title}
-            </Title>
-            <ContentSpan>
-              {post.content}
-            </ContentSpan>
+            <Title style={{ marginBottom: '8px' }}>{post.title}</Title>
+            <ContentSpan>{post.content}</ContentSpan>
           </TextSection>
-          {post.thumbnail &&
-          <img
-            src={post.thumbnail}
-            alt={'thumnail'}
-            style={{
-              width: '48px',
-              height: '48px',
-              objectFit: 'cover',
-              borderRadius: '10px',
-              marginBottom: '12px',
-              marginLeft: '20px'
-            }}
-          />}
+          {post.thumbnail && (
+            <img
+              src={post.thumbnail}
+              alt={'thumnail'}
+              style={{
+                width: '48px',
+                height: '48px',
+                objectFit: 'cover',
+                borderRadius: '10px',
+                marginBottom: '12px',
+                marginLeft: '20px',
+              }}
+            />
+          )}
         </ContentSection>
         <FooterSection>
           <ButtonSection>
@@ -99,14 +99,10 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
               </Span>
             </ButtonArea>
             <ButtonArea>
-              <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>
-                {`💬 댓글 ${post.commentCount}`}
-              </Span>
+              <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{`💬 댓글 ${post.commentCount}`}</Span>
             </ButtonArea>
           </ButtonSection>
-          <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>
-            {registerDate}
-          </Span>
+          <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
         </FooterSection>
       </ItemSection>
     </>

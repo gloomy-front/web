@@ -17,5 +17,3 @@ export { default as Close } from './Close';
 export { default as More } from './More';
 export { default as Check } from './Check';
 export { default as Picture } from './Picture';
-export { default as WriteButton } from './WriteButton';
-export { default as Mypage } from './Mypage';

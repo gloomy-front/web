@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
-import { AsyncBoundary, BoardLoading, PostList } from '@/components/organisms';
+import { AsyncBoundary, BoardLoading, PostList, BottomNav } from '@/components/organisms';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -46,19 +46,16 @@ export default function CommunityTemplate(): JSX.Element {
       <HeaderContainer>
         <HeaderNav>
           <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-          <Icon.Search height={'25px'}/>
+          <Icon.Search height={'25px'} />
         </HeaderNav>
       </HeaderContainer>
       <CategorySection />
       <ContentContainer>
-        <AsyncBoundary
-          pendingFallback={<BoardLoading/>}
-          isRefresh={true}
-          style={{ height: 'calc(100vh - 140px)' }}
-        >
-          <PostList/>
+        <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
+          <PostList />
         </AsyncBoundary>
       </ContentContainer>
+      <BottomNav />
     </MainContainer>
   );
 }

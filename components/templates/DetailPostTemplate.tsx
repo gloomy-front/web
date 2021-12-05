@@ -2,6 +2,7 @@ import { Icon, Span, Title } from '@/components/atoms';
 import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
+import Image from 'next/image';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -41,7 +42,7 @@ const CategoryBox = styled.section`
 `;
 const ImageSection = styled.section`
   ${Layout.flexRowCenter};
-  width : 100%;
+  width: 100%;
   height: 306px;
   padding-top: 16px;
 `;
@@ -120,7 +121,17 @@ const DetailPostTemplate = (): JSX.Element => {
         <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{post.title}</Title>
         <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
       </TitleSection>
-      <ImageSection>{post.thumbnail && <img src={'https://picsum.photos/360/306'} style={{width:'100%',height:'306px',objectFit:"cover"}}/>}</ImageSection>
+      <ImageSection>
+        {post.thumbnail && (
+          <Image
+            src={'https://picsum.photos/360/306'}
+            alt={'contentImage'}
+            width={'100%'}
+            height={'306px'}
+            objectFit={'cover'}
+          />
+        )}
+      </ImageSection>
       <ContentSection>{post.content}</ContentSection>
       <ButtonArea>
         <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>

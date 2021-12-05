@@ -22,6 +22,7 @@ const CategoryWrapper = styled.div`
   white-space: nowrap;
   overflow: auto;
   scrollbar-width: none;
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -42,8 +43,8 @@ const CategoryItem = styled.div`
   border-radius: 3px;
   padding: 0 8px;
   font-size: 14px;
-  color:  ${({ theme }) => theme.GRAY05};
-  
+  color: ${({ theme }) => theme.GRAY05};
+
   cursor: pointer;
 
   ${({ isActive, theme }: { isActive: boolean, theme: COLOR_TYPE }) => {
@@ -77,7 +78,7 @@ export default function Category({ initCategory = 'total' }: { initCategory?: st
       const categoryChildren = Array.from(scrollRef.current.children);
       for (let i = 0; i < categoryChildren.length; i++) {
         categoryWidth += categoryChildren[i].getBoundingClientRect().width;
-        if (innerWidth - 90 < categoryWidth && category === categoryList[i]) {
+        if (innerWidth - 90 < categoryWidth && category === Object.keys(CATEGORY_LIST)[i]) {
           return { isBoundary: true, categoryWidth: categoryWidth - categoryChildren[i].getBoundingClientRect().width };
         }
       }
@@ -124,7 +125,7 @@ export default function Category({ initCategory = 'total' }: { initCategory?: st
       <CategoryContainer>
         <SortArea>
           <Span style={{ fontSize: '14px', marginRight: '8px' }}>{'최신순'}</Span>
-          <Icon.ArrowDown height={'6px'} />
+          <Icon.ArrowDown height={'6px'}/>
         </SortArea>
         <CategoryWrapper
           onMouseDown={onDragStart}
@@ -135,19 +136,17 @@ export default function Category({ initCategory = 'total' }: { initCategory?: st
           onMouseLeave={onDragEnd}
           ref={scrollRef}
         >
-          {categoryList.map((category: string) => (
+          {Object.keys(CATEGORY_LIST).map((category: string) => (
             <CategoryItem
               key={category}
               onClick={(e) => selectCategory(category, e)}
               isActive={selectedCategory === category}
             >
-              { CATEGORY_LIST[category] }
+              {CATEGORY_LIST[category]}
             </CategoryItem>
           ))}
         </CategoryWrapper>
       </CategoryContainer>
     </>
-);
+  );
 }
-
-const categoryList = Object.keys(CATEGORY_LIST);

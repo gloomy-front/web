@@ -41,7 +41,7 @@ const CategoryBox = styled.section`
 `;
 const ImageSection = styled.section`
   ${Layout.flexRowCenter};
-  width: 100%;
+  width : 100%;
   height: 306px;
   padding-top: 16px;
 `;
@@ -104,6 +104,7 @@ const CommentPostButton = styled.button`
   border: 0;
   background-color: ${({ theme }) => theme.WHITE}; ;
 `;
+
 const DetailPostTemplate = (): JSX.Element => {
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
   return (
@@ -119,7 +120,7 @@ const DetailPostTemplate = (): JSX.Element => {
         <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{post.title}</Title>
         <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
       </TitleSection>
-      <ImageSection>{post.thumbnail && <img src={'https://picsum.photos/360/306'} />}</ImageSection>
+      <ImageSection>{post.thumbnail && <img src={'https://picsum.photos/360/306'} style={{width:'100%',height:'306px',objectFit:"cover"}}/>}</ImageSection>
       <ContentSection>{post.content}</ContentSection>
       <ButtonArea>
         <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
@@ -147,7 +148,7 @@ const post = {
   likeCount: 4,
   commentCount: 4,
   createdAt: '2021-10-30 17:32',
-  thumbnail: 'https://picsum.photos/360/306',
+  thumbnail: 'https://picsum.photos/240/306',
   color: 'purple',
   category: '직장/이직',
 };

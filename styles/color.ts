@@ -17,5 +17,5 @@ export const COLOR = {
   GRAY08: '#5f5f5f',
   GRAY09: '#BDBDBD',
   GRAY10: '#E0E0E0',
-  PURPLE: '#8478EF',
+  PRIMARY: '#8478EF',
 };

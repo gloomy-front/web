@@ -1,10 +1,8 @@
-import styled from 'styled-components';
-import img from 'next/image';
-
-import { Layout, COLOR } from '@/styles/index';
 import { Span, Title } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
+import { COLOR, Layout } from '@/styles/index';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};

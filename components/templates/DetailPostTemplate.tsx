@@ -1,10 +1,10 @@
+import { Icon, Span, Title } from '@/components/atoms';
 import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, Span, Title } from '../atoms';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -14,7 +14,6 @@ const MainContainer = styled.main`
   padding-bottom: 56px;
 `;
 const HeaderContainer = styled.section`
-  /* 여기 flex 중첩 필요한가요? */
   width: 100%;
   box-sizing: border-box;
   padding: 24px 16px 8px 11px;
@@ -33,7 +32,7 @@ const TitleSection = styled.section`
 const CategoryBox = styled.section`
   ${Layout.flexRowCenter};
   height: 20px;
-  padding: 0 5px; // 직장/이직 으로 해봤더니 overflow되길래 수정했습니다
+  padding: 0 5px;
   border-radius: 2px;
   font-size: 11px;
   color: ${({ theme }) => theme.GRAY05};
@@ -42,6 +41,7 @@ const CategoryBox = styled.section`
 `;
 const ImageSection = styled.section`
   ${Layout.flexRowCenter};
+  width: 100%;
   height: 306px;
   padding-top: 16px;
 `;
@@ -62,7 +62,7 @@ const LikeButton = styled.button`
   color: ${({ theme }) => theme.WHITE};
   width: 82px;
   height: 32px;
-  background-color: ${({ theme }) => theme.PURPLE};
+  background-color: ${({ theme }) => theme.PRIMARY};
   border-radius: 10px;
   border: none;
 `;
@@ -143,7 +143,7 @@ const post = {
   likeCount: 4,
   commentCount: 4,
   createdAt: '2021-10-30 17:32',
-  thumbnail: 'https://picsum.photos/360/306', // https://picsum.photos/width/height
+  thumbnail: 'https://picsum.photos/360/306',
   color: 'purple',
   category: '직장/이직',
 };

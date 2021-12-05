@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
-
 import { BoardLoading, PostItem } from '@/components/organisms';
-import { Layout } from '@/styles/theme';
 import { useInfiniteScroll } from '@/hooks/index';
+import { Layout } from '@/styles/theme';
+import { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
 const BoundarySection = styled.section`
   ${Layout.flexColStartCenter};

@@ -14,8 +14,8 @@ const ItemSection = styled.section`
 
 const CategoryBox = styled.div`
   ${Layout.flexRowCenter};
-  width: 30px;
   height: 20px;
+  padding: 0 5px;
   border-radius: 2px;
   font-size: 11px;
   color: ${({ theme }) => theme.GRAY05};

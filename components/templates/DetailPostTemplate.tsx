@@ -47,10 +47,11 @@ const ImageSection = styled.section`
 `;
 const ContentSection = styled.section`
   padding: 16px;
-  word-break: keep-all;
-  font-size: 15px;
-  line-height: 22px;
   color: ${({ theme }) => theme.BLACK};
+  font-size: 15px;
+  word-break: keep-all;
+  white-space: pre-line;
+  line-height: 22px;
 `;
 const ButtonArea = styled.section`
   ${Layout.flexRowStartCenter};
@@ -138,8 +139,11 @@ export default DetailPostTemplate;
 const post = {
   pk: 5,
   title: '나 아까 노티드 도넛먹고 우울한게 좀 나아졌어',
-  content:
-    '아까 안국역쪽 들렀는데 거기 웨이팅이 별로 없대? 그래서 들어가니까 초코 푸딩도넛 품절 아니길래 잽싸게 사먹었다 휴 역시 달달한게 우울에는 직빵인듯 힘내자 내자신아 너네들도 힘내라',
+  content: `아까 안국역쪽 들렀는데 거기 웨이팅이 별로 없대?
+    그래서 들어가니까 초코 푸딩도넛 품절 아니길래 잽싸게 사먹었다
+    휴 역시 달달한게 우울에는 직빵인듯
+    힘내자 내자신아
+    너네들도 힘내라`,
   likeCount: 4,
   commentCount: 4,
   createdAt: '2021-10-30 17:32',

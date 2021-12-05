@@ -67,7 +67,10 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
   return (
     <>
       {/* 피드 상세 진입점 */}
-      <ItemSection onClick={() => router.push(`/community/detail?feedId=${post.pk}`)}>
+      <ItemSection onClick={() => router.push({
+        pathname:'/community/detail/[postId]',
+        query:{postId:post.pk}
+      })}>
         <CategoryBox>{post.category}</CategoryBox>
         <ContentSection>
           <TextSection>

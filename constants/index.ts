@@ -20,3 +20,15 @@ export const DECLARATION_LIST: { [key: string]: string } = {
   papering: '도배성 내용',
   political: '정치적 · 사회적 의견 표출'
 };
+
+export const CATEGORY_LIST: { [key: string]: string }  = {
+  total: '모든 고민',
+  chat: '💬 잡담',
+  family: '🏡 가족',
+  friend: '👥 친구',
+  company: '💼 직장/이직',
+  employ: '📑 취업',
+  study: '📚 학업/시험',
+  heteroLove: '👫 연애(이성애)',
+  homoLove: '🌈 연애(동성애)'
+}

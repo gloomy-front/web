@@ -2,7 +2,6 @@ import { Icon, Span, Title } from '@/components/atoms';
 import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
-import Image from 'next/image';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -123,12 +122,10 @@ const DetailPostTemplate = (): JSX.Element => {
       </TitleSection>
       <ImageSection>
         {post.thumbnail && (
-          <Image
+          <img
             src={'https://picsum.photos/360/306'}
             alt={'contentImage'}
-            width={'100%'}
-            height={'306px'}
-            objectFit={'cover'}
+            style={{ width: '100%', height: '306px', objectFit: 'cover' }}
           />
         )}
       </ImageSection>

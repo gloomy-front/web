@@ -42,20 +42,22 @@ export default function CommunityTemplate(): JSX.Element {
   const router = useRouter();
 
   return (
-    <MainContainer>
-      <HeaderContainer>
-        <HeaderNav>
-          <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-          <Icon.Search height={'25px'} />
-        </HeaderNav>
-      </HeaderContainer>
-      <CategorySection />
-      <ContentContainer>
-        <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
-          <PostList />
-        </AsyncBoundary>
-      </ContentContainer>
+    <>
+      <MainContainer>
+        <HeaderContainer>
+          <HeaderNav>
+            <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
+            <Icon.Search height={'25px'} />
+          </HeaderNav>
+        </HeaderContainer>
+        <CategorySection />
+        <ContentContainer>
+          <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
+            <PostList />
+          </AsyncBoundary>
+        </ContentContainer>
+      </MainContainer>
       <BottomNav />
-    </MainContainer>
+    </>
   );
 }

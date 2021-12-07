@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Icon } from '@/components/atoms';
-
+import { Tooltip } from '@/components/molcules';
 const BottomContainer = styled.section`
   ${Layout.flexColStartStart};
   position: fixed;
@@ -10,14 +10,7 @@ const BottomContainer = styled.section`
   height: 56px;
   width: 100%;
   background-color: #ffffff;
-`;
-
-const Button = styled.button`
-  border: none;
-  margin: 0;
-  padding: 16px 0;
-  color: ${({ theme }) => theme.WHITE};
-  cursor: pointer;
+  border-top: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
 
 const MyPageButtonArea = styled.div`
@@ -40,14 +33,18 @@ const WriteButtonArea = styled.div`
 
 export default function BottomNav(): JSX.Element {
   return (
-    <BottomContainer>
-      <WriteButtonArea>
-        <Icon.WriteButton style={{ position: 'absolute', left: '18px' }} height={'32px'} />
-      </WriteButtonArea>
+    <>
+      <BottomContainer>
+        <WriteButtonArea>
+          <Tooltip position={'top'} text="나누고 싶은 생각이 있나요?" styleMe="">
+            <Icon.WriteIcon style={{ position: 'absolute', left: '18px' }} height={'32px'} />
+          </Tooltip>
+        </WriteButtonArea>
 
-      <MyPageButtonArea>
-        <Icon.Mypage style={{ position: 'absolute', left: '18px' }} height={'24px'} />
-      </MyPageButtonArea>
-    </BottomContainer>
+        <MyPageButtonArea>
+          <Icon.MypageIcon style={{ position: 'absolute', left: '18px' }} height={'24px'} />
+        </MyPageButtonArea>
+      </BottomContainer>
+    </>
   );
 }

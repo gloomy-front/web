@@ -1,7 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Icon } from '@/components/atoms';
 import { Tooltip } from '@/components/molcules';
+
 const BottomContainer = styled.section`
   ${Layout.flexColStartStart};
   position: fixed;
@@ -16,33 +18,34 @@ const BottomContainer = styled.section`
 const MyPageButtonArea = styled.div`
   ${Layout.flexRowCenter};
   position: fixed;
-  bottom: 30px;
-  left: 65%;
+  margin-left: 77%;
+  margin-top: 12px;
   transform: translateX(-50%);
   cursor: pointer;
 `;
 
 const WriteButtonArea = styled.div`
   ${Layout.flexRowCenter};
-  position: fixed;
-  bottom: 32px;
+  position: relative;
   left: 38%;
+  margin-top: 8px;
   transform: translateX(-50%);
   cursor: pointer;
 `;
 
 export default function BottomNav(): JSX.Element {
+  const router = useRouter();
   return (
     <>
       <BottomContainer>
-        <WriteButtonArea>
-          <Tooltip position={'top'} text="나누고 싶은 생각이 있나요?" styleMe="">
-            <Icon.WriteIcon style={{ position: 'absolute', left: '18px' }} height={'32px'} />
+        <WriteButtonArea onClick={() => router.push('/community/new')}>
+          <Tooltip position={'top'} content="🔮나누고 싶은 생각이 있나요?">
+            <Icon.WriteIcon height={'32px'} />
           </Tooltip>
         </WriteButtonArea>
 
         <MyPageButtonArea>
-          <Icon.MypageIcon style={{ position: 'absolute', left: '18px' }} height={'24px'} />
+          <Icon.Mypage />
         </MyPageButtonArea>
       </BottomContainer>
     </>

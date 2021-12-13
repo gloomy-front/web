@@ -2,37 +2,36 @@ import { useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 type TooltipProps = {
-  position: any;
-  text: any;
+  position: string;
+  content: any;
   children: any;
-  styleMe: any;
 };
 
 type TooltipTargetProps = {
-  styleMe: any;
   highlightOnHover: any;
   showOnFocus: any;
 };
 
 type CenterContainerProps = {
-  position: any;
+  position: string;
 };
 
 export const TooltipWrapper = styled.div`
   position: relative;
   display: inline-flex;
+  left: 100%;
+  padding-bottom: 14px;
 `;
 
 export const TooltipTarget = styled.button`
   border: none;
   background: inherit;
   padding: 5px;
-  margin: -1px;
-  font-size: inherit;
-  ${({ styleMe, highlightOnHover }: TooltipTargetProps) =>
-    styleMe &&
+  margin: -100px;
+  font-size: 15px;
+  ${({ highlightOnHover }: TooltipTargetProps) =>
     css`
-      border: ${highlightOnHover ? css`1px solid #393e46` : css``};
+      bborder: ${highlightOnHover ? css`1px solid #393e46` : css``};
       padding: 15px;
       margin: 1px;
       border-radius: 5px;
@@ -51,15 +50,14 @@ export const TooltipTarget = styled.button`
 
 export const CenterContainer = styled.div`
   position: absolute;
-  width: 200px;
-  margin-left: -100px;
+  width: 220px;
+  margin-left: -116px;
   display: flex;
   justify-content: center;
   align-items: center;
   left: 50%;
   bottom: calc(100% + 5px);
   pointer-events: none;
-  background-color: #9fb8f4;
   ${({ position }: CenterContainerProps) => {
     switch (position) {
       case 'bottom':
@@ -97,9 +95,9 @@ export const TooltipBox = styled.span`
   color: #fff;
   background-color: #9fb8f4;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 10px 8px;
-  font-size: 1.25rem;
+  font-size: 15px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
 
   ${({ position }: CenterContainerProps) => {
@@ -121,7 +119,7 @@ export const TooltipBox = styled.span`
     border-width: 5px;
     border-style: solid;
     background-color: #9fb8f4;
-    left: calc(50% - 4.5px);
+    left: calc(50%);
     top: 100%;
   }
 
@@ -157,27 +155,22 @@ export const TooltipBox = styled.span`
   }}
 `;
 
-function Tooltip({ position, text, children, styleMe = true }: TooltipProps) {
+function Tooltip({ position, content, children = true }: TooltipProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const showTooltip = isHovered || isFocused;
 
   return (
-    <TooltipWrapper>
-      <TooltipTarget
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        styleMe={styleMe}
-        highlightOnHover={isHovered}
-        showOnFocus={isFocused}
-      >
-        {children}
-      </TooltipTarget>
+    <TooltipWrapper
+      onMouseEnter={() => setIsHovered(true)}
+      //onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+    >
+      {children}
       {showTooltip && (
         <CenterContainer position={position}>
-          <TooltipBox position={position}>{text}</TooltipBox>
+          <TooltipBox position={position}>{content}</TooltipBox>
         </CenterContainer>
       )}
     </TooltipWrapper>

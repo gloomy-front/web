@@ -18,4 +18,4 @@ export { default as More } from './More';
 export { default as Check } from './Check';
 export { default as Picture } from './Picture';
 export { default as WriteIcon } from './WriteIcon';
-export { default as MypageIcon } from './MypageIcon';
+export { default as Mypage } from './Mypage';

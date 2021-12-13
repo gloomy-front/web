@@ -1,27 +1,15 @@
-import React, { memo, ReactElement } from 'react';
+import React, { memo } from 'react';
 import { SVGIconProps } from '.';
 
-const WriteIcon = ({ fill = '#000', height = '32px', onClick, style }: SVGIconProps): ReactElement => (
-  <svg
-    height={height}
-    viewBox="0 0 41 40"
-    fill={fill}
-    style={style}
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-  >
-    <rect width="41" height="40" fill="url(#patternWrite)" />
-    <defs>
-      <pattern id="patternWrite" patternContentUnits="objectBoundingBox" width="1" height="1" cx="0" cy="0" r="5">
-        <use xlinkHref="#imageWrite" transform="translate(0 -0.0107509) scale(0.00341297)" />
-      </pattern>
-      <image
-        id="imageWrite"
-        width="280"
-        height="292"
-        xlinkHref="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM4NDc4RUYiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik05LjY1MTk3IDIxSDEyLjQyNUMxMi41OTg5IDIxIDEyLjc2NCAyMC45MzA1IDEyLjg4NTcgMjAuODA4OEwyMi43OTE0IDEwLjkwMzFDMjIuOTEzMSAxMC43ODE0IDIyLjk4MjYgMTAuNjExOSAyMi45ODI2IDEwLjQ0MjRDMjIuOTgyNiAxMC4yNjg2IDIyLjkxMzEgMTAuMTAzNCAyMi43OTE0IDkuOTgxNjhMMjAuMDAwOSA3LjE5MTI0QzE5Ljg3OTIgNy4wNjk1NCAxOS43MTQxIDcgMTkuNTQwMiA3QzE5LjM2NjMgNyAxOS4yMDEyIDcuMDY5NTQgMTkuMDc5NSA3LjE5MTI0TDkuMTkxMjQgMTcuMTE0M0M5LjA2OTU0IDE3LjI0MDMgOSAxNy40MDU1IDkgMTcuNTc1VjIwLjM0OEM5IDIwLjcwODggOS4yOTEyMSAyMSA5LjY1MTk3IDIxWk0yMi45NDMzIDIzSDkuNUM5LjIyMzMzIDIzIDkgMjMuMjIzMyA5IDIzLjVDOSAyMy43NzY3IDkuMjIzMzMgMjQgOS41IDI0SDIyLjk0MzNDMjMuMjIgMjQgMjMuNDQzMyAyMy43NzY3IDIzLjQ0MzMgMjMuNUMyMy40NDMzIDIzLjIyMzMgMjMuMjIgMjMgMjIuOTQzMyAyM1oiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo="
-      />
-    </defs>
+const WriteIcon = ({ fill = '#000', height = '32px', onClick, style }: SVGIconProps): JSX.Element => (
+  <svg height={height} viewBox="0 0 32 32" fill={fill} style={style} onClick={onClick ? onClick : () => {}}>
+    <circle cx="16" cy="16" r="16" fill="#8478EF" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M9.65197 21H12.425C12.5989 21 12.764 20.9305 12.8857 20.8088L22.7914 10.9031C22.9131 10.7814 22.9826 10.6119 22.9826 10.4424C22.9826 10.2686 22.9131 10.1034 22.7914 9.98168L20.0009 7.19124C19.8792 7.06954 19.7141 7 19.5402 7C19.3663 7 19.2012 7.06954 19.0795 7.19124L9.19124 17.1143C9.06954 17.2403 9 17.4055 9 17.575V20.348C9 20.7088 9.29121 21 9.65197 21ZM22.9433 23H9.5C9.22333 23 9 23.2233 9 23.5C9 23.7767 9.22333 24 9.5 24H22.9433C23.22 24 23.4433 23.7767 23.4433 23.5C23.4433 23.2233 23.22 23 22.9433 23Z"
+      fill="white"
+    />
   </svg>
 );
 

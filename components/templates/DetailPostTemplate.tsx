@@ -79,8 +79,10 @@ const FooterContainer = styled.section`
   bottom: 0;
   width: 100%;
   height: 56px;
+  background-color: ${({ theme }) => theme.WHITE};
   padding: 10px 16px;
   box-sizing: border-box;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
 `;
 const FooterSection = styled.section`
   ${Layout.flexRowCenter};

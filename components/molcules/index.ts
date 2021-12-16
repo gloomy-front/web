@@ -3,3 +3,4 @@ export { default as Skeleton } from './Skeleton';
 export { default as Popup } from './Popup';
 export { default as BottomPopup } from './BottomPopup';
 export { default as Dropdown } from './Dropdown';
+export { default as Comment } from './Comment';

@@ -2,9 +2,11 @@ import { Icon, Span, Title } from '@/components/atoms';
 import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
+import { Comment } from '@/components/molcules';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+import { CommentItemProps } from '../molcules/Comment';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -69,8 +71,26 @@ const LikeButton = styled.button`
 `;
 const CommentSection = styled.section`
   width: 100%;
-  height: 152px;
+  min-height: 152px;
+  box-sizing: content-box;
   border-top: 6px solid ${({ theme }) => theme.GRAY02};
+`;
+const CommentSectionHeader = styled.div`
+  ${Layout.flexRowStartCenter}
+  width:100%;
+  height: 44px;
+  padding: 16px 16px 6px 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid ${({ theme }) => theme.GRAY02};
+`;
+const CommentList = styled.ul`
+  ${Layout.flexColStartCenter}
+  width:100%;
+  height: min-content;
+  min-height: 108px;
+  margin: 7px 0;
+  padding: 0;
+  list-style-type: none;
 `;
 const FooterContainer = styled.section`
   ${Layout.flexRowCenter};
@@ -135,7 +155,16 @@ const DetailPostTemplate = (): JSX.Element => {
       <ButtonArea>
         <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
       </ButtonArea>
-      <CommentSection></CommentSection>
+      <CommentSection>
+        <CommentSectionHeader>댓글 {0}</CommentSectionHeader>
+        <CommentList>
+          {Object.keys(comment)
+            .sort()
+            .map((key) => (
+              <Comment key={key} {...comment[key]} />
+            ))}
+        </CommentList>
+      </CommentSection>
       <FooterContainer>
         <FooterSection>
           <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />
@@ -161,4 +190,31 @@ const post = {
   thumbnail: 'https://picsum.photos/240/306',
   color: 'purple',
   category: '직장/이직',
+};
+
+const comment: { [id: string]: CommentItemProps } = {
+  '1': {
+    id: '1',
+    writer: '익명 친구1',
+    createdAt: '15:31',
+    content: '오 노티드 맛있겠다',
+  },
+  '2': {
+    id: '2',
+    writer: '익명 친구2',
+    createdAt: '15:31',
+    content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
+  },
+  '3': {
+    id: '3',
+    writer: '익명 친구3',
+    createdAt: '15:31',
+    content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
+  },
+  '4': {
+    id: '4',
+    writer: '익명 친구4',
+    createdAt: '15:31',
+    content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
+  },
 };

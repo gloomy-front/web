@@ -6,37 +6,35 @@ import { Loading } from '@/components/molcules';
 import { KAKAO_KEY } from '@/constants/index';
 
 const MainContainer = styled.main`
-  ${Layout.flexColCenter};
+  ${Layout.flexColStartCenter};
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
-  position: relative;
-  background-image: url('https://gloomy-static-image.s3.ap-northeast-2.amazonaws.com/intro_background_image.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  background-color: #FEFEDF;
 `;
 
 const TextArea = styled.div`
-  ${Layout.flexRowStartCenter};
+  ${Layout.flexColCenter};
+  padding-top: 32px;
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 30%;
-  padding-left: 35px;
-  box-sizing: border-box;
+`;
+
+const LoginButtonSection = styled.div`
+  ${Layout.flexColCenter};
+  width: 100%;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const LoginButtonArea = styled.div`
   ${Layout.flexRowCenter};
-  position: fixed;
-  bottom: 35px;
-  left: 50%;
+  background-color: ${({ theme }) => theme.KAKAO_YELLOW};
   width: calc(100% - 34px);
   max-width: 566px;
-  height: 47px;
-  background-color: ${({ theme }) => theme.KAKAO_YELLOW};
+  height: 49px;
   border-radius: 10px;
-  transform: translateX(-50%);
   cursor: pointer;
 `;
 
@@ -54,7 +52,7 @@ export default function LoginTemplate(): JSX.Element {
     document.head.appendChild(kakaoScript);
   }, []);
 
-  const kakaoLoign = () => {
+  const kakaoLogin = () => {
     setIsLoading(false);
     window.Kakao.init(KAKAO_KEY);
     window.Kakao.Auth.authorize({
@@ -66,18 +64,27 @@ export default function LoginTemplate(): JSX.Element {
   return (
     <MainContainer>
       <TextArea>
-        <Title size="h3" style={{ lineHeight: 1.5 }}>
-          {'감정이'}
-          <br/> {'말랑해지는 순간을'}
-          <br/>
-          <Span style={{ fontWeight: 700, fontSize: '20px' }}>{'그루밍'}</Span>
-          {'에서 경험하세요'}
-        </Title>
+        <Span style={{ fontSize: '16px', marginBottom: '12px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
+        <Title style={{ lineHeight: 1.5, fontSize: '32px', fontWeight: 700 }}>{'고밍아웃'}</Title>
       </TextArea>
-      <LoginButtonArea onClick={kakaoLoign}>
-        <Icon.Kakao style={{ position: 'absolute', left: '18px' }} height={'39px'}/>
-        <Span style={{ color: COLOR.BLACK, fontSize: '13px', display: 'block', width: '100%', textAlign: 'center' }}>{'카카오로 이용하기'}</Span>
-      </LoginButtonArea>
+      <img
+        src={'https://gloomy-static-image.s3.ap-northeast-2.amazonaws.com/Intro_image.png'}
+        alt={''}
+        style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)' }}
+      />
+      <LoginButtonSection>
+        <LoginButtonArea onClick={kakaoLogin}>
+          <Icon.Kakao style={{ position: 'absolute', left: '30px' }} height={'32px'}/>
+          <Span style={{ fontSize: '16px', display: 'block', width: '100%', textAlign: 'center' }}>{'카카오 로그인'}</Span>
+        </LoginButtonArea>
+        <Span style={{ color: COLOR.GRAY05, marginTop: '13px' }}>
+          {'시작하면 '}
+          <Span style={{ color: COLOR.GRAY05, textDecoration: 'underline' }}>{'이용약관'}</Span>
+          {' 및 '}
+          <Span style={{ color: COLOR.GRAY05, textDecoration: 'underline' }}>{'개인정보취급방침'}</Span>
+          {'에 동의하게 됩니다.'}
+        </Span>
+      </LoginButtonSection>
       {isLoading ? <></> : <Loading/>}
     </MainContainer>
   );

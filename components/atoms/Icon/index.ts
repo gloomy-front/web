@@ -19,3 +19,4 @@ export { default as Check } from './Check';
 export { default as Picture } from './Picture';
 export { default as WriteIcon } from './WriteIcon';
 export { default as Mypage } from './Mypage';
+export { default as Home } from './Home';

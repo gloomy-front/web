@@ -13,21 +13,12 @@ const BottomContainer = styled.div`
   width: 100%;
   background-color: #ffffff;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   border-top: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
 
-const MyPageButtonArea = styled.div`
+const ButtonArea = styled.div`
   position: flex;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-`;
-
-const WriteButtonArea = styled.div`
-  position: flex;
-  width: 30px;
-  height: 30px;
   cursor: pointer;
 `;
 
@@ -36,19 +27,19 @@ export default function BottomNav(): JSX.Element {
   return (
     <>
       <BottomContainer>
-        <MyPageButtonArea>
-          <Icon.Mypage />
-        </MyPageButtonArea>
+        <ButtonArea>
+          <Icon.Home />
+        </ButtonArea>
 
-        <WriteButtonArea onClick={() => router.push('/community/new')}>
+        <ButtonArea onClick={() => router.push('/community/new')}>
           <Tooltip position={'top'} content="🔮나누고 싶은 생각이 있나요?">
-            <Icon.WriteIcon height={'32px'} />
+            <Icon.WriteIcon />
           </Tooltip>
-        </WriteButtonArea>
+        </ButtonArea>
 
-        <MyPageButtonArea>
+        <ButtonArea>
           <Icon.Mypage />
-        </MyPageButtonArea>
+        </ButtonArea>
       </BottomContainer>
     </>
   );

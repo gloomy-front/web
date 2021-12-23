@@ -19,13 +19,11 @@ type CenterContainerProps = {
 export const TooltipWrapper = styled.div`
   position: flex;
   display: inline-flex;
-  left: 100%;
-  padding-bottom: 14px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TooltipTarget = styled.button`
-  border: none;
-  background: inherit;
   padding: 5px;
   margin: -100px;
   font-size: 15px;
@@ -38,8 +36,6 @@ export const TooltipTarget = styled.button`
       font-size: 2rem;
     `};
 
-  color: inherit;
-  cursor: inherit;
   display: flex;
   ${({ showOnFocus }: TooltipTargetProps) =>
     !showOnFocus &&

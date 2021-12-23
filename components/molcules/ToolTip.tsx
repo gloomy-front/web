@@ -17,7 +17,7 @@ type CenterContainerProps = {
 };
 
 export const TooltipWrapper = styled.div`
-  position: relative;
+  position: flex;
   display: inline-flex;
   left: 100%;
   padding-bottom: 14px;
@@ -51,13 +51,12 @@ export const TooltipTarget = styled.button`
 export const CenterContainer = styled.div`
   position: absolute;
   width: 220px;
-  margin-left: -116px;
+  margin-left: -115px;
   display: flex;
   justify-content: center;
   align-items: center;
   left: 50%;
   bottom: calc(100% + 5px);
-  pointer-events: none;
   ${({ position }: CenterContainerProps) => {
     switch (position) {
       case 'bottom':
@@ -91,7 +90,7 @@ export const CenterContainer = styled.div`
 `;
 
 export const TooltipBox = styled.span`
-  position: relative;
+  position: flex;
   color: #fff;
   background-color: #9fb8f4;
   text-align: center;
@@ -114,13 +113,13 @@ export const TooltipBox = styled.span`
   &:after {
     content: '';
     position: absolute;
-    width: 1px;
-    height: 1px;
+    width: 10px;
+    height: 10px;
     border-width: 5px;
-    border-style: solid;
     background-color: #9fb8f4;
     left: calc(50%);
-    top: 100%;
+    top: 89%;
+    transform: rotate(45deg);
   }
 
   ${({ position }) => {
@@ -150,20 +149,23 @@ export const TooltipBox = styled.span`
           }
         `;
       default:
-        return css``;
+        return css`
+          &:after {
+          }
+        `;
     }
   }}
 `;
 
 function Tooltip({ position, content, children = true }: TooltipProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const showTooltip = isHovered || isFocused;
 
   return (
     <TooltipWrapper
       onMouseEnter={() => setIsHovered(true)}
-      //onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => setIsHovered(true)}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >

@@ -2,7 +2,7 @@ import React, { memo, ReactElement } from 'react';
 import { SVGIconProps } from '.';
 
 const Mypage = ({ fill = '#000', height = '30px', onClick, style }: SVGIconProps): ReactElement => (
-  <svg height={height} viewBox="0 0 32 32" fill={fill} style={style} onClick={onClick ? onClick : () => {}}>
+  <svg height={height} viewBox="0 0 24 24" fill={fill} style={style} onClick={onClick ? onClick : () => {}}>
     <path
       fillRule="evenodd"
       clipRule="evenodd"

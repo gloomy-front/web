@@ -1,11 +1,11 @@
 import React, { memo, ReactElement } from 'react';
 import { SVGIconProps } from '.';
 
-const Home = ({ fill = '#000', height = '24px', onClick, style }: SVGIconProps): ReactElement => (
+const Home = ({ fill = '#212025', height = '24px', onClick, style }: SVGIconProps): ReactElement => (
   <svg height={height} viewBox="0 0 24 24" fill={fill} style={style} onClick={onClick ? onClick : () => {}}>
     <path
       d="M11.3356 3.25259C11.7145 2.9158 12.2855 2.9158 12.6644 3.25259L21.6644 11.2526C22.0772 11.6195 22.1143 12.2516 21.7474 12.6644C21.3805 13.0771 20.7484 13.1143 20.3356 12.7474L20 12.4491V20C20 21.1046 19.1046 22 18 22H6.00001C4.89544 22 4.00001 21.1046 4.00001 20V12.4491L3.66437 12.7474C3.25159 13.1143 2.61952 13.0771 2.2526 12.6644C1.88568 12.2516 1.92286 11.6195 2.33565 11.2526L11.3356 3.25259ZM6.00001 10.6713V20H9.00001V15C9.00001 14.4477 9.44773 14 10 14H14C14.5523 14 15 14.4477 15 15V20H18V10.6713L12 5.33795L6.00001 10.6713ZM13 20V16H11V20H13Z"
-      fill="#212025"
+      fill={fill}
     />
   </svg>
 );

@@ -18,27 +18,27 @@ const BottomContainer = styled.div`
 `;
 
 const ButtonArea = styled.div`
-  position: flex;
   cursor: pointer;
 `;
 
 export default function BottomNav(): JSX.Element {
   const router = useRouter();
+
   return (
     <>
       <BottomContainer>
-        <ButtonArea>
-          <Icon.Home />
+        <ButtonArea onClick={() => router.push('/community?locate=home')}>
+          <Icon.Home fill={router.query['locate'] === 'home' ? '#212025' : '#BDBDBD'}/>
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/community/new')}>
-          <Tooltip position={'top'} content="🔮나누고 싶은 생각이 있나요?">
+          <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
             <Icon.WriteIcon />
           </Tooltip>
         </ButtonArea>
 
-        <ButtonArea>
-          <Icon.Mypage />
+        <ButtonArea onClick={() => router.push('/community?locate=profile')}>
+          <Icon.Mypage fill={router.query['locate'] === 'profile' ? '#212025' : '#BDBDBD'}/>
         </ButtonArea>
       </BottomContainer>
     </>

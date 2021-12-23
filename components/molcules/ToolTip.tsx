@@ -1,15 +1,13 @@
-import { useRef, useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import { CSSProperties, ReactNode, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { Layout } from '@/styles/index';
 
 type TooltipProps = {
-  position: string;
-  content: any;
-  children: any;
-};
-
-type TooltipTargetProps = {
-  highlightOnHover: any;
-  showOnFocus: any;
+  position?: string;
+  content: string;
+  children: ReactNode;
+  containerStyle?: CSSProperties;
+  tooltipStyle?: CSSProperties;
 };
 
 type CenterContainerProps = {
@@ -17,42 +15,18 @@ type CenterContainerProps = {
 };
 
 export const TooltipWrapper = styled.div`
-  position: flex;
   display: inline-flex;
+  position: relative;
   align-items: center;
   justify-content: center;
-`;
-
-export const TooltipTarget = styled.button`
-  padding: 5px;
-  margin: -100px;
-  font-size: 15px;
-  ${({ highlightOnHover }: TooltipTargetProps) =>
-    css`
-      bborder: ${highlightOnHover ? css`1px solid #393e46` : css``};
-      padding: 15px;
-      margin: 1px;
-      border-radius: 5px;
-      font-size: 2rem;
-    `};
-
-  display: flex;
-  ${({ showOnFocus }: TooltipTargetProps) =>
-    !showOnFocus &&
-    css`
-      outline: none;
-    `};
 `;
 
 export const CenterContainer = styled.div`
+  ${Layout.flexRowCenter};
   position: absolute;
   width: 220px;
   margin-left: -115px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   left: 50%;
-  bottom: calc(100% + 5px);
   ${({ position }: CenterContainerProps) => {
     switch (position) {
       case 'bottom':
@@ -79,14 +53,13 @@ export const CenterContainer = styled.div`
         `;
       default:
         return css`
-          bottom: calc(100% + 5px);
+          bottom: calc(100% + 15px);
         `;
     }
   }}
 `;
 
 export const TooltipBox = styled.span`
-  position: flex;
   color: #fff;
   background-color: #9fb8f4;
   text-align: center;
@@ -105,7 +78,6 @@ export const TooltipBox = styled.span`
         return css``;
     }
   }}
-
   &:after {
     content: '';
     position: absolute;
@@ -153,7 +125,7 @@ export const TooltipBox = styled.span`
   }}
 `;
 
-function Tooltip({ position, content, children = true }: TooltipProps) {
+function Tooltip({ position = 'top', content, children = true, containerStyle = {}, tooltipStyle = {}}: TooltipProps) {
   const [isHovered, setIsHovered] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const showTooltip = isHovered || isFocused;
@@ -167,8 +139,8 @@ function Tooltip({ position, content, children = true }: TooltipProps) {
     >
       {children}
       {showTooltip && (
-        <CenterContainer position={position}>
-          <TooltipBox position={position}>{content}</TooltipBox>
+        <CenterContainer position={position} style={containerStyle}>
+          <TooltipBox position={position} style={tooltipStyle}>{content}</TooltipBox>
         </CenterContainer>
       )}
     </TooltipWrapper>

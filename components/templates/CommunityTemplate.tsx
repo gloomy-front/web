@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
-import { AsyncBoundary, BoardLoading, PostList, BottomNav } from '@/components/organisms';
+import { AsyncBoundary, BoardLoading, PostList, BottomNav, Category } from '@/components/organisms';
+import { useUrlParams } from '@/utils/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -25,21 +25,13 @@ const HeaderNav = styled.section`
   width: 100%;
 `;
 
-const CategorySection = styled.section`
-  ${Layout.flexRowBetweenCenter};
-  width: 100%;
-  height: 57px;
-
-  background-color: ${({ theme }) => theme.GRAY02};
-`;
-
 const ContentContainer = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;
 `;
 
 export default function CommunityTemplate(): JSX.Element {
-  const router = useRouter();
+  const params = useUrlParams({ category: 'total' });
 
   return (
     <>
@@ -47,13 +39,17 @@ export default function CommunityTemplate(): JSX.Element {
         <HeaderContainer>
           <HeaderNav>
             <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-            <Icon.Search height={'25px'} />
+            <Icon.Search height={'25px'}/>
           </HeaderNav>
         </HeaderContainer>
-        <CategorySection />
+        <Category initCategory={params.category}/>
         <ContentContainer>
-          <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
-            <PostList />
+          <AsyncBoundary
+            pendingFallback={<BoardLoading/>}
+            isRefresh={true}
+            style={{ height: 'calc(100vh - 140px)' }}
+          >
+            <PostList/>
           </AsyncBoundary>
         </ContentContainer>
       </MainContainer>

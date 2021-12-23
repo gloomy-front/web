@@ -20,3 +20,5 @@ export { default as Picture } from './Picture';
 export { default as WriteIcon } from './WriteIcon';
 export { default as Mypage } from './Mypage';
 export { default as Home } from './Home';
+export { default as ArrowDown } from './ArrowDown';
+export { default as Back } from './Back';

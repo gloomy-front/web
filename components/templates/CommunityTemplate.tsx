@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
-import { AsyncBoundary, BoardLoading, PostList, Category } from '@/components/organisms';
+import { AsyncBoundary, BoardLoading, PostList, BottomNav, Category } from '@/components/organisms';
 import { useUrlParams } from '@/utils/index';
 
 const MainContainer = styled.main`
@@ -34,23 +34,26 @@ export default function CommunityTemplate(): JSX.Element {
   const params = useUrlParams({ category: 'total' });
 
   return (
-    <MainContainer>
-      <HeaderContainer>
-        <HeaderNav>
-          <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-          <Icon.Search height={'25px'}/>
-        </HeaderNav>
-      </HeaderContainer>
-      <Category initCategory={params.category}/>
-      <ContentContainer>
-        <AsyncBoundary
-          pendingFallback={<BoardLoading/>}
-          isRefresh={true}
-          style={{ height: 'calc(100vh - 140px)' }}
-        >
-          <PostList/>
-        </AsyncBoundary>
-      </ContentContainer>
-    </MainContainer>
+    <>
+      <MainContainer>
+        <HeaderContainer>
+          <HeaderNav>
+            <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
+            <Icon.Search height={'25px'}/>
+          </HeaderNav>
+        </HeaderContainer>
+        <Category initCategory={params.category}/>
+        <ContentContainer>
+          <AsyncBoundary
+            pendingFallback={<BoardLoading/>}
+            isRefresh={true}
+            style={{ height: 'calc(100vh - 140px)' }}
+          >
+            <PostList/>
+          </AsyncBoundary>
+        </ContentContainer>
+      </MainContainer>
+      <BottomNav />
+    </>
   );
 }

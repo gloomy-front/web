@@ -7,6 +7,7 @@ import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { CommentItemProps } from '../molcules/Comment';
+import Modal from '../molcules/Modal';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -171,6 +172,24 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
+      {/* <Modal
+        title={'이 게시글에 대해'}
+        type={'normal-list'}
+        content={['게시글 수정', '게시글 삭제']}
+        cb={(idx: number) => alert(idx)}
+      /> */}
+      {/* <Modal
+        title={'신고 사유를 선택하세요'}
+        type={'normal-list'}
+        content={[
+          '광고 · 홍보성 내용',
+          '욕설 · 외설적 언어 사용',
+          '선정적 · 폭력적인 내용',
+          '도배성 내용',
+          '정치적 · 사회적 의견 표출',
+        ]}
+        cb={(idx: number) => alert(idx)}
+      /> */}
     </MainContainer>
   );
 };

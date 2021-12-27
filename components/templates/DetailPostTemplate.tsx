@@ -1,12 +1,12 @@
 import { Icon, Span, Title } from '@/components/atoms';
+import { Comment, Modal } from '@/components/molcules';
 import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
-import { Comment, Modal } from '@/components/molcules';
+import { CommentItemProps } from '@/types/index';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { CommentItemProps } from '../molcules/Comment';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -158,11 +158,9 @@ const DetailPostTemplate = (): JSX.Element => {
       <CommentSection>
         <CommentSectionHeader>댓글 {0}</CommentSectionHeader>
         <CommentList>
-          {Object.keys(comment)
-            .sort()
-            .map((key) => (
-              <Comment key={key} {...comment[key]} />
-            ))}
+          {comment.map((item) => (
+            <Comment key={item.id} {...item} />
+          ))}
         </CommentList>
       </CommentSection>
       <FooterContainer>
@@ -171,12 +169,21 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
+      <Modal
+        title={'이 게시물을 삭제하시겠습니까'}
+        type={'normal-list'}
+        content={['삭제하기', '취소']}
+        callbackFn={function (param: any): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     </MainContainer>
   );
 };
 export default DetailPostTemplate;
 
 const CommentModal = (
+  // TODO : https://github.com/gloomy-project/web/pull/27#discussion_r775225872
   <Modal
     title={'신고 사유를 선택하세요'}
     type={'normal-list'}
@@ -187,7 +194,7 @@ const CommentModal = (
       '도배성 내용',
       '정치적 · 사회적 의견 표출',
     ]}
-    cb={(idx: number) => alert(idx)}
+    callbackFn={(idx: number) => alert(idx)}
   />
 );
 
@@ -196,7 +203,7 @@ const FeedDetailModal = (
     title={'이 게시글에 대해'}
     type={'normal-list'}
     content={['게시글 수정', '게시글 삭제']}
-    cb={(idx: number) => alert(idx)}
+    callbackFn={(idx: number) => alert(idx)}
   />
 );
 
@@ -216,29 +223,29 @@ const post = {
   category: '직장/이직',
 };
 
-const comment: { [id: string]: CommentItemProps } = {
-  '1': {
-    id: '1',
+const comment: CommentItemProps[] = [
+  {
+    id: 1,
     writer: '익명 친구1',
     createdAt: '15:31',
     content: '오 노티드 맛있겠다',
   },
-  '2': {
-    id: '2',
+  {
+    id: 2,
     writer: '익명 친구2',
     createdAt: '15:31',
     content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
   },
-  '3': {
-    id: '3',
+  {
+    id: 3,
     writer: '익명 친구3',
     createdAt: '15:31',
     content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
   },
-  '4': {
-    id: '4',
+  {
+    id: 4,
     writer: '익명 친구4',
     createdAt: '15:31',
     content: '나도 다음주에 노티드 갈까 하는데 달달한거 먹고 기분 풀렸다니 다행이야. 힘내자',
   },
-};
+];

@@ -61,12 +61,6 @@ export const Layout = {
     justify-content: space-between;
     align-items: center;
   `,
-  flexRowBetweenStart: css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  `,
   flexRowStartCenter: css`
     display: flex;
     flex-direction: row;

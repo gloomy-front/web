@@ -1,16 +1,10 @@
 import { Icon } from '@/components/atoms';
 import { Layout } from '@/styles/theme';
+import { CommentItemProps } from '@/types/index';
 import styled from 'styled-components';
 
-export interface CommentItemProps {
-  id: string;
-  writer: string;
-  createdAt: string;
-  content: string;
-}
-
 const CommentItem = styled.li`
-  ${Layout.flexRowBetweenStart}
+  ${Layout.flexRowBetweenCenter}
   width: 100%;
   height: min-content;
   margin: 0;
@@ -41,11 +35,11 @@ const CommentBtnContainer = styled.div`
   min-height: 47px;
 `;
 
-const Comment = (props: CommentItemProps) => (
+const Comment = ({ id, writer, createdAt, content }: CommentItemProps) => (
   <CommentItem>
     <CommentTextContainer>
-      <CommentInfo>{`${props.writer} · ${props.createdAt}`}</CommentInfo>
-      <CommentContent>{`${props.content}`}</CommentContent>
+      <CommentInfo>{`${writer} · ${createdAt}`}</CommentInfo>
+      <CommentContent>{`${content}`}</CommentContent>
     </CommentTextContainer>
     <CommentBtnContainer>
       <Icon.More onClick={() => alert('clicked')} style={{ paddingRight: '16px' }} />

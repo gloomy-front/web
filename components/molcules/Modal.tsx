@@ -1,15 +1,15 @@
-import { Layout } from '@/styles/theme';
-import { Title, Icon, PopupOverlay } from '@/components/atoms';
+import { Icon, PopupOverlay, Title } from '@/components/atoms';
 import useBlockScroll from '@/hooks/useBlockScroll';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { Layout } from '@/styles/theme';
 import { createPortal } from 'react-dom';
+import styled from 'styled-components';
+import React from 'react';
 
 export interface ModalProps {
   title: string;
   type: 'normal-list' | 'check-list';
   content: string[];
-  cb: (param: any) => void;
+  callbackFn: (param: any) => void;
 }
 
 const ModalContainer = styled.div`
@@ -18,11 +18,10 @@ const ModalContainer = styled.div`
   bottom: 0;
   ${Layout.flexColEndCenter};
   width: 100%;
-  height: 'min-content';
   border-radius: 24px 24px 0 0;
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.WHITE};
-  z-index: 4000000;
+  z-index: 20000000;
 `;
 const ModalHeaderSection = styled.section`
   ${Layout.flexRowBetweenCenter}
@@ -56,7 +55,7 @@ const Modal = (props: ModalProps) => {
         </ModalHeaderSection>
         <ModalContentList>
           {props.content.map((text, idx) => (
-            <ModalContentItem key={idx} onClick={() => props.cb(idx)}>
+            <ModalContentItem key={idx} onClick={() => props.callbackFn(idx)}>
               {text}
             </ModalContentItem>
           ))}

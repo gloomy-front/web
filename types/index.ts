@@ -11,3 +11,10 @@ export enum ActionType {
 }
 
 export type COLOR_TYPE = typeof COLOR;
+
+export interface CommentItemProps {
+  id: number;
+  writer: string;
+  createdAt: string;
+  content: string;
+}

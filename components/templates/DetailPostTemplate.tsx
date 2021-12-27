@@ -169,14 +169,6 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
-      <Modal
-        title={'이 게시물을 삭제하시겠습니까'}
-        type={'normal-list'}
-        content={['삭제하기', '취소']}
-        callbackFn={function (param: any): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
     </MainContainer>
   );
 };

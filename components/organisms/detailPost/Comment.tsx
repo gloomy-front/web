@@ -1,7 +1,8 @@
-import { Icon } from '@/components/atoms';
+import styled from 'styled-components';
+
 import { Layout } from '@/styles/theme';
 import { CommentItemProps } from '@/types/index';
-import styled from 'styled-components';
+import { MoreComponent } from '@/components/organisms/detailPost';
 
 const CommentItem = styled.li`
   ${Layout.flexRowBetweenCenter}
@@ -42,7 +43,7 @@ const Comment = ({ id, writer, createdAt, content }: CommentItemProps) => (
       <CommentContent>{`${content}`}</CommentContent>
     </CommentTextContainer>
     <CommentBtnContainer>
-      <Icon.More onClick={() => alert('clicked')} style={{ paddingRight: '16px' }} />
+      <MoreComponent />
     </CommentBtnContainer>
   </CommentItem>
 );

@@ -1,11 +1,12 @@
+import React from 'react';
+import { createPortal } from 'react-dom';
+import styled from 'styled-components';
+
 import { Icon, PopupOverlay, Title } from '@/components/atoms';
 import useBlockScroll from '@/hooks/useBlockScroll';
 import { Layout } from '@/styles/theme';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components';
-import React from 'react';
 
-export interface ModalProps {
+interface ModalProps {
   title: string;
   type: 'normal-list' | 'check-list';
   content: string[];
@@ -33,11 +34,13 @@ const ModalContentList = styled.ul`
   width: 100%;
   list-style-type: none;
   padding: 0;
+  padding-bottom: 8px;
   margin: 0;
 `;
 const ModalContentItem = styled.li`
   ${Layout.flexRowStartCenter};
   height: 48px;
+  font-size: 15px;
   padding: 13px 16px;
   box-sizing: border-box;
 `;

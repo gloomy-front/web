@@ -1,12 +1,14 @@
-import { Icon, Span, Title } from '@/components/atoms';
-import { Comment, Modal } from '@/components/molcules';
-import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
-import { COLOR } from '@/styles/color';
-import { Layout } from '@/styles/theme';
-import { CommentItemProps } from '@/types/index';
-import router from 'next/router';
 import React from 'react';
+import router from 'next/router';
 import styled from 'styled-components';
+
+import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
+import { COLOR, Layout } from '@/styles/index';
+import { CommentItemProps } from '@/types/index';
+import { Icon, Span, Title } from '@/components/atoms';
+import { Modal } from '@/components/molcules';
+import { Comment } from '@/components/organisms/detailPost';
+import { MoreComponent } from '@/components/organisms/detailPost';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -134,7 +136,7 @@ const DetailPostTemplate = (): JSX.Element => {
       <HeaderContainer>
         <HeaderNav>
           <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer' }} />
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }} />
+          <MoreComponent />
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>

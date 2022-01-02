@@ -74,7 +74,7 @@ export default function LoginTemplate(): JSX.Element {
       />
       <LoginButtonSection>
         <LoginButtonArea onClick={kakaoLogin}>
-          <Icon.Kakao style={{ position: 'absolute', left: '30px' }} height={'32px'}/>
+          <Icon.Kakao style={{ position: 'relative', left: '30px' }} height={'32px'}/>
           <Span style={{ fontSize: '16px', display: 'block', width: '100%', textAlign: 'center' }}>{'카카오 로그인'}</Span>
         </LoginButtonArea>
         <Span style={{ color: COLOR.GRAY05, marginTop: '13px' }}>

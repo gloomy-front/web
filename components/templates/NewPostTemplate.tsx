@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { COLOR, Layout } from '@/styles/index';
 import { COLOR_TYPE } from '@/types/index';
 import { Span, Icon, TextArea } from '@/components/atoms';
+import { AppAuthorContext } from '@/provider/index';
+import { checkPermission, requestPermission } from '@/hooks/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -56,6 +58,7 @@ export default function NewPostTemplate(): JSX.Element {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const authData = useContext(AppAuthorContext);
 
   const methods = useForm<{ content: string; postImages: Array<Image> }>({
     defaultValues: {
@@ -108,6 +111,21 @@ export default function NewPostTemplate(): JSX.Element {
         <CloseButton disabled={watchContent.length < 1} onClick={handleSubmit(requestNew, onError)}>{'완료'}</CloseButton>
       </HeaderSection>
       <InputSection>
+        <div>
+          <Span style={{ color: 'white' }}>{'현재 권한 상태 ===> ' + JSON.stringify(authData)}</Span>
+        </div>
+        <div onClick={() => checkPermission({ permissionType: 'CAMERA' })}>
+          <Span style={{ color: 'white' }}>{'카메라 권한 상태'}</Span>
+        </div>
+        <div onClick={() => checkPermission({ permissionType: 'PHOTO' })}>
+          <Span style={{ color: 'white' }}>{'storage 권한 상태'}</Span>
+        </div>
+        <div onClick={() => requestPermission({ permissionType: 'CAMERA' })}>
+          <Span style={{ color: 'white' }}>{'카메라 권한 요청'}</Span>
+        </div>
+        <div onClick={() => requestPermission({ permissionType: 'PHOTO' })}>
+          <Span style={{ color: 'white' }}>{'storage 권한 요청'}</Span>
+        </div>
         <TextArea
           spellCheck={false}
           placeholder={'내용을 입력해주세요'}

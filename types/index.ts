@@ -11,3 +11,5 @@ export enum ActionType {
 }
 
 export type COLOR_TYPE = typeof COLOR;
+
+export * from './messageType';

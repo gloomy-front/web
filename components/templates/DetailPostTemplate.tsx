@@ -5,6 +5,7 @@ import { Layout } from '@/styles/theme';
 import router from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
+import Comment from '@/components/organisms/community/Comment';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -72,6 +73,14 @@ const CommentSection = styled.section`
   height: 152px;
   border-top: 6px solid ${({ theme }) => theme.GRAY02};
 `;
+const CountBlock = styled.div`
+  display: flex;
+  height: 46px;
+  padding-left: 16px;
+  align-items: center;
+  border-bottom: 1px solid #F2F2F2;
+  gap: 4px;
+`;
 const FooterContainer = styled.section`
   ${Layout.flexRowCenter};
   position: fixed;
@@ -81,6 +90,8 @@ const FooterContainer = styled.section`
   height: 56px;
   padding: 10px 16px;
   box-sizing: border-box;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
 `;
 const FooterSection = styled.section`
   ${Layout.flexRowCenter};
@@ -133,7 +144,12 @@ const DetailPostTemplate = (): JSX.Element => {
       <ButtonArea>
         <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
       </ButtonArea>
-      <CommentSection></CommentSection>
+      <CommentSection>
+          <CountBlock>
+              <Title style={{ fontSize: '15px' }}>댓글</Title><Span style={{ fontSize: '15px' }}>{post.commentCount}</Span>
+          </CountBlock>
+          <Comment />
+      </CommentSection>
       <FooterContainer>
         <FooterSection>
           <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />

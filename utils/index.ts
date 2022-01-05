@@ -1,4 +1,5 @@
-export * from './useMutation';
+export { default as useMutation } from './useMutation';
 export * from './useUrlParams';
 export * from './device';
-export * from './fetcher';
+export * from './ssrFetcher';
+export * from './csrFetcher';

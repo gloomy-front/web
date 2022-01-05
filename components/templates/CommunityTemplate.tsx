@@ -3,6 +3,7 @@ import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, PostList, BottomNav, Category } from '@/components/organisms';
 import { useUrlParams } from '@/utils/index';
+import { getComment, useCreateComment } from '@/api/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -33,6 +34,13 @@ const ContentContainer = styled.section`
 export default function CommunityTemplate(): JSX.Element {
   const params = useUrlParams({ category: 'total' });
 
+  // get swr 쓰는법
+  // const { data } = getComment();
+
+  // (post, put, delete) 쓰는법
+  // const [postCreateComment] = useCreateComment();
+  // postCreateComment({ data: { content: '', parentCommentPk: -1 }}).then();
+
   return (
     <>
       <MainContainer>
@@ -53,7 +61,7 @@ export default function CommunityTemplate(): JSX.Element {
           </AsyncBoundary>
         </ContentContainer>
       </MainContainer>
-      <BottomNav />
+      <BottomNav/>
     </>
   );
 }

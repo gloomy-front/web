@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { Layout } from '@/styles/index';
+import { Layout, COLOR } from '@/styles/index';
 import { Icon } from '@/components/atoms';
 import { Tooltip } from '@/components/molcules';
 
@@ -23,12 +23,13 @@ const ButtonArea = styled.div`
 
 export default function BottomNav(): JSX.Element {
   const router = useRouter();
+  const firstPath = router.pathname.split('/')[1];
 
   return (
     <>
       <BottomContainer>
         <ButtonArea onClick={() => router.push('/community?locate=home')}>
-          <Icon.Home fill={router.query['locate'] === 'home' ? '#212025' : '#BDBDBD'}/>
+          <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09}/>
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/community/new')}>
@@ -38,7 +39,7 @@ export default function BottomNav(): JSX.Element {
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/community?locate=profile')}>
-          <Icon.Mypage fill={router.query['locate'] === 'profile' ? '#212025' : '#BDBDBD'}/>
+          <Icon.Mypage fill={router.query['locate'] === 'profile' ? COLOR.BLACK : COLOR.GRAY09}/>
         </ButtonArea>
       </BottomContainer>
     </>

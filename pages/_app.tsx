@@ -2,6 +2,7 @@ import React from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
+import { AnimatePresence } from 'framer-motion';
 
 import { COLOR, GlobalStyles } from '@/styles/index';
 import { AsyncBoundary } from '@/components/organisms';
@@ -9,7 +10,7 @@ import { Loading } from '@/components/molcules';
 import CommunityPage from '@/pages/community';
 import { AppAuthorContext, AppAuthorNextCallbackContext, useAppProtocol } from '@/provider/index';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   const { authData, setNextCallback } = useAppProtocol();
 
   return (
@@ -37,7 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AsyncBoundary pendingFallback={<Loading/>} rejectedFallback={<CommunityPage/>}>
           <AppAuthorContext.Provider value={authData}>
             <AppAuthorNextCallbackContext.Provider value={setNextCallback}>
-              <Component {...pageProps} />
+              <AnimatePresence>
+                <Component key={router.route} {...pageProps} />
+              </AnimatePresence>
             </AppAuthorNextCallbackContext.Provider>
           </AppAuthorContext.Provider>
         </AsyncBoundary>

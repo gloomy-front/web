@@ -7,7 +7,7 @@ mergeable:
       - do: assign
         assignees: [ '@author' ] # only array accepted, use @author for PR/Issue author
       - do: request_review
-        reviewers: ['Lee-sungheon', 'hyemingway2']
+        reviewers: ['Lee-sungheon', 'hyemingway2', 'h2younggon']
       - do: labels
         labels: [ 'status: pending' ]
         mode: 'add'
@@ -115,7 +115,7 @@ mergeable:
     validate:
       - do: approvals
         required:
-          reviewers: [ Lee-sungheon, hyemingway2 ]
+          reviewers: [ Lee-sungheon, hyemingway2, h2younggon ]
           owners: false # Optional boolean. When true, the file .github/CODEOWNERS is read and owners made required reviewers
           assignees: true # Optional boolean. When true, PR assignees are made required reviewers.
           requested_reviewers: true # Optional boolean. When true, all the requested reviewer's approval is required

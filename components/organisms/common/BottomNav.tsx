@@ -28,7 +28,7 @@ export default function BottomNav(): JSX.Element {
     <>
       <BottomContainer>
         <ButtonArea onClick={() => router.push('/community?locate=home')}>
-          <Icon.Home fill={router.query['locate'] === 'home' ? '#212025' : '#BDBDBD'}/>
+          <Icon.Home fill={router.query['locate'] === 'home' ? '#212025' : '#BDBDBD'} />
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/community/new')}>
@@ -37,8 +37,8 @@ export default function BottomNav(): JSX.Element {
           </Tooltip>
         </ButtonArea>
 
-        <ButtonArea onClick={() => router.push('/community?locate=profile')}>
-          <Icon.Mypage fill={router.query['locate'] === 'profile' ? '#212025' : '#BDBDBD'}/>
+        <ButtonArea onClick={() => router.push('/myPage/myContents')}>
+          <Icon.Mypage fill={router.query['locate'] === 'profile' ? '#212025' : '#BDBDBD'} />
         </ButtonArea>
       </BottomContainer>
     </>

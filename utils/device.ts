@@ -25,6 +25,18 @@ export const getDevice = (): string => {
   return 'web';
 };
 
+export const isApp = () => {
+  let isAppInstance = false;
+
+  // check android app
+  // @ts-ignore
+  if (typeof window !== 'undefined' && window.ReactNativeWebView) {
+    isAppInstance = true;
+  }
+
+  return isAppInstance;
+};
+
 export const serverGetBrowser = (userAgent: string): string => {
   const agent = userAgent.toLowerCase();
   if ((agent.search('Trident') !== -1) || (agent.indexOf('msie') !== -1)) return 'Explorer Browser';

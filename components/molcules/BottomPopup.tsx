@@ -1,12 +1,23 @@
 import React, { MouseEventHandler, CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { Icon } from '@/components/atoms';
 import { useBlockScroll } from '@/hooks/index';
 import { COLOR, Layout } from '@/styles/index';
 
 export type PopupType = 'NONE' | 'ONE' | 'TWO';
+
+const openAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0px);
+  }
+`;
 
 interface PopupFooterProps {
   type?: PopupType
@@ -71,13 +82,14 @@ const PopupContents = styled.section`
   min-height: 200px;
 
   paddingTop: 16px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
 
   background: ${({ theme }) => theme.WHITE};
   box-shadow: 0 0 14px 3px rgba(34, 34, 34, 0.1);
   transform: translate(-50%, 0);
   overflow: hidden;
+  animation: 0.6s cubic-bezier(0.2, 1, 0.4, 1) 0s 1 normal both running ${openAnimation};
 `;
 
 const PopupOverLay = styled.section`

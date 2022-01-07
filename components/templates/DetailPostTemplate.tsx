@@ -111,7 +111,7 @@ const DetailPostTemplate = (): JSX.Element => {
     <MainContainer>
       <HeaderContainer>
         <HeaderNav>
-          <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer' }} />
+          <Icon.Back onClick={() => router.back()} height={'14px'} style={{ cursor: 'pointer' }} />
           <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }} />
         </HeaderNav>
       </HeaderContainer>

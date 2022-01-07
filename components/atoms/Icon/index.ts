@@ -22,3 +22,5 @@ export { default as Mypage } from './Mypage';
 export { default as Home } from './Home';
 export { default as ArrowDown } from './ArrowDown';
 export { default as Back } from './Back';
+export { default as GomingOut } from './GomingOut';
+export { default as Bell } from './Bell';

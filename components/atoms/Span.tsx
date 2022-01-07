@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Span = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.57;
   font-weight: 400;
   color: ${({ theme }) => theme.BLACK};

@@ -26,6 +26,10 @@ const HeaderNav = styled.section`
   width: 100%;
 `;
 
+const HeaderDiv = styled.div`
+  ${Layout.flexRowStartCenter}
+`;
+
 const ContentContainer = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;
@@ -46,8 +50,14 @@ export default function CommunityTemplate(): JSX.Element {
       <MainContainer>
         <HeaderContainer>
           <HeaderNav>
-            <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-            <Icon.Search height={'25px'}/>
+            <HeaderDiv>
+              <Title style={{ fontWeight: 'bold', marginRight: '2px', fontFamily: 'Gowun Dodum', color: 'black' }}>{'고밍아웃'}</Title>
+              <Icon.GomingOut height={'18px'} style={{ marginBottom: '7px' }}/>
+            </HeaderDiv>
+            <HeaderDiv>
+              <Icon.Bell height={'18px'} style={{ marginRight: '14px' }}/>
+              <Icon.Search height={'18px'}/>
+            </HeaderDiv>
           </HeaderNav>
         </HeaderContainer>
         <Category initCategory={params.category}/>

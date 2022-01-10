@@ -162,7 +162,7 @@ const DetailPostTemplate = (): JSX.Element => {
       });
     } else {
       setOptions({
-        type: 'comment',
+        type: 'post',
         items: getOptionItem(),
       });
     }

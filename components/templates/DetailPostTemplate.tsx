@@ -3,9 +3,12 @@ import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
 import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
 import router from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Comment from '@/components/organisms/community/Comment';
+import OptionsMenu from '@/components/organisms/community/OptionsMenu';
+import Portal from '@/components/organisms/common/Portal';
+import { DECLARATION_LIST } from '@/constants/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -78,8 +81,19 @@ const CountBlock = styled.div`
   height: 46px;
   padding-left: 16px;
   align-items: center;
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #f2f2f2;
   gap: 4px;
+`;
+const NoCommentBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26px;
+`;
+const NoCommentText = styled.p`
+  font-size: 16px;
+  color: ${COLOR.GRAY04};
+  font-weight: bold;
 `;
 const FooterContainer = styled.section`
   ${Layout.flexRowCenter};
@@ -116,47 +130,113 @@ const CommentPostButton = styled.button`
   background-color: ${({ theme }) => theme.WHITE}; ;
 `;
 
+export type OptionsType = {
+  type: string;
+  items: string[];
+};
+
 const DetailPostTemplate = (): JSX.Element => {
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [hasAuth, setHasAuth] = useState(false);
+  const [options, setOptions] = useState<OptionsType>({
+    type: 'post',
+    items: ['게시글 수정', '게시글 삭제'],
+  });
+  // TODO: 본인 인증 API
+
+  const getOptionItem = () => {
+    const items = [];
+    for (const [key, value] of Object.entries(DECLARATION_LIST)) {
+      items.push(value);
+    }
+    return items;
+  };
+
+  // menu handler
+  const optionHandler = (type: string) => {
+    if (type === 'post' && hasAuth) {
+      setOptions({
+        type: 'post',
+        items: ['게시글 수정', '게시글 삭제'],
+      });
+    } else {
+      setOptions({
+        type: 'comment',
+        items: getOptionItem(),
+      });
+    }
+    if (type === 'comment') {
+      setOptions({
+        type: 'comment',
+        items: ['댓글 수정', '댓글 삭제'],
+      });
+    }
+  };
+  // toggle modal handler
+  const menuOpenHandler = () => {
+    setIsOpenMenu(() => !isOpenMenu);
+  };
   return (
-    <MainContainer>
-      <HeaderContainer>
-        <HeaderNav>
-          <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer' }} />
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }} />
-        </HeaderNav>
-      </HeaderContainer>
-      <TitleSection>
-        <CategoryBox>{post.category}</CategoryBox>
-        <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{post.title}</Title>
-        <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
-      </TitleSection>
-      <ImageSection>
-        {post.thumbnail && (
-          <img
-            src={'https://picsum.photos/360/306'}
-            alt={'contentImage'}
-            style={{ width: '100%', height: '306px', objectFit: 'cover' }}
-          />
-        )}
-      </ImageSection>
-      <ContentSection>{post.content}</ContentSection>
-      <ButtonArea>
-        <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
-      </ButtonArea>
-      <CommentSection>
+    <>
+      {isOpenMenu && (
+        <Portal>
+          <OptionsMenu menuOpenHandler={menuOpenHandler} options={options} />
+        </Portal>
+      )}
+      <MainContainer>
+        <HeaderContainer>
+          <HeaderNav>
+            <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer' }} />
+            <Icon.More
+              onClick={() => {
+                menuOpenHandler();
+                optionHandler('post');
+              }}
+              style={{ cursor: 'pointer' }}
+            />
+          </HeaderNav>
+        </HeaderContainer>
+        <TitleSection>
+          <CategoryBox>{post.category}</CategoryBox>
+          <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{post.title}</Title>
+          <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
+        </TitleSection>
+        <ImageSection>
+          {post.thumbnail && (
+            <img
+              src={'https://picsum.photos/360/306'}
+              alt={'contentImage'}
+              style={{ width: '100%', height: '306px', objectFit: 'cover' }}
+            />
+          )}
+        </ImageSection>
+        <ContentSection>{post.content}</ContentSection>
+        <ButtonArea>
+          <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
+        </ButtonArea>
+        <CommentSection>
           <CountBlock>
-              <Title style={{ fontSize: '15px' }}>댓글</Title><Span style={{ fontSize: '15px' }}>{post.commentCount}</Span>
+            <Title style={{ fontSize: '15px' }}>댓글</Title>
+            <Span style={{ fontSize: '15px' }}>{post.commentCount}</Span>
           </CountBlock>
-          <Comment />
-      </CommentSection>
-      <FooterContainer>
-        <FooterSection>
-          <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />
-          <CommentPostButton>등록</CommentPostButton>
-        </FooterSection>
-      </FooterContainer>
-    </MainContainer>
+          {post && post.commentCount > 0 ? (
+            <Comment optionHandler={optionHandler} menuOpenHandler={menuOpenHandler} />
+          ) : (
+            <NoCommentBlock>
+              <Icon.NoComment />
+              <NoCommentText>댓글이 없습니다.</NoCommentText>
+            </NoCommentBlock>
+          )}
+        </CommentSection>
+        <FooterContainer>
+          <FooterSection>
+            <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />
+            <CommentPostButton>등록</CommentPostButton>
+          </FooterSection>
+        </FooterContainer>
+      </MainContainer>
+    </>
   );
 };
 export default DetailPostTemplate;
@@ -170,7 +250,7 @@ const post = {
     힘내자 내자신아
     너네들도 힘내라`,
   likeCount: 4,
-  commentCount: 4,
+  commentCount: 2,
   createdAt: '2021-10-30 17:32',
   thumbnail: 'https://picsum.photos/240/306',
   color: 'purple',

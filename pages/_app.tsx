@@ -10,7 +10,7 @@ import { Loading } from '@/components/molcules';
 import CommunityPage from '@/pages/community';
 import { AppAuthorContext, AppAuthorNextCallbackContext, useAppProtocol } from '@/provider/index';
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const { authData, setNextCallback } = useAppProtocol();
 
   return (
@@ -38,9 +38,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <AsyncBoundary pendingFallback={<Loading/>} rejectedFallback={<CommunityPage/>}>
           <AppAuthorContext.Provider value={authData}>
             <AppAuthorNextCallbackContext.Provider value={setNextCallback}>
-              <AnimatePresence>
-                <Component key={router.route} {...pageProps} />
-              </AnimatePresence>
+              <Component {...pageProps} />
             </AppAuthorNextCallbackContext.Provider>
           </AppAuthorContext.Provider>
         </AsyncBoundary>

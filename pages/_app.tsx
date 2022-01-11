@@ -2,7 +2,6 @@ import React from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import { AnimatePresence } from 'framer-motion';
 
 import { COLOR, GlobalStyles } from '@/styles/index';
 import { AsyncBoundary } from '@/components/organisms';

@@ -12,7 +12,7 @@ export const stackRouterBack = (router: NextRouter) => {
 
 export const stackRouterPush = (router: NextRouter, url: string) => {
   if (isApp()) {
-    sendRouterEvent('back');
+    sendRouterEvent(url);
   } else {
     router.push(url).then();
   }

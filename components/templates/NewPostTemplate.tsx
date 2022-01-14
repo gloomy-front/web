@@ -8,7 +8,7 @@ import { COLOR_TYPE } from '@/types/index';
 import { Span, Icon, Input, TextArea } from '@/components/atoms';
 import { SelectCategory } from '@/components/organisms';
 import { AppAuthorContext } from '@/provider/index';
-import { isApp } from '@/utils/index';
+import { isApp, stackRouterBack } from '@/utils/index';
 import { checkPermission, moveToOption, requestMultiPermission } from '@/hooks/index';
 import { CATEGORY_LIST } from '@/constants/index';
 
@@ -153,7 +153,7 @@ export default function NewPostTemplate(): JSX.Element {
   return (
     <MainContainer>
       <HeaderSection>
-        <Icon.Back height={'14px'} style={{ cursor: 'pointer', marginBottom: '3px' }} onClick={() => router.back()}/>
+        <Icon.Back height={'14px'} style={{ cursor: 'pointer', marginBottom: '3px' }} onClick={() => stackRouterBack(router)}/>
         <CloseButton disabled={watchContent.length < 1}
                      onClick={handleSubmit(requestNewPost, onError)}>{'저장'}</CloseButton>
       </HeaderSection>

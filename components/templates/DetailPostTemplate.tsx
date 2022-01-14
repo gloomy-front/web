@@ -1,10 +1,11 @@
-import { Icon, Span, Title } from '@/components/atoms';
-import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
-import { COLOR } from '@/styles/color';
-import { Layout } from '@/styles/theme';
-import router from 'next/router';
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
+
+import { Icon, Span, Title } from '@/components/atoms';
+import { COLOR, Layout } from '@/styles/index';
+import { useCalcRegisterDate } from '@/hooks/index';
+import { stackRouterBack, stackRouterPush } from '@/utils/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -102,17 +103,18 @@ const CommentPostButton = styled.button`
   word-break: keep-all;
   padding: 10px 0 10px 8px;
   border: 0;
-  background-color: ${({ theme }) => theme.WHITE}; ;
+  background-color: ${({ theme }) => theme.WHITE};;
 `;
 
 const DetailPostTemplate = (): JSX.Element => {
+  const router = useRouter();
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
   return (
     <MainContainer>
       <HeaderContainer>
         <HeaderNav>
-          <Icon.Back onClick={() => router.back()} height={'14px'} style={{ cursor: 'pointer' }} />
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }} />
+          <Icon.Back onClick={() => stackRouterBack(router)} height={'14px'} style={{ cursor: 'pointer' }}/>
+          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }}/>
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>
@@ -131,12 +133,12 @@ const DetailPostTemplate = (): JSX.Element => {
       </ImageSection>
       <ContentSection>{post.content}</ContentSection>
       <ButtonArea>
-        <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
+        <LikeButton onClick={() => stackRouterPush(router, `/community/detail/${post.pk}`)}>❤️ 공감 {post.likeCount}</LikeButton>
       </ButtonArea>
       <CommentSection></CommentSection>
       <FooterContainer>
         <FooterSection>
-          <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />
+          <CommentInput type="text" placeholder="💬 댓글을 남겨주세요."/>
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>

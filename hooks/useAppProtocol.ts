@@ -51,6 +51,12 @@ export const checkAllPermission = (): void => {
   }, 100);
 };
 
+export const sendRouterEvent = (path: string): void => {
+  setTimeout(() => {
+    postMessageToApp({ type: 'REQ_ROUTER_EVENT', data: path } )
+  })
+};
+
 export const requestAllPermission = (): void => {
   setTimeout(() => {
     postMessageToApp({ type: REQ_ALL_PERMISSION_REQ });

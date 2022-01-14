@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
 import { Span, Title } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
 import { COLOR, Layout } from '@/styles/index';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
+import { stackRouterPush } from '@/utils/index';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -67,7 +69,7 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
   return (
     <>
       {/* 피드 상세 진입점 */}
-      <ItemSection onClick={() => router.push(`/community/detail/${post.pk}`)}>
+      <ItemSection onClick={() => stackRouterPush(router, `/community/detail/${post.pk}`)}>
         <CategoryBox>{post.category}</CategoryBox>
         <ContentSection>
           <TextSection>

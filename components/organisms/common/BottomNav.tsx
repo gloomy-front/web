@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Layout, COLOR } from '@/styles/index';
 import { Icon } from '@/components/atoms';
 import { Tooltip } from '@/components/molcules';
+import { stackRouterPush } from '@/utils/index';
 
 const BottomContainer = styled.div`
   ${Layout.flexRowCenter};
@@ -32,9 +33,9 @@ export default function BottomNav(): JSX.Element {
           <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09}/>
         </ButtonArea>
 
-        <ButtonArea onClick={() => router.push('/community/new')}>
+        <ButtonArea onClick={() => stackRouterPush(router, '/community/new')}>
           <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
-            <Icon.WriteIcon />
+            <Icon.WriteIcon/>
           </Tooltip>
         </ButtonArea>
 

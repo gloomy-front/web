@@ -125,7 +125,7 @@ const DetailPostTemplate = (): JSX.Element => {
       <ImageSection>
         {post.thumbnail && (
           <img
-            src={'https://picsum.photos/360/306'}
+            src={'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg'}
             alt={'contentImage'}
             style={{ width: '100%', height: '306px', objectFit: 'cover' }}
           />
@@ -158,7 +158,7 @@ const post = {
   likeCount: 4,
   commentCount: 4,
   createdAt: '2021-10-30 17:32',
-  thumbnail: 'https://picsum.photos/240/306',
+  thumbnail: 'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg',
   color: 'purple',
   category: '직장/이직',
 };

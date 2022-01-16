@@ -37,9 +37,7 @@ const LogoutButtonContainer = styled.section`
   margin-top: 8px;
 `;
 
-export default function MyCommentsTemplate(): JSX.Element {
-  const params = useUrlParams({ tab: 'myComments' });
-
+export default function SettingTemplate(): JSX.Element {
   return (
     <>
       <MainContainer>

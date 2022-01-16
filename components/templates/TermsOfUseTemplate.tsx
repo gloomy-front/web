@@ -39,9 +39,7 @@ const ContentContainer = styled.div`
   font-size: 15px;
 `;
 
-export default function MyCommentsTemplate(): JSX.Element {
-  const params = useUrlParams({ tab: 'myComments' });
-
+export default function TermsOfUseTemplate(): JSX.Element {
   return (
     <>
       <MainContainer>

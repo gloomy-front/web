@@ -40,8 +40,6 @@ const ContentContainer = styled.div`
 `;
 
 export default function PrivacyPolicyTemplate(): JSX.Element {
-  const params = useUrlParams({ tab: 'myComments' });
-
   return (
     <>
       <MainContainer>

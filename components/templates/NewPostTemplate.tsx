@@ -182,8 +182,12 @@ export default function NewPostTemplate(): JSX.Element {
   return (
     <MainContainer>
       <HeaderSection>
-        <Icon.Back height={'14px'} style={{ cursor: 'pointer', marginBottom: '3px' }}
-                   onClick={() => stackRouterBack(router)}/>
+        <div
+          style={{ cursor: 'pointer', marginBottom: '3px', width: '30px', height: '40px', lineHeight: '70px' }}
+          onClick={() => stackRouterBack(router)}
+        >
+          <Icon.Back height={'14px'} />
+        </div>
         <CloseButton disabled={watchContent.length < 1}
                      onClick={handleSubmit(requestNewPost, onError)}>{'저장'}</CloseButton>
       </HeaderSection>

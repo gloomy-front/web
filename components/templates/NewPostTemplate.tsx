@@ -6,11 +6,12 @@ import { useForm } from 'react-hook-form';
 import { COLOR, Layout } from '@/styles/index';
 import { COLOR_TYPE } from '@/types/index';
 import { Span, Icon, Input, TextArea } from '@/components/atoms';
-import { SelectCategory } from '@/components/organisms';
+import { SelectCategory, PhotoPermissionRequestPopup } from '@/components/organisms';
 import { AppAuthorContext } from '@/provider/index';
 import { isApp, stackRouterBack } from '@/utils/index';
-import { checkPermission, moveToOption, requestMultiPermission } from '@/hooks/index';
+import { checkPermission } from '@/hooks/index';
 import { CATEGORY_LIST } from '@/constants/index';
+import PhotoPermissionBlockedPopup from '../organisms/common/PhotoPermissionBlockedPopup';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -30,7 +31,7 @@ const HeaderSection = styled.section`
   height: 56px;
   padding: 0 17px 9px;
   box-sizing: border-box;
-  border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`}
+  border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
 
 const CategorySection = styled.section`
@@ -71,11 +72,18 @@ interface Image {
   filePath: string;
 }
 
+const checkPhotoPermission = () => {
+  checkPermission({ permissionType: 'CAMERA' });
+  checkPermission({ permissionType: 'PHOTO' });
+};
+
 export default function NewPostTemplate(): JSX.Element {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showCategory, setShowCategory] = useState<boolean>(false);
+  const [showPhotoPermissionRequestPopup, setShowPhotoPermissionRequestPopup] = useState<boolean>(false);
+  const [showPhotoPermissionBlockedPopup, setShowPhotoPermissionBlockedPopup] = useState<boolean>(false);
   const authData = useContext(AppAuthorContext);
 
   const methods = useForm<{ category: string; title: string; content: string; postImages: Array<Image> }>({
@@ -91,10 +99,31 @@ export default function NewPostTemplate(): JSX.Element {
 
   useEffect(() => {
     if (isApp()) {
-      checkPermission({ permissionType: 'CAMERA' });
-      checkPermission({ permissionType: 'PHOTO' });
+      document.addEventListener('visibilitychange', checkPhotoPermission);
+    }
+    return () => {
+      isApp() && document.removeEventListener('visibilitychange', checkPhotoPermission);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isApp()) {
+      checkPhotoPermission();
     }
   }, [watchImages]);
+
+  useEffect(() => {
+    if (isApp()) {
+      const { CAMERA: cameraAuth, PHOTO: photoAuth } = authData;
+      if ((showPhotoPermissionRequestPopup || showPhotoPermissionBlockedPopup) && cameraAuth === 'granted' && photoAuth === 'granted') {
+        setShowPhotoPermissionRequestPopup(false);
+        inputRef.current && inputRef.current.click();
+      }
+      if (showPhotoPermissionBlockedPopup && cameraAuth === 'granted' && photoAuth === 'granted' ) {
+        setShowPhotoPermissionBlockedPopup(false);
+      }
+    }
+  }, [authData, showPhotoPermissionRequestPopup, showPhotoPermissionBlockedPopup]);
 
   const requestNewPost = useCallback(async ({ content }) => {
     // console.log('New!');
@@ -140,12 +169,12 @@ export default function NewPostTemplate(): JSX.Element {
 
       if (cameraAuth === 'blocked' || photoAuth === 'blocked') {
         e.preventDefault();
-        return moveToOption();
+        return setShowPhotoPermissionBlockedPopup(true);
       }
 
       if ((cameraAuth === 'empty' || photoAuth === 'empty') || cameraAuth === 'denied' || photoAuth === 'denied') {
         e.preventDefault();
-        return requestMultiPermission({ permissionTypeList: ['CAMERA', 'PHOTO']});
+        return setShowPhotoPermissionRequestPopup(true);
       }
     }
   };
@@ -153,7 +182,8 @@ export default function NewPostTemplate(): JSX.Element {
   return (
     <MainContainer>
       <HeaderSection>
-        <Icon.Back height={'14px'} style={{ cursor: 'pointer', marginBottom: '3px' }} onClick={() => stackRouterBack(router)}/>
+        <Icon.Back height={'14px'} style={{ cursor: 'pointer', marginBottom: '3px' }}
+                   onClick={() => stackRouterBack(router)}/>
         <CloseButton disabled={watchContent.length < 1}
                      onClick={handleSubmit(requestNewPost, onError)}>{'저장'}</CloseButton>
       </HeaderSection>
@@ -213,6 +243,11 @@ export default function NewPostTemplate(): JSX.Element {
           setShowCategory(false);
         }}
       />}
+
+      {showPhotoPermissionRequestPopup &&
+      <PhotoPermissionRequestPopup closeDispatch={() => setShowPhotoPermissionRequestPopup(false)}/>}
+      {showPhotoPermissionBlockedPopup &&
+      <PhotoPermissionBlockedPopup closeDispatch={() => setShowPhotoPermissionBlockedPopup(false)}/>}
     </MainContainer>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Title = styled.p`
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.27;
   color: ${({ theme }) => theme.BLACK};
   margin: 0;

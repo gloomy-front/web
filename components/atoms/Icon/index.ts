@@ -24,3 +24,5 @@ export { default as ArrowDown } from './ArrowDown';
 export { default as Back } from './Back';
 export { default as GomingOut } from './GomingOut';
 export { default as Bell } from './Bell';
+export { default as Camera } from './Camera';
+export { default as Folder } from './Folder';

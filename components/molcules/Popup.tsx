@@ -62,17 +62,16 @@ const PopupHeaderTitle = styled.p`
 const PopupContents = styled.section`
   ${Layout.flexColCenter};
   position: absolute;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
   top: 50%;
   left: 50%;
 
   max-width: 480px;
-  width: calc(100% - 88px);
+  width: calc(100% - 40px);
 
   paddingTop: 16px;
-  border-radius: 8px;
 
   background: ${({ theme }) => theme.WHITE};
-  box-shadow: 0 0 14px 3px rgba(34, 34, 34, 0.1);
   transform: translate(-50%, -50%);
   overflow: hidden;
 `;
@@ -80,7 +79,8 @@ const PopupContents = styled.section`
 const PopupOverLay = styled.section`
   width: 100%;
   height: 100%;
-  background-color: rgba(34, 34, 34, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3px);
 `;
 
 const PopupBtnContainer = styled.section`
@@ -95,8 +95,10 @@ const PopupBtnContainer = styled.section`
 
 const Button = styled.button`
   border: none;
-  padding: 12px 0;
+  padding: 20px 0;
   background-color: ${({ theme }) => theme.WHITE};
+  color: ${({ theme }) => theme.GRAY07};
+  font-size: 15px;
 `;
 
 const PopupFooter = (
@@ -172,7 +174,7 @@ export default function DefaultPopup(
       {useOverlay && <PopupOverLay/>}
       <PopupContents style={contentsStyle}>
         <PopupHeader style={headerStyle}>
-          <PopupHeaderTitle dangerouslySetInnerHTML={{ __html: title }}/>
+          {title && <PopupHeaderTitle dangerouslySetInnerHTML={{ __html: title }}/>}
           {useClose &&
           <Icon.Close
             style={{
@@ -184,7 +186,7 @@ export default function DefaultPopup(
             onClick={failCallback}
           />}
         </PopupHeader>
-        <section style={mainStyle}>{children}</section>
+        <section style={{ width: '100%', ...mainStyle }}>{children}</section>
 
         {PopupFooter({ type, successTitle, successCallback, failTitle, failCallback, successDisable, failDisable })}
       </PopupContents>

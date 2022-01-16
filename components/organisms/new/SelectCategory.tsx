@@ -51,7 +51,7 @@ export default function SelectCategory({ selectDispatch }: { selectDispatch: (v:
                 checked={checkedValue === item}
                 onChange={() => setCheckedValue(item)}
               />
-              <label style={{ color: COLOR.BLACK }} htmlFor={item} onClick={() => { selectDispatch(item); }}>
+              <label style={{ color: COLOR.BLACK, width: '100%' }} htmlFor={item} onClick={() => { selectDispatch(item); }}>
                 <CategoryItem>
                   <Span style={{ color: COLOR.BLACK }}>{CATEGORY_LIST[item]}</Span>
                 </CategoryItem>

@@ -73,7 +73,7 @@ export default function PostItem({ post }: { post: any }): JSX.Element {
         <CategoryBox>{post.category}</CategoryBox>
         <ContentSection>
           <TextSection>
-            <Title style={{ marginBottom: '8px' }}>{post.title}</Title>
+            <Title style={{ marginBottom: '8px', fontWeight: 400 }}>{post.title}</Title>
             <ContentSpan>{post.content}</ContentSpan>
           </TextSection>
           {post.thumbnail && (

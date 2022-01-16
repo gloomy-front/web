@@ -10,16 +10,41 @@ export const getBrowser = (): string => {
   return '기타 브라우저';
 };
 
+export const isIphone = () => {
+  let isIphone = false;
+  if (typeof window !== 'undefined') {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    isIphone = userAgent.match(/iphone\s([0-9.]*)/) !== null;
+  }
+
+  return isIphone;
+};
+
+export const isAndroid = () => {
+  let isAndroid = false;
+  if (typeof window !== 'undefined') {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    isAndroid = userAgent.match(/android\s([0-9.]*)/) !== null;
+  }
+
+  return isAndroid;
+};
+
 export const getDevice = (): string => {
   if (typeof window !== 'undefined') {
-    const value = window.navigator.userAgent.toLowerCase();
-    let result = value.match(/android\s([0-9.]*)/);
-    if (result !== null) {
-      return 'android';
+    if (isAndroid()) {
+      if (isApp()) {
+        return 'app_android';
+      } else {
+        return 'android';
+      }
     }
-    result = value.match(/iphone\s([0-9.]*)/);
-    if (result !== null) {
-      return 'iphone';
+    if (isIphone()) {
+      if (isApp()) {
+        return 'app_ios';
+      } else {
+        return 'iphone';
+      }
     }
   }
   return 'web';

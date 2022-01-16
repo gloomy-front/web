@@ -115,11 +115,12 @@ export default function NewPostTemplate(): JSX.Element {
   useEffect(() => {
     if (isApp()) {
       const { CAMERA: cameraAuth, PHOTO: photoAuth } = authData;
-      if ((showPhotoPermissionRequestPopup || showPhotoPermissionBlockedPopup) && cameraAuth === 'granted' && photoAuth === 'granted') {
+      const authGranted = cameraAuth === 'granted' && photoAuth === 'granted';
+      if (showPhotoPermissionRequestPopup && authGranted) {
         setShowPhotoPermissionRequestPopup(false);
         inputRef.current && inputRef.current.click();
       }
-      if (showPhotoPermissionBlockedPopup && cameraAuth === 'granted' && photoAuth === 'granted' ) {
+      if (showPhotoPermissionBlockedPopup && authGranted) {
         setShowPhotoPermissionBlockedPopup(false);
       }
     }

@@ -1,13 +1,17 @@
-import {useContext, useEffect, useState} from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { COLOR, Layout } from '@/styles/index';
+import { KAKAO_KEY } from '@/constants/index';
+
+import { checkPermission } from '@/hooks/index';
+import { AppAuthorContext } from '@/provider/index';
+import { isApp, isIphone } from '@/utils/index';
+
 import { Title, Span, Icon } from '@/components/atoms';
 import { Loading } from '@/components/molcules';
-import { KAKAO_KEY } from '@/constants/index';
 import { ATTPermissionRequestPopup } from '@/components/organisms';
-import {checkPermission} from "@/hooks/useAppProtocol";
-import {AppAuthorContext} from "@/provider/AppAuthor";
-import {isApp} from "@/utils/device";
+
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -57,7 +61,7 @@ export default function LoginTemplate(): JSX.Element {
   const authData = useContext(AppAuthorContext);
 
   useEffect(() => {
-    if (isApp()) {
+    if (isApp() && isIphone()) {
       checkPermission({ permissionType: 'ATT' });
     }
 
@@ -84,7 +88,7 @@ export default function LoginTemplate(): JSX.Element {
 
   return (
     <MainContainer>
-      {showATTPermissionPopup && <ATTPermissionRequestPopup closeDispatch={() => setShowATTPermissionPopup(false)} />}
+      {showATTPermissionPopup && <ATTPermissionRequestPopup closeDispatch={() => setShowATTPermissionPopup(false)}/>}
       <TextArea>
         <Span style={{ fontSize: '16px', marginBottom: '6px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
         <TitleDiv>
@@ -100,7 +104,13 @@ export default function LoginTemplate(): JSX.Element {
       <LoginButtonSection>
         <LoginButtonArea onClick={kakaoLogin}>
           <Icon.Kakao style={{ position: 'relative', left: '30px' }} height={'22px'}/>
-          <Span style={{ fontSize: '16px', display: 'block', width: '100%', textAlign: 'center', marginRight: '10px' }}>{'카카오로 로그인'}</Span>
+          <Span style={{
+            fontSize: '16px',
+            display: 'block',
+            width: '100%',
+            textAlign: 'center',
+            marginRight: '10px'
+          }}>{'카카오로 로그인'}</Span>
         </LoginButtonArea>
         <Span style={{ color: COLOR.GRAY05, fontSize: '12px', marginTop: '13px' }}>
           {'시작하면 '}

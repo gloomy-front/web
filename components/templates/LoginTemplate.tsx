@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { COLOR, Layout } from '@/styles/index';
 import { Title, Span, Icon } from '@/components/atoms';
 import { Loading } from '@/components/molcules';
 import { KAKAO_KEY } from '@/constants/index';
+import { ATTPermissionRequestPopup } from '@/components/organisms';
+import {checkPermission} from "@/hooks/useAppProtocol";
+import {AppAuthorContext} from "@/provider/AppAuthor";
+import {isApp} from "@/utils/device";
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -48,25 +52,39 @@ declare const window: Window &
 };
 
 export default function LoginTemplate(): JSX.Element {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showATTPermissionPopup, setShowATTPermissionPopup] = useState<boolean>(false);
+  const authData = useContext(AppAuthorContext);
 
   useEffect(() => {
+    if (isApp()) {
+      checkPermission({ permissionType: 'ATT' });
+    }
+
     const kakaoScript = document.createElement('script');
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     document.head.appendChild(kakaoScript);
   }, []);
 
+  useEffect(() => {
+    const { ATT: attAuth } = authData;
+    if (attAuth === 'denied') {
+      setShowATTPermissionPopup(true);
+    }
+  }, [authData]);
+
   const kakaoLogin = () => {
-    setIsLoading(false);
+    setIsLoading(true);
     window.Kakao.init(KAKAO_KEY);
     window.Kakao.Auth.authorize({
       redirectUri: `${window.location.origin}/kakao/signUp`,
     });
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   return (
     <MainContainer>
+      {showATTPermissionPopup && <ATTPermissionRequestPopup closeDispatch={() => setShowATTPermissionPopup(false)} />}
       <TextArea>
         <Span style={{ fontSize: '16px', marginBottom: '6px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
         <TitleDiv>
@@ -92,7 +110,7 @@ export default function LoginTemplate(): JSX.Element {
           {'에 동의하게 됩니다.'}
         </Span>
       </LoginButtonSection>
-      {isLoading ? <></> : <Loading/>}
+      {isLoading && <Loading/>}
     </MainContainer>
   );
 }

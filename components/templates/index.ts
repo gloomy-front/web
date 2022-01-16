@@ -3,4 +3,7 @@ export { default as DetailPostTemplate } from './DetailPostTemplate';
 export { default as LoginTemplate } from './LoginTemplate';
 export { default as NewPostTemplate } from './NewPostTemplate';
 export { default as MyContentsTemplate } from './MyContentsTemplate';
-export { default as MyCommentsTemplate } from './MycommentsTemplate';
+export { default as MyCommentsTemplate } from './MyCommentsTemplate';
+export { default as SettingTemplate } from './SettingTemplate';
+export { default as TermsOfUseTemplate } from './TermsOfUseTemplate';
+export { default as PrivacyPolicyTemplate } from './PrivacyPolicyTemplate';

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import router from 'next/router';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, MyContents, BottomNav, Tab } from '@/components/organisms';
@@ -9,7 +10,6 @@ const MainContainer = styled.main`
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-
   background-color: ${({ theme }) => theme.WHITE};
 `;
 
@@ -29,6 +29,10 @@ const ContentContainer = styled.section`
   width: 100%;
 `;
 
+const ButtonArea = styled.div`
+  cursor: pointer;
+`;
+
 export default function MyContentsTemplate(): JSX.Element {
   const params = useUrlParams({ tab: 'myContents' });
 
@@ -38,7 +42,9 @@ export default function MyContentsTemplate(): JSX.Element {
         <HeaderContainer>
           <HeaderNav>
             <Title style={{ fontWeight: 'bold' }}>{'마이페이지'}</Title>
-            <Icon.Setting height={'25px'} />
+            <ButtonArea onClick={() => router.push('/myPage/setting')}>
+              <Icon.Setting height={'25px'} />
+            </ButtonArea>
           </HeaderNav>
         </HeaderContainer>
         <Tab initTab={params.tab} />

@@ -1,7 +1,6 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { AsyncBoundary, BoardLoading, MyContents } from '@/components/organisms';
 import { Layout } from '@/styles/index';
 import { MYPAGE_TAB } from '@/constants/index';
 import { COLOR_TYPE } from '@/types/index';
@@ -13,15 +12,6 @@ const TabContainer = styled.section`
   border-style: solid;
   border-width: 1px;
   border-color: ${({ theme }) => theme.GRAY02};
-`;
-
-const TabWrapper = styled.div`
-  ${Layout.flexRowStartCenter};
-  width: 100%;
-  height: 100%;
-  white-space: nowrap;
-  overflow: auto;
-  scrollbar-width: none;
 `;
 
 const TabItem = styled.div`

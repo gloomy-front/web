@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "jest",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -17,6 +18,7 @@
     "babel-plugin-styled-components": "^1.13.3",
     "dayjs": "^1.10.7",
     "framer-motion": "^5.5.5",
+    "jest": "^27.4.7",
     "js-cookie": "^2.2.1",
     "next": "11.1.2",
     "next-env": "^1.1.1",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
+    "@types/jest": "^27.4.0",
     "@types/react": "17.0.30",
     "@types/uuid": "^8",
     "@typescript-eslint/parser": "^5.1.0",

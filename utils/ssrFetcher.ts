@@ -24,8 +24,8 @@ interface ErrorCode {
   data?: any;
 }
 
-export type ApiReturn = ApiSuccess | ApiFail | ErrorCode
-export type FetchReturnType = Promise<ApiReturn>
+type ApiReturn = ApiSuccess | ApiFail | ErrorCode
+type FetchReturnType = Promise<ApiReturn>
 
 export const fetcherSSR = ({ method = 'GET', url = '/', config = {}, ctx }: RequestProps) => {
   const apiURL = `${url}`;

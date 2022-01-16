@@ -3,6 +3,7 @@ import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, PostList, BottomNav, Category } from '@/components/organisms';
 import { useUrlParams } from '@/utils/index';
+import { getComment, useCreateComment } from '@/api/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -25,6 +26,10 @@ const HeaderNav = styled.section`
   width: 100%;
 `;
 
+const HeaderDiv = styled.div`
+  ${Layout.flexRowStartCenter}
+`;
+
 const ContentContainer = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;
@@ -33,13 +38,26 @@ const ContentContainer = styled.section`
 export default function CommunityTemplate(): JSX.Element {
   const params = useUrlParams({ category: 'total' });
 
+  // get swr 쓰는법
+  // const { data } = getComment();
+
+  // (post, put, delete) 쓰는법
+  // const [postCreateComment] = useCreateComment();
+  // postCreateComment({ data: { content: '', parentCommentPk: -1 }}).then();
+
   return (
     <>
       <MainContainer>
         <HeaderContainer>
           <HeaderNav>
-            <Title style={{ fontWeight: 'bold' }}>{'서비스명'}</Title>
-            <Icon.Search height={'25px'}/>
+            <HeaderDiv>
+              <Title style={{ fontWeight: 'bold', marginRight: '2px', fontFamily: 'Gowun Dodum', color: 'black' }}>{'고밍아웃'}</Title>
+              <Icon.GomingOut height={'18px'} style={{ marginBottom: '7px' }}/>
+            </HeaderDiv>
+            <HeaderDiv>
+              <Icon.Bell height={'18px'} style={{ marginRight: '14px' }}/>
+              <Icon.Search height={'18px'}/>
+            </HeaderDiv>
           </HeaderNav>
         </HeaderContainer>
         <Category initCategory={params.category}/>
@@ -53,7 +71,7 @@ export default function CommunityTemplate(): JSX.Element {
           </AsyncBoundary>
         </ContentContainer>
       </MainContainer>
-      <BottomNav />
+      <BottomNav/>
     </>
   );
 }

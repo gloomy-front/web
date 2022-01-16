@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TextArea = styled.textarea`
+const Input = styled.input`
   width: 100%;
   background-color: ${({ theme }) => theme.WHITE};
   font-size: 14px;
@@ -22,4 +22,4 @@ const TextArea = styled.textarea`
   }
 `;
 
-export default TextArea;
+export default Input;

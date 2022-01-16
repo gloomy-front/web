@@ -35,7 +35,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head></Head>
+        <Head>
+          <link href='https://fonts.googleapis.com/css?family=Gowun Dodum' rel='stylesheet' />
+        </Head>
         <body>
         <Main/>
         <NextScript/>

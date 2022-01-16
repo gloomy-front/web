@@ -1,10 +1,11 @@
-import { Icon, Span, Title } from '@/components/atoms';
-import useCalcRegisterDate from '@/hooks/useCalcRegisterDate';
-import { COLOR } from '@/styles/color';
-import { Layout } from '@/styles/theme';
-import router from 'next/router';
 import React from 'react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
+
+import { Icon, Span, Title } from '@/components/atoms';
+import { COLOR, Layout } from '@/styles/index';
+import { useCalcRegisterDate } from '@/hooks/index';
+import { stackRouterBack, stackRouterPush } from '@/utils/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -102,17 +103,18 @@ const CommentPostButton = styled.button`
   word-break: keep-all;
   padding: 10px 0 10px 8px;
   border: 0;
-  background-color: ${({ theme }) => theme.WHITE}; ;
+  background-color: ${({ theme }) => theme.WHITE};;
 `;
 
 const DetailPostTemplate = (): JSX.Element => {
+  const router = useRouter();
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
   return (
     <MainContainer>
       <HeaderContainer>
         <HeaderNav>
-          <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer' }} />
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }} />
+          <Icon.Back onClick={() => stackRouterBack(router)} height={'14px'} style={{ cursor: 'pointer' }}/>
+          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }}/>
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>
@@ -123,7 +125,7 @@ const DetailPostTemplate = (): JSX.Element => {
       <ImageSection>
         {post.thumbnail && (
           <img
-            src={'https://picsum.photos/360/306'}
+            src={'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg'}
             alt={'contentImage'}
             style={{ width: '100%', height: '306px', objectFit: 'cover' }}
           />
@@ -131,12 +133,12 @@ const DetailPostTemplate = (): JSX.Element => {
       </ImageSection>
       <ContentSection>{post.content}</ContentSection>
       <ButtonArea>
-        <LikeButton>❤️ 공감 {post.likeCount}</LikeButton>
+        <LikeButton onClick={() => stackRouterPush(router, `/community/detail/${post.pk}`)}>❤️ 공감 {post.likeCount}</LikeButton>
       </ButtonArea>
       <CommentSection></CommentSection>
       <FooterContainer>
         <FooterSection>
-          <CommentInput type="text" placeholder="💬 댓글을 남겨주세요." />
+          <CommentInput type="text" placeholder="💬 댓글을 남겨주세요."/>
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
@@ -156,7 +158,7 @@ const post = {
   likeCount: 4,
   commentCount: 4,
   createdAt: '2021-10-30 17:32',
-  thumbnail: 'https://picsum.photos/240/306',
+  thumbnail: 'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg',
   color: 'purple',
   category: '직장/이직',
 };

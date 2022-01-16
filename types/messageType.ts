@@ -1,0 +1,55 @@
+// Request Type list
+export const REQ_ALL_PERMISSION_CHECK = 'REQ_ALL_PERMISSION_CHECK'; // 모든 권한 여부 확인
+export const REQ_ALL_PERMISSION_REQ = 'REQ_ALL_PERMISSION_REQ'; // 모든 권한 요청
+
+export const REQ_MULTI_PERMISSION_CHECK = 'REQ_MULTI_PERMISSION_CHECK'; // 다수 권한 여부 확인
+export const REQ_MULTI_PERMISSION_REQ = 'REQ_MULTI_PERMISSION_REQ'; // 다스 권한 요청
+
+export const REQ_PERMISSION_CHECK = 'REQ_PERMISSION_CHECK'; // 권한 여부 확인
+export const REQ_PERMISSION_REQ = 'REQ_PERMISSION_REQ'; // 권한 요청
+
+export const REQ_NOTI_PERMISSION_REQ = 'REQ_NOTI_PERMISSION_REQ'; // Push 권한 요청
+export const REQ_NOTI_PERMISSION_CHECK = 'REQ_NOTI_PERMISSION_CHECK'; // Push 권한 확인
+
+export const REQ_POST_TARGET_URL = 'REQ_POST_TARGET_URL'; // 웹뷰 target url 변경
+export const REQ_GET_TARGET_URL = 'REQ_GET_TARGET_URL'; // 웹뷰 target url 가져오기
+
+export const REQ_GET_APP_VERSION = 'REQ_GET_APP_VERSION'; // 현재 앱 버전 가져오기
+export const REQ_GET_DEVICE_UUID = 'REQ_GET_DEVICE_UUID'; // 현재 앱 UUID 가져오기
+
+export const REQ_OPEN_SETTING = 'REQ_OPEN_SETTING'; // 설정창 열기
+export const REQ_VIBRATION = 'REQ_VIBRATION'; // 기기 진동 요청
+
+export const REQ_POST_EXTERNAL_URL = 'REQ_POST_EXTERNAL_URL'; // 외부 url 등록
+export const REQ_GET_EXTERNAL_URL = 'REQ_GET_EXTERNAL_URL'; // 외부 url 리스트 가져오기
+
+export const REQ_GET_FCM_TOKEN = 'REQ_GET_FCM_TOKEN'; // FCM Token 가져오기
+
+// Response Type list
+export const RES_ALL_PERMISSION_CHECK = 'RES_ALL_PERMISSION_CHECK';
+export const RES_ALL_PERMISSION_REQ = 'RES_ALL_PERMISSION_REQ';
+
+export const RES_MULTI_PERMISSION_CHECK = 'RES_MULTI_PERMISSION_CHECK'; // 다수 권한 여부 확인
+export const RES_MULTI_PERMISSION_REQ = 'RES_MULTI_PERMISSION_REQ'; // 다스 권한 요청
+
+export const RES_PERMISSION_CHECK = 'RES_PERMISSION_CHECK';
+export const RES_PERMISSION_REQ = 'RES_PERMISSION_REQ';
+
+export const RES_NOTI_PERMISSION_REQ = 'RES_NOTI_PERMISSION_REQ';
+export const RES_NOTI_PERMISSION_CHECK = 'RES_NOTI_PERMISSION_CHECK';
+
+export const RES_POST_TARGET_URL = 'RES_POST_TARGET_URL';
+export const RES_GET_TARGET_URL = 'RES_GET_TARGET_URL';
+
+export const RES_GET_APP_VERSION = 'RES_GET_APP_VERSION';
+export const RES_GET_DEVICE_UUID = 'RES_GET_DEVICE_UUID';
+
+export const RES_EXCEPTION = 'RES_EXCEPTION';
+
+export const RES_OPEN_SETTING = 'RES_OPEN_SETTING';
+export const RES_VIBRATION = 'RES_VIBRATION';
+
+export const RES_POST_EXTERNAL_URL = 'RES_POST_EXTERNAL_URL';
+export const RES_GET_EXTERNAL_URL = 'RES_GET_EXTERNAL_URL';
+
+export const RES_GET_FCM_TOKEN = 'RES_GET_FCM_TOKEN';

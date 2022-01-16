@@ -1,9 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { COLOR, Layout } from '@/styles/index';
+import { KAKAO_KEY } from '@/constants/index';
+
+import { checkPermission } from '@/hooks/index';
+import { AppAuthorContext } from '@/provider/index';
+import { isApp, isIphone } from '@/utils/index';
+
 import { Title, Span, Icon } from '@/components/atoms';
 import { Loading } from '@/components/molcules';
-import { KAKAO_KEY } from '@/constants/index';
+import { ATTPermissionRequestPopup } from '@/components/organisms';
+
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -38,34 +46,55 @@ const LoginButtonArea = styled.div`
   cursor: pointer;
 `;
 
+const TitleDiv = styled.div`
+  ${Layout.flexRowStartCenter}
+`;
+
 declare const window: Window &
   typeof globalThis & {
   Kakao: any;
 };
 
 export default function LoginTemplate(): JSX.Element {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showATTPermissionPopup, setShowATTPermissionPopup] = useState<boolean>(false);
+  const authData = useContext(AppAuthorContext);
 
   useEffect(() => {
+    if (isApp() && isIphone()) {
+      checkPermission({ permissionType: 'ATT' });
+    }
+
     const kakaoScript = document.createElement('script');
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     document.head.appendChild(kakaoScript);
   }, []);
 
+  useEffect(() => {
+    const { ATT: attAuth } = authData;
+    if (attAuth === 'denied') {
+      setShowATTPermissionPopup(true);
+    }
+  }, [authData]);
+
   const kakaoLogin = () => {
-    setIsLoading(false);
+    setIsLoading(true);
     window.Kakao.init(KAKAO_KEY);
     window.Kakao.Auth.authorize({
       redirectUri: `${window.location.origin}/kakao/signUp`,
     });
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   return (
     <MainContainer>
+      {showATTPermissionPopup && <ATTPermissionRequestPopup closeDispatch={() => setShowATTPermissionPopup(false)}/>}
       <TextArea>
-        <Span style={{ fontSize: '16px', marginBottom: '12px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
-        <Title style={{ lineHeight: 1.5, fontSize: '32px', fontWeight: 700 }}>{'고밍아웃'}</Title>
+        <Span style={{ fontSize: '16px', marginBottom: '6px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
+        <TitleDiv>
+          <Title style={{ color: 'black', fontSize: '28px', fontWeight: 800, fontFamily: 'Gowun Dodum' }}>{'고밍아웃'}</Title>
+          <Icon.GomingOut height={'35px'} style={{ marginBottom: '14px', marginLeft: '5px' }}/>
+        </TitleDiv>
       </TextArea>
       <img
         src={'https://gloomy-static-image.s3.ap-northeast-2.amazonaws.com/Intro_image.png'}
@@ -74,18 +103,24 @@ export default function LoginTemplate(): JSX.Element {
       />
       <LoginButtonSection>
         <LoginButtonArea onClick={kakaoLogin}>
-          <Icon.Kakao style={{ position: 'absolute', left: '30px' }} height={'32px'}/>
-          <Span style={{ fontSize: '16px', display: 'block', width: '100%', textAlign: 'center' }}>{'카카오 로그인'}</Span>
+          <Icon.Kakao style={{ position: 'relative', left: '30px' }} height={'22px'}/>
+          <Span style={{
+            fontSize: '16px',
+            display: 'block',
+            width: '100%',
+            textAlign: 'center',
+            marginRight: '10px'
+          }}>{'카카오로 로그인'}</Span>
         </LoginButtonArea>
-        <Span style={{ color: COLOR.GRAY05, marginTop: '13px' }}>
+        <Span style={{ color: COLOR.GRAY05, fontSize: '12px', marginTop: '13px' }}>
           {'시작하면 '}
-          <Span style={{ color: COLOR.GRAY05, textDecoration: 'underline' }}>{'이용약관'}</Span>
+          <Span style={{ color: COLOR.GRAY05, fontSize: '12px', textDecoration: 'underline' }}>{'이용약관'}</Span>
           {' 및 '}
-          <Span style={{ color: COLOR.GRAY05, textDecoration: 'underline' }}>{'개인정보취급방침'}</Span>
+          <Span style={{ color: COLOR.GRAY05, fontSize: '12px', textDecoration: 'underline' }}>{'개인정보취급방침'}</Span>
           {'에 동의하게 됩니다.'}
         </Span>
       </LoginButtonSection>
-      {isLoading ? <></> : <Loading/>}
+      {isLoading && <Loading/>}
     </MainContainer>
   );
 }

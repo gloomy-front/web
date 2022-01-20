@@ -22,7 +22,11 @@ const ButtonArea = styled.div`
   cursor: pointer;
 `;
 
-export default function BottomNav(): JSX.Element {
+interface BottomNavProps {
+  tooltip?: boolean;
+}
+
+export default function BottomNav({ tooltip = false }: BottomNavProps): JSX.Element {
   const router = useRouter();
   const firstPath = router.pathname.split('/')[1];
 
@@ -30,17 +34,21 @@ export default function BottomNav(): JSX.Element {
     <>
       <BottomContainer>
         <ButtonArea onClick={() => router.push('/community?locate=home')}>
-          <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09}/>
+          <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09} />
         </ButtonArea>
 
         <ButtonArea onClick={() => stackRouterPush(router, '/community/new')}>
-          <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
-            <Icon.WriteIcon/>
-          </Tooltip>
+          {tooltip ? (
+            <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
+              <Icon.WriteIcon />
+            </Tooltip>
+          ) : (
+            <Icon.WriteIcon />
+          )}
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/community?locate=profile')}>
-          <Icon.Mypage fill={router.query['locate'] === 'profile' ? COLOR.BLACK : COLOR.GRAY09}/>
+          <Icon.Mypage fill={router.query['locate'] === 'profile' ? COLOR.BLACK : COLOR.GRAY09} />
         </ButtonArea>
       </BottomContainer>
     </>

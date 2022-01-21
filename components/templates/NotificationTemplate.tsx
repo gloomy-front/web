@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Layout } from '@/styles/index';
 import { Title } from '@/components/atoms';
 
-import { BottomNav } from '../organisms';
+import { AsyncBoundary, BottomNav } from '../organisms';
 import { NotificationList } from '../organisms/notification';
+import NotificationLoading from '../organisms/notification/NotificationLoading';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -40,7 +40,9 @@ export default function NotificationTemplate(): JSX.Element {
         <Title>알림</Title>
       </HeaderSection>
       <ContentContainer>
-        <NotificationList />
+        <AsyncBoundary pendingFallback={<NotificationLoading />} isRefresh={true}>
+          <NotificationList />
+        </AsyncBoundary>
       </ContentContainer>
       <BottomNav />
     </MainContainer>

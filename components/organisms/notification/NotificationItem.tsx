@@ -6,12 +6,13 @@ import { Layout } from '@/styles/theme';
 import { COLOR } from '@/styles/color';
 import { useRouter } from 'next/router';
 
-const Container = styled.div`
+const Container = styled.li`
   ${Layout.flexRowStartEnd}
   padding: 16px;
   box-sizing: border-box;
   border-bottom: 1px solid ${COLOR.GRAY02};
   height: 70px;
+  cursor: pointer;
 `;
 
 const TypeContainer = styled.div`
@@ -46,11 +47,11 @@ const NotificationItem = ({ notification }: any) => {
   const router = useRouter();
   const getDescription = (notificationType: string) => {
     switch (notificationType) {
-      case 'like':
+      case 'LIKE':
         return `${notification.count}명의 익명 친구가 내 글을 공감합니다.`;
-      case 'comment':
+      case 'COMMENT':
         return `${notification.count}개의 댓글이 달렸습니다.`;
-      case 'nestedComment':
+      case 'NESTED_COMMENT':
         return `${notification.count}개의 답댓글이 달렸습니다.`;
     }
   };

@@ -1,3 +1,4 @@
+import { INotification } from '@/api/notification/interface';
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
@@ -35,4 +36,8 @@ export const CATEGORY_LIST: { [key: string]: string } = {
   homoLove: '🌈 연애(동성애)',
 };
 
-export const NOTIFICATION_LIST: { [key: string]: string } = { like: '❤️', comment: '✏️', nestedComment: '💬' };
+export const NOTIFICATION_LIST: { [key: string]: string } = {
+  LIKE: '❤️',
+  COMMENT: '✏️',
+  NESTED_COMMENT: '💬',
+};

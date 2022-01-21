@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Layout } from '@/styles/index';
-import { Icon } from '@/components/atoms';
+import { Title } from '@/components/atoms';
 
 import { stackRouterBack } from '@/utils/index';
 import { BottomNav } from '../organisms';
+import { NotificationList } from '../organisms/notification';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -28,20 +29,20 @@ const HeaderSection = styled.section`
   border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
 
-export default function NotificationTemplate(): JSX.Element {
-  const router = useRouter();
+const ContentContainer = styled.section`
+  ${Layout.flexColStartStart};
+  width: 100%;
+`;
 
+export default function NotificationTemplate(): JSX.Element {
   return (
     <MainContainer>
       <HeaderSection>
-        <div
-          style={{ cursor: 'pointer', marginBottom: '3px', width: '30px', height: '40px', lineHeight: '70px' }}
-          onClick={() => stackRouterBack(router)}
-        >
-          <Icon.Back height={'14px'} />
-        </div>
-        알림
+        <Title>알림</Title>
       </HeaderSection>
+      <ContentContainer>
+        <NotificationList />
+      </ContentContainer>
       <BottomNav />
     </MainContainer>
   );

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Title } from '@/components/atoms';
 
-import { stackRouterBack } from '@/utils/index';
 import { BottomNav } from '../organisms';
 import { NotificationList } from '../organisms/notification';
 

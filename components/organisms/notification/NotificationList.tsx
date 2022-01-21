@@ -4,7 +4,6 @@ import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { AsyncBoundary } from '..';
 import NotificationItem from './NotificationItem';
 import NotificationLoading from './NotificationLoading';
 
@@ -37,7 +36,7 @@ const NotificationList = () => {
     setTimeout(() => {
       setNotification(FAKE_DATAS);
       setIsLoading(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   if (isLoading) return <NotificationLoading />;

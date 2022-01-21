@@ -1,6 +1,5 @@
 import { useNotification } from '@/api/notification/hook';
 import { INotification } from '@/api/notification/interface';
-import { COLOR } from '@/styles/color';
 import { Layout } from '@/styles/theme';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -23,7 +22,7 @@ const NoDataDescription = styled.p`
   font-size: 16px;
   line-height: 22px;
   margin: 0 0 8px 0;
-  color: ${COLOR.GRAY04};
+  color: ${({ theme }) => theme.GRAY04};
   font-weight: 700;
 `;
 

@@ -3,14 +3,13 @@ import { useCalcRegisterDate } from '@/hooks/index';
 import { NOTIFICATION_LIST } from '@/constants/index';
 import styled from 'styled-components';
 import { Layout } from '@/styles/theme';
-import { COLOR } from '@/styles/color';
 import { useRouter } from 'next/router';
 
 const Container = styled.li`
   ${Layout.flexRowStartEnd}
   padding: 16px;
   box-sizing: border-box;
-  border-bottom: 1px solid ${COLOR.GRAY02};
+  border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`};
   height: 70px;
   cursor: pointer;
 `;
@@ -37,7 +36,7 @@ const Description = styled.div`
 `;
 
 const StyledSpan = styled(Span)`
-  color: ${COLOR.GRAY05};
+  color: ${({ theme }) => theme.GRAY05};
   font-size: 12px;
   line-height: 1.1;
 `;

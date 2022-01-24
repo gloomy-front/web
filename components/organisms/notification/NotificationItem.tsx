@@ -1,9 +1,11 @@
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
+
 import { Span } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
-import { NOTIFICATION_LIST } from '@/constants/index';
-import styled from 'styled-components';
+import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LIST } from '@/constants/index';
 import { Layout } from '@/styles/theme';
-import { useRouter } from 'next/router';
+import { INotification } from '@/api/notification/interface';
 
 const Container = styled.li`
   ${Layout.flexRowStartEnd}
@@ -17,11 +19,13 @@ const Container = styled.li`
 const TypeContainer = styled.div`
   margin-right: 8px;
 `;
+
 const ContentContainer = styled.div`
   width: 100%;
   overflow: hidden;
 `;
-const Title = styled.p`
+
+const ContentTitle = styled.p`
   font-size: 16px;
   margin: 0;
   overflow: hidden;
@@ -41,29 +45,24 @@ const StyledSpan = styled(Span)`
   line-height: 1.1;
 `;
 
-const NotificationItem = ({ notification }: any) => {
+interface NotificationItemProps {
+  notification: INotification;
+}
+
+const NotificationItem = ({ notification }: NotificationItemProps) => {
   const [registerDate] = useCalcRegisterDate(notification.createdAt);
   const router = useRouter();
-  const getDescription = (notificationType: string) => {
-    switch (notificationType) {
-      case 'LIKE':
-        return `${notification.count}명의 익명 친구가 내 글을 공감합니다.`;
-      case 'COMMENT':
-        return `${notification.count}개의 댓글이 달렸습니다.`;
-      case 'NESTED_COMMENT':
-        return `${notification.count}개의 답댓글이 달렸습니다.`;
-    }
-  };
+
   return (
     <Container onClick={() => router.push(`/community/detail/${notification.pk}`)}>
       <TypeContainer>{NOTIFICATION_LIST[notification.type]}</TypeContainer>
       <ContentContainer>
         <Description>
-          <StyledSpan>{getDescription(notification.type)}</StyledSpan>
+          <StyledSpan>{NOTIFICATION_DESCRIPTION[notification.type]}</StyledSpan>
           <StyledSpan>{registerDate}</StyledSpan>
         </Description>
 
-        <Title>{notification.title}</Title>
+        <ContentTitle>{notification.title}</ContentTitle>
       </ContentContainer>
     </Container>
   );

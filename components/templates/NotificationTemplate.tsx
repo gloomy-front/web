@@ -2,10 +2,7 @@ import styled from 'styled-components';
 
 import { Layout } from '@/styles/index';
 import { Title } from '@/components/atoms';
-
-import { AsyncBoundary, BottomNav } from '../organisms';
-import { NotificationList } from '../organisms/notification';
-import NotificationLoading from '../organisms/notification/NotificationLoading';
+import { AsyncBoundary, BottomNav, NotificationList, NotificationLoading } from '@/components/organisms';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};

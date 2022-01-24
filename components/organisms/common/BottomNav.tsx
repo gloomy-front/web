@@ -22,11 +22,7 @@ const ButtonArea = styled.div`
   cursor: pointer;
 `;
 
-interface BottomNavProps {
-  tooltip?: boolean;
-}
-
-export default function BottomNav({ tooltip = false }: BottomNavProps): JSX.Element {
+export default function BottomNav(): JSX.Element {
   const router = useRouter();
   const firstPath = router.pathname.split('/')[1];
 
@@ -38,7 +34,7 @@ export default function BottomNav({ tooltip = false }: BottomNavProps): JSX.Elem
         </ButtonArea>
 
         <ButtonArea onClick={() => stackRouterPush(router, '/community/new')}>
-          {tooltip ? (
+          {firstPath === 'community' ? (
             <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
               <Icon.WriteIcon />
             </Tooltip>

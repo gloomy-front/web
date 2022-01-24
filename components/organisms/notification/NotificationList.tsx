@@ -1,12 +1,12 @@
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import { useNotification } from '@/api/notification/hook';
 import { INotification } from '@/api/notification/interface';
 import { Layout } from '@/styles/theme';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import NotificationItem from './NotificationItem';
-import NotificationLoading from './NotificationLoading';
+import { NotificationItem, NotificationLoading } from '@/components/organisms';
 
-const Container = styled.ul`
+const NotificationListContainer = styled.ul`
   width: 100%;
   padding: 0;
   margin: 0;
@@ -40,7 +40,7 @@ const NotificationList = () => {
 
   if (isLoading) return <NotificationLoading />;
   return (
-    <Container>
+    <NotificationListContainer>
       {notification &&
         (notification.length ? (
           notification.map((data) => <NotificationItem notification={data} key={data.pk} />)
@@ -50,7 +50,7 @@ const NotificationList = () => {
             <NoDataDescription>알림이 없습니다</NoDataDescription>
           </NoDataContainer>
         ))}
-    </Container>
+    </NotificationListContainer>
   );
 };
 

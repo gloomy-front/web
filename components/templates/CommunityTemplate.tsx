@@ -76,7 +76,7 @@ export default function CommunityTemplate(): JSX.Element {
           </AsyncBoundary>
         </ContentContainer>
       </MainContainer>
-      <BottomNav tooltip />
+      <BottomNav />
     </>
   );
 }

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+
 import { Layout } from '@/styles/theme';
 import { Skeleton } from '@/components/molcules';
+import { NOTIFICATION_LOADING_SIZE } from '@/constants/index';
 
-const Container = styled.div`
+const LoadingContainer = styled.div`
   ${Layout.flexRowStartEnd}
   padding: 16px;
   width: 100%;
@@ -24,8 +26,8 @@ const Description = styled.div`
 const NotificationLoading = () => {
   return (
     <>
-      {Array.from({ length: 5 }, (v, i) => i).map((item) => (
-        <Container>
+      {Array.from({ length: NOTIFICATION_LOADING_SIZE }, (v, i) => i).map((item) => (
+        <LoadingContainer>
           <Skeleton circle width={17} height={17} style={{ marginRight: '8px' }} />
           <ContentContainer>
             <Description>
@@ -34,7 +36,7 @@ const NotificationLoading = () => {
             </Description>
             <Skeleton width={'100%'} height={24} />
           </ContentContainer>
-        </Container>
+        </LoadingContainer>
       ))}
     </>
   );

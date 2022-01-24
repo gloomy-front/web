@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { getNotification } from '.';
 
-const generateNotificationKey = () => `/notification`;
+const generateNotificationKey = () => '/notification';
 export const useNotification = () => {
   const { data, error } = useSWR(generateNotificationKey(), getNotification, {
     refreshWhenOffline: false,

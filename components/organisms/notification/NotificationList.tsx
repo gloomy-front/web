@@ -29,7 +29,7 @@ const NoDataDescription = styled.p`
 const NotificationList = () => {
   //const { notification, isLoading } = useNotification();
   const [isLoading, setIsLoading] = useState(false);
-  const [notification, setNotification] = useState<INotification[]>();
+  const [notification, setNotification] = useState<INotification[]>([]);
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
@@ -41,15 +41,14 @@ const NotificationList = () => {
   if (isLoading) return <NotificationLoading />;
   return (
     <NotificationListContainer>
-      {notification &&
-        (notification.length ? (
-          notification.map((data) => <NotificationItem notification={data} key={data.pk} />)
-        ) : (
-          <NoDataContainer>
-            <NoDataDescription>🕳</NoDataDescription>
-            <NoDataDescription>알림이 없습니다</NoDataDescription>
-          </NoDataContainer>
-        ))}
+      {notification.length ? (
+        notification.map((data) => <NotificationItem notification={data} key={data.pk} />)
+      ) : (
+        <NoDataContainer>
+          <NoDataDescription>🕳</NoDataDescription>
+          <NoDataDescription>알림이 없습니다</NoDataDescription>
+        </NoDataContainer>
+      )}
     </NotificationListContainer>
   );
 };

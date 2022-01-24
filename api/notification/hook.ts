@@ -10,7 +10,7 @@ export const useNotification = () => {
     suspense: true,
   });
   return {
-    notification: data,
+    notification: data ?? [],
     isLoading: !error && !data,
     isError: error,
   };

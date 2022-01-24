@@ -7,7 +7,7 @@ import { NOTIFICATION_DESCRIPTION, NOTIFICATION_LIST } from '@/constants/index';
 import { Layout } from '@/styles/theme';
 import { INotification } from '@/api/notification/interface';
 
-const Container = styled.li`
+const NotificationItemContainer = styled.li`
   ${Layout.flexRowStartEnd}
   padding: 16px;
   box-sizing: border-box;
@@ -54,7 +54,7 @@ const NotificationItem = ({ notification }: NotificationItemProps) => {
   const router = useRouter();
 
   return (
-    <Container onClick={() => router.push(`/community/detail/${notification.pk}`)}>
+    <NotificationItemContainer onClick={() => router.push(`/community/detail/${notification.pk}`)}>
       <TypeContainer>{NOTIFICATION_LIST[notification.type]}</TypeContainer>
       <ContentContainer>
         <Description>
@@ -64,7 +64,7 @@ const NotificationItem = ({ notification }: NotificationItemProps) => {
 
         <ContentTitle>{notification.title}</ContentTitle>
       </ContentContainer>
-    </Container>
+    </NotificationItemContainer>
   );
 };
 

@@ -1,4 +1,3 @@
-import { INotification } from '@/api/notification/interface';
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();

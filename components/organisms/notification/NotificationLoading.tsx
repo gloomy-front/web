@@ -27,7 +27,7 @@ const NotificationLoading = () => {
   return (
     <>
       {Array.from({ length: NOTIFICATION_LOADING_SIZE }, (v, i) => i).map((item) => (
-        <LoadingContainer>
+        <LoadingContainer key={item}>
           <Skeleton circle width={17} height={17} style={{ marginRight: '8px' }} />
           <ContentContainer>
             <Description>

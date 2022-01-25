@@ -56,9 +56,9 @@ export const getWithToken = async <T>(url: string): Promise<ApiReturn<T>> => {
   }
 };
 
-export const getWithoutToken = async <T>(url: string): Promise<ApiReturn<T>> => {
+export const getWithoutToken = async <T>(url: string, reqConfig = {}): Promise<ApiReturn<T>> => {
   try {
-    const res = await axios.get<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`);
+    const res = await axios.get<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`, { ...reqConfig });
     return res.data;
   } catch (e) {
     throw e;
@@ -94,9 +94,9 @@ export const postWithToken = async <T>(url: string, data: T, reqConfig = {}): Pr
   }
 };
 
-export const postWithoutToken = async <T>(url: string, data: T): Promise<ApiReturn<T>> => {
+export const postWithoutToken = async <T>(url: string, data: T, reqConfig = {}): Promise<ApiReturn<T>> => {
   try {
-    const res = await axios.post<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`, data);
+    const res = await axios.post<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`, data, { ...reqConfig });
     return res.data;
   } catch (e) {
     throw e;
@@ -132,6 +132,15 @@ export const putWithToken = async <T>(url: string, data: T): Promise<ApiReturn<T
   }
 };
 
+export const putWithoutToken = async <T>(url: string, data: T, reqConfig = {}): Promise<ApiReturn<T>> => {
+  try {
+    const res = await axios.put<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`, data, { ...reqConfig });
+    return res.data;
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const deleteWithToken = async <T>(url: string): Promise<ApiReturn<T>> => {
   const config = checkAuthToken() as AxiosRequestConfig;
 
@@ -158,5 +167,14 @@ export const deleteWithToken = async <T>(url: string): Promise<ApiReturn<T>> => 
     }
 
     throw { ...response.data, statusCode };
+  }
+};
+
+export const deleteWithoutToken = async <T>(url: string, reqConfig = {}): Promise<ApiReturn<T>> => {
+  try {
+    const res = await axios.delete<T, AxiosResponse<ApiReturn<T>>>(`${API_URL}${url}`, { ...reqConfig });
+    return res.data;
+  } catch (e) {
+    throw e;
   }
 };

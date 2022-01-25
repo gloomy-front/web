@@ -6,7 +6,7 @@ const { API_ENV } = publicRuntimeConfig;
 export const SITE_URL =
   API_ENV === 'development' ? 'https://d1gbspr5q497yq.cloudfront.net' : 'https://d1gbspr5q497yq.cloudfront.net';
 export const GLOOMY_TOKEN = 'gloomyToken';
-export const API_URL = 'http://ec2-13-125-147-178.ap-northeast-2.compute.amazonaws.com:8081';
+export const API_URL = 'https://gomingout.com';
 export const KAKAO_KEY = '473b1a6bbe9f9cceeffa8a5a384fae27';
 
 export const POST_LIST_SIZE = 5;

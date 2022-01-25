@@ -4,6 +4,8 @@ import { Title, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, PostList, BottomNav, Category } from '@/components/organisms';
 import { useUrlParams } from '@/utils/index';
 import { getComment, useCreateComment } from '@/api/index';
+import { stackRouterPush } from '@/utils/stackRouter';
+import { useRouter } from 'next/router';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -37,6 +39,7 @@ const ContentContainer = styled.section`
 
 export default function CommunityTemplate(): JSX.Element {
   const params = useUrlParams({ category: 'total' });
+  const router = useRouter();
 
   // get swr 쓰는법
   // const { data } = getComment();
@@ -51,27 +54,29 @@ export default function CommunityTemplate(): JSX.Element {
         <HeaderContainer>
           <HeaderNav>
             <HeaderDiv>
-              <Title style={{ fontWeight: 'bold', marginRight: '2px', fontFamily: 'Gowun Dodum', color: 'black' }}>{'고밍아웃'}</Title>
-              <Icon.GomingOut height={'18px'} style={{ marginBottom: '7px' }}/>
+              <Title style={{ fontWeight: 'bold', marginRight: '2px', fontFamily: 'Gowun Dodum', color: 'black' }}>
+                {'고밍아웃'}
+              </Title>
+              <Icon.GomingOut height={'18px'} style={{ marginBottom: '7px' }} />
             </HeaderDiv>
             <HeaderDiv>
-              <Icon.Bell height={'18px'} style={{ marginRight: '14px' }}/>
-              <Icon.Search height={'18px'}/>
+              <Icon.Bell
+                height={'18px'}
+                style={{ marginRight: '14px', cursor: 'pointer' }}
+                onClick={() => router.push('/notification')}
+              />
+              <Icon.Search height={'18px'} />
             </HeaderDiv>
           </HeaderNav>
         </HeaderContainer>
-        <Category initCategory={params.category}/>
+        <Category initCategory={params.category} />
         <ContentContainer>
-          <AsyncBoundary
-            pendingFallback={<BoardLoading/>}
-            isRefresh={true}
-            style={{ height: 'calc(100vh - 140px)' }}
-          >
-            <PostList/>
+          <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
+            <PostList />
           </AsyncBoundary>
         </ContentContainer>
       </MainContainer>
-      <BottomNav/>
+      <BottomNav />
     </>
   );
 }

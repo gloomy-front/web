@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { COLOR, Layout } from '@/styles/index';
 import { KAKAO_KEY } from '@/constants/index';
 
 import { checkPermission } from '@/hooks/index';
-import { AppAuthorContext } from '@/provider/index';
 import { isApp, isIphone } from '@/utils/index';
 
 import { Title, Span, Icon } from '@/components/atoms';
 import { Loading } from '@/components/molcules';
-import { ATTPermissionRequestPopup } from '@/components/organisms';
 
 
 const MainContainer = styled.main`
@@ -57,8 +55,6 @@ declare const window: Window &
 
 export default function LoginTemplate(): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showATTPermissionPopup, setShowATTPermissionPopup] = useState<boolean>(false);
-  const authData = useContext(AppAuthorContext);
 
   useEffect(() => {
     if (isApp() && isIphone()) {
@@ -69,13 +65,6 @@ export default function LoginTemplate(): JSX.Element {
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     document.head.appendChild(kakaoScript);
   }, []);
-
-  useEffect(() => {
-    const { ATT: attAuth } = authData;
-    if (attAuth === 'denied') {
-      setShowATTPermissionPopup(true);
-    }
-  }, [authData]);
 
   const kakaoLogin = () => {
     setIsLoading(true);
@@ -88,7 +77,6 @@ export default function LoginTemplate(): JSX.Element {
 
   return (
     <MainContainer>
-      {showATTPermissionPopup && <ATTPermissionRequestPopup closeDispatch={() => setShowATTPermissionPopup(false)}/>}
       <TextArea>
         <Span style={{ fontSize: '16px', marginBottom: '6px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
         <TitleDiv>

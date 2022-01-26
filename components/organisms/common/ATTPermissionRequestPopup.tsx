@@ -60,7 +60,7 @@ export default function ATTPermissionRequestPopup() {
 
   return (
     <>
-      {showPermissionPopup &&
+      {/*{showPermissionPopup &&*/}
       <Popup
         useClose={false}
         type={'ONE'}
@@ -76,7 +76,7 @@ export default function ATTPermissionRequestPopup() {
           </ATTPermissionHeader>
           <ATTPermissionContent>
             <PermissionTypeBox>
-              <Icon.Camera style={{ marginRight: '7px', marginBottom: '2px' }}/>
+              <Icon.Location height={'20px'} style={{ marginRight: '7px', marginBottom: '2px' }}/>
               <Span style={{ color: COLOR.GRAY07, fontWeight: 700, fontSize: '16px' }}>{'추적 허용'}</Span>
             </PermissionTypeBox>
             <Span style={{ color: COLOR.GRAY05, marginTop: '5px', marginBottom: '20px' }}>
@@ -84,7 +84,7 @@ export default function ATTPermissionRequestPopup() {
             </Span>
 
             <PermissionTypeBox>
-              <Icon.Folder style={{ marginRight: '7px', marginBottom: '2px' }}/>
+              <Icon.Bell fill={COLOR.PRIMARY} height={'20px'} style={{ marginRight: '7px', marginBottom: '2px' }}/>
               <Span style={{ color: COLOR.GRAY07, fontWeight: 700, fontSize: '16px' }}>{'알림'}</Span>
             </PermissionTypeBox>
             <Span style={{ color: COLOR.GRAY05, marginTop: '5px' }}>
@@ -93,7 +93,7 @@ export default function ATTPermissionRequestPopup() {
           </ATTPermissionContent>
         </ATTPermissionContainer>
       </Popup>
-      }
+      {/*}*/}
     </>
   );
 }

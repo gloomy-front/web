@@ -5,10 +5,10 @@ import { Layout } from '@/styles/theme';
 import router from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Comment from '@/components/organisms/community/Comment';
-import OptionsMenu from '@/components/organisms/community/OptionsMenu';
-import Portal from '@/components/organisms/common/Portal';
+import Comment from '@/components/organisms/detail/Comment';
+import OptionsMenu from '@/components/organisms/detail/OptionsMenu';
 import { DECLARATION_LIST } from '@/constants/index';
+import { OptionsType } from '@/types/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -82,6 +82,7 @@ const CountBlock = styled.div`
   padding-left: 16px;
   align-items: center;
   border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 7px;
   gap: 4px;
 `;
 const NoCommentBlock = styled.div`
@@ -130,18 +131,13 @@ const CommentPostButton = styled.button`
   background-color: ${({ theme }) => theme.WHITE}; ;
 `;
 
-export type OptionsType = {
-  type: string;
-  items: string[];
-};
-
 const DetailPostTemplate = (): JSX.Element => {
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [hasAuth, setHasAuth] = useState(false);
   const [options, setOptions] = useState<OptionsType>({
-    type: 'post',
-    items: ['게시글 수정', '게시글 삭제'],
+    title: null,
+    items: null,
   });
   // TODO: 본인 인증 API
 
@@ -157,18 +153,18 @@ const DetailPostTemplate = (): JSX.Element => {
   const optionHandler = (type: string) => {
     if (type === 'post' && hasAuth) {
       setOptions({
-        type: 'post',
+        title: '이 게시글에 대해',
         items: ['게시글 수정', '게시글 삭제'],
       });
     } else {
       setOptions({
-        type: 'post',
+        title: '신고 사유를 선택하세요',
         items: getOptionItem(),
       });
     }
     if (type === 'comment') {
       setOptions({
-        type: 'comment',
+        title: '이 댓글에 대해',
         items: ['댓글 수정', '댓글 삭제'],
       });
     }
@@ -179,11 +175,7 @@ const DetailPostTemplate = (): JSX.Element => {
   };
   return (
     <>
-      {isOpenMenu && (
-        <Portal>
-          <OptionsMenu menuOpenHandler={menuOpenHandler} options={options} />
-        </Portal>
-      )}
+      {isOpenMenu && <OptionsMenu menuOpenHandler={menuOpenHandler} options={options} />}
       <MainContainer>
         <HeaderContainer>
           <HeaderNav>

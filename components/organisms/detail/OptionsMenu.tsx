@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon, Title } from '@/components/atoms';
 import { COLOR } from '@/styles/color';
-import { OptionsType } from '@/components/templates/DetailPostTemplate';
+import { OptionsType } from '@/types/index';
+import Portal from '@/components/atoms/Portal';
 
 export type OptionsMenuProps = {
   menuOpenHandler?: () => void;
@@ -11,28 +12,28 @@ export type OptionsMenuProps = {
 
 function OptionsMenu({ menuOpenHandler, options }: OptionsMenuProps) {
   return (
-    <Container>
-      <Overlay>
-        <Wrapper>
-          <Block>
-            <Title style={{ color: COLOR.GRAY07, fontWeight: 'bold' }}>
-              이 {options.type === 'post' ? '게시글' : '댓글'}에 대해
-            </Title>
-            <Icon.Close onClick={menuOpenHandler} />
-          </Block>
-          <Menu>
-            {options.items.length < 4
-              ? options.items.map((item, index) => <Option key={index}>{item}</Option>)
-              : options.items.map((item, index) => (
-                  <Option key={index}>
-                    <Icon.RoundCheck />
-                    {item}
-                  </Option>
-                ))}
-          </Menu>
-        </Wrapper>
-      </Overlay>
-    </Container>
+    <Portal>
+      <Container>
+        <Overlay>
+          <Wrapper>
+            <Block>
+              <Title style={{ color: COLOR.GRAY07, fontWeight: 'bold' }}>{options.title}</Title>
+              <Icon.Close onClick={menuOpenHandler} />
+            </Block>
+            <Menu>
+              {options?.title === '신고 사유를 선택하세요'
+                ? options.items?.map((item, index) => (
+                    <Option key={index}>
+                      <Icon.RoundCheck />
+                      {item}
+                    </Option>
+                  ))
+                : options.items?.map((item, index) => <Option key={index}>{item}</Option>)}
+            </Menu>
+          </Wrapper>
+        </Overlay>
+      </Container>
+    </Portal>
   );
 }
 
@@ -51,7 +52,6 @@ const Overlay = styled.div`
   position: relative;
 `;
 const Wrapper = styled.div`
-  padding-top: 24px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -64,9 +64,8 @@ const Block = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  padding-left: 16px;
-  padding-right: 16px;
+  height: 22px;
+  padding: 24px 16px 14px;
 `;
 const Menu = styled.ul`
   list-style: none;

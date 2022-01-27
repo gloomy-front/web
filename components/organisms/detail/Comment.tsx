@@ -14,11 +14,12 @@ function Comment({ optionHandler, menuOpenHandler }: CommentProps) {
       <HeaderBlock>
         <Username>익명 친구</Username>·<RegTime>115:31</RegTime>
         <Icon.More
+          fill="#828282"
           onClick={() => {
             menuOpenHandler();
             optionHandler('comment');
           }}
-          style={{ position: 'absolute', right: 0, top: '50%', transform: 'translate(-50%, -50%)' }}
+          style={{ position: 'absolute', right: '21px', top: '50%', transform: 'translate(0, -50%)' }}
         />
       </HeaderBlock>
 
@@ -28,7 +29,7 @@ function Comment({ optionHandler, menuOpenHandler }: CommentProps) {
 }
 
 const Wrapper = styled.article`
-  padding: 9px 15px;
+  padding: 8px 0 9px 16px;
   border-bottom: 1px solid #f2f2f2;
 `;
 
@@ -39,19 +40,20 @@ const HeaderBlock = styled.div`
 
 const ContentBlock = styled.div`
   padding-top: 4px;
-  padding-bottom: 15px;
+  padding-right: 40px;
   font-size: 15px;
-  color: ${COLOR.GRAY07};
+  line-height: 22px;
+  color: ${({ theme }) => theme.GRAY07};
 `;
 
 const Username = styled.span`
   font-size: 14px;
-  color: ${COLOR.GRAY05};
+  color: ${({ theme }) => theme.GRAY05};
 `;
 
 const RegTime = styled.span`
   font-size: 14px;
-  color: ${COLOR.GRAY05};
+  color: ${({ theme }) => theme.GRAY05};
 `;
 
 export default Comment;

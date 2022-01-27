@@ -1,8 +1,15 @@
 import React, { memo, ReactElement } from 'react';
 import { SVGIconProps } from './';
 
-const RoundCheck = ({}: SVGIconProps): ReactElement => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+const RoundCheck = ({ fill = '#BDBDBD', height = '14px', onClick, style }: SVGIconProps): ReactElement => (
+  <svg
+    height={height}
+    style={style}
+    fill={fill}
+    onClick={onClick ? onClick : () => {}}
+    viewBox="0 0 14 14"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"

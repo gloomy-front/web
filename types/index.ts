@@ -7,9 +7,14 @@ export interface Image {
 
 export enum ActionType {
   SIGN_UP = 'SIGN_UP',
-  SIGN_IN = 'SIGN_IN'
+  SIGN_IN = 'SIGN_IN',
 }
 
 export type COLOR_TYPE = typeof COLOR;
 
 export * from './messageType';
+
+export type OptionsType = {
+  title: string | null;
+  items: string[] | null;
+};

@@ -60,7 +60,7 @@ export default function ATTPermissionRequestPopup() {
 
   return (
     <>
-      {/*{showPermissionPopup &&*/}
+      {showPermissionPopup &&
       <Popup
         useClose={false}
         type={'ONE'}
@@ -93,7 +93,7 @@ export default function ATTPermissionRequestPopup() {
           </ATTPermissionContent>
         </ATTPermissionContainer>
       </Popup>
-      {/*}*/}
+      }
     </>
   );
 }

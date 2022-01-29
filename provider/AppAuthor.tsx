@@ -8,7 +8,8 @@ import {
   RES_MULTI_PERMISSION_REQ,
   RES_PERMISSION_CHECK,
   RES_PERMISSION_REQ,
-  RES_NOTI_PERMISSION_CHECK
+  RES_NOTI_PERMISSION_CHECK,
+  RES_NOTI_PERMISSION_REQ
 } from '@/types/index';
 
 type RESULTS =
@@ -79,7 +80,11 @@ export const useAppProtocol = (): { authData: IAuthData, setNextCallback: Dispat
       type === RES_MULTI_PERMISSION_REQ ||
       type === RES_ALL_PERMISSION_CHECK ||
       type === RES_ALL_PERMISSION_REQ ||
-      type === RES_NOTI_PERMISSION_CHECK) {
+      type === RES_NOTI_PERMISSION_CHECK ||
+      type === RES_NOTI_PERMISSION_REQ
+    ) {
+      console.log(type);
+      console.log(data);
       responseCallback(data);
     }
   };

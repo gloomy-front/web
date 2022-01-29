@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 
 import { COLOR, GlobalStyles } from '@/styles/index';
-import {AsyncBoundary, ATTPermissionRequestPopup} from '@/components/organisms';
+import { AsyncBoundary, ATTPermissionRequestPopup } from '@/components/organisms';
 import { Loading } from '@/components/molcules';
 import CommunityPage from '@/pages/community';
 import { AppAuthorContext, AppAuthorNextCallbackContext, useAppProtocol } from '@/provider/index';

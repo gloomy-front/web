@@ -36,7 +36,7 @@ const ContentContainer = styled.section`
 `;
 
 export default function CommunityTemplate(): JSX.Element {
-  const params = useUrlParams({ category: 'total' });
+  const params = useUrlParams({ category: 'ALL' });
   const router = useRouter();
 
   return (

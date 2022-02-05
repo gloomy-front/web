@@ -194,10 +194,11 @@ export default function BottomPopup(
           {title && <PopupHeaderTitle dangerouslySetInnerHTML={{ __html: title }}/>}
           {useClose &&
           <Icon.Close
+            height={'12px'}
             style={{
               position: 'absolute',
-              top: '12px',
-              right: '12px',
+              top: '24px',
+              right: '16px',
               cursor: 'pointer'
             }}
             onClick={failCallback}

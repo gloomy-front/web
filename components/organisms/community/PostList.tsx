@@ -12,6 +12,7 @@ import { IFeed, FeedListType } from '@/types/index';
 const BoundarySection = styled.section`
   ${Layout.flexColStartCenter};
   width: 100%;
+  padding-bottom: 57px;
 `;
 
 export default function PostList(): JSX.Element {

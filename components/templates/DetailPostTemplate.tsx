@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Icon, Span, Title } from '@/components/atoms';
+import { Declaration } from '@/components/organisms';
 import { COLOR, Layout } from '@/styles/index';
 import { useCalcRegisterDate } from '@/hooks/index';
 import { stackRouterBack } from '@/utils/index';
@@ -126,6 +127,7 @@ const CommentPostButton = styled.button`
 const DetailPostTemplate = (): JSX.Element => {
   const router = useRouter();
   const feedId = parseInt(router.query['postId'] as string ?? '0');
+  const [showDeclaration, setShowDeclaration] = useState<boolean>(false);
   const { data: feed } = useGetFeedDetail(feedId);
   const [registerDate] = useCalcRegisterDate(feed.createdAt ?? '');
 
@@ -134,7 +136,7 @@ const DetailPostTemplate = (): JSX.Element => {
       <HeaderContainer>
         <HeaderNav>
           <Icon.Back onClick={() => stackRouterBack(router)} height={'14px'} style={{ cursor: 'pointer' }}/>
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }}/>
+          <Icon.More onClick={() => setShowDeclaration(true)} style={{ cursor: 'pointer' }}/>
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>
@@ -163,6 +165,7 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
+      {showDeclaration && <Declaration closeDispatch={() => setShowDeclaration(false)}/>}
     </MainContainer>
   );
 };

@@ -87,7 +87,7 @@ export default function NewPostTemplate(): JSX.Element {
   const authData = useContext(AppAuthorContext);
 
   const [postFeed] = usePostFeed();
-  // const [postFeedImage] = usePostFeedImage();
+  const [postFeedImage] = usePostFeedImage();
 
   const methods = useForm<{ category: string; title: string; content: string; postImages: Array<Image> }>({
     defaultValues: {
@@ -129,7 +129,7 @@ export default function NewPostTemplate(): JSX.Element {
     }
   }, [authData, showPhotoPermissionRequestPopup, showPhotoPermissionBlockedPopup]);
 
-  const requestNewPost = useCallback(async ({ content }) => {
+  const requestNewPost = useCallback(async () => {
     const res = await postFeed({
       title: watchTitle,
       category: watchCategory,
@@ -137,6 +137,8 @@ export default function NewPostTemplate(): JSX.Element {
     });
 
     if (res?.code === 200) {
+      // const files = watchImages.map(image => image.filePath);
+      // await postFeedImage({ feedId: res.result.id, files });
       await router.replace(`/community/detail/${res.result.id}`);
     }
 
@@ -144,11 +146,11 @@ export default function NewPostTemplate(): JSX.Element {
 
   const onError = useCallback(({ category, title, content }) => {
     if (title) {
-      alert('title');
+      alert('제목을 입력해주세요.');
     } else if (category) {
-      alert('category');
+      alert('카테고리를 선택해주세요.');
     } else if (content) {
-      alert('content');
+      alert('내용을 입력해주세요.');
     }
   }, []);
 
@@ -159,7 +161,6 @@ export default function NewPostTemplate(): JSX.Element {
     if (file) {
       setIsLoading(true);
 
-      // await postFeedImage({ feedId, file });
       reader.readAsDataURL(file);
       reader.onloadend = (e) => {
         setIsLoading(false);

@@ -5,6 +5,8 @@ import { Span, Title } from '@/components/atoms';
 import { useCalcRegisterDate } from '@/hooks/index';
 import { COLOR, Layout } from '@/styles/index';
 import { stackRouterPush } from '@/utils/index';
+import { IFeed } from '@/types/index';
+import { CATEGORY_LIST } from '@/constants/index';
 
 const ItemSection = styled.section`
   ${Layout.flexColStartStart};
@@ -62,23 +64,22 @@ const ButtonArea = styled.div`
   cursor: pointer;
 `;
 
-export default function PostItem({ post }: { post: any }): JSX.Element {
+export default function PostItem({ post }: { post: IFeed }): JSX.Element {
   const router = useRouter();
   const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
 
   return (
     <>
-      {/* 피드 상세 진입점 */}
-      <ItemSection onClick={() => stackRouterPush(router, `/community/detail/${post.pk}`)}>
-        <CategoryBox>{post.category}</CategoryBox>
+      <ItemSection onClick={() => stackRouterPush(router, `/community/detail/${post.id}`)}>
+        <CategoryBox>{CATEGORY_LIST[post.category]}</CategoryBox>
         <ContentSection>
           <TextSection>
             <Title style={{ marginBottom: '8px', fontWeight: 400 }}>{post.title}</Title>
             <ContentSpan>{post.content}</ContentSpan>
           </TextSection>
-          {post.thumbnail && (
+          {post.imageURLs.length > 0 && (
             <img
-              src={post.thumbnail}
+              src={post.imageURLs[0]}
               alt={'thumnail'}
               style={{
                 width: '48px',

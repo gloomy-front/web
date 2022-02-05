@@ -2,7 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 
 type ApiData = {
-  data: any;
+  result: any;
   message: string | number;
   status: string | number;
   errorCode?: string | boolean;

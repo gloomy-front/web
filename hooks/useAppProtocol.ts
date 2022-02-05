@@ -53,8 +53,8 @@ export const checkAllPermission = (): void => {
 
 export const sendRouterEvent = (path: string): void => {
   setTimeout(() => {
-    postMessageToApp({ type: 'REQ_ROUTER_EVENT', data: path } )
-  })
+    postMessageToApp({ type: 'REQ_ROUTER_EVENT', data: path });
+  });
 };
 
 export const requestAllPermission = (): void => {
@@ -65,48 +65,48 @@ export const requestAllPermission = (): void => {
 
 export const checkMultiPermission = ({ permissionTypeList }: { permissionTypeList: string[] }): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_MULTI_PERMISSION_CHECK, data: { permissionTypeList } });
+    postMessageToApp({ type: REQ_MULTI_PERMISSION_CHECK, data: { permissionTypeList }});
   }, 100);
 };
 
 export const requestMultiPermission = ({ permissionTypeList }: { permissionTypeList: string[] }): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_MULTI_PERMISSION_REQ, data: { permissionTypeList } });
+    postMessageToApp({ type: REQ_MULTI_PERMISSION_REQ, data: { permissionTypeList }});
   }, 100);
 };
 
 export const checkPermission = ({ permissionType }: { permissionType: string }): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_PERMISSION_CHECK, data: { permissionType } });
+    postMessageToApp({ type: REQ_PERMISSION_CHECK, data: { permissionType }});
   }, 100);
 };
 
 export const requestPermission = ({ permissionType }: { permissionType: string }): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_PERMISSION_REQ, data: { permissionType } });
+    postMessageToApp({ type: REQ_PERMISSION_REQ, data: { permissionType }});
   }, 100);
 };
 
 export const checkNotiPermission = (): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_NOTI_PERMISSION_CHECK, data: {} });
+    postMessageToApp({ type: REQ_NOTI_PERMISSION_CHECK, data: {}});
   }, 100);
 };
 
 export const requestNotiPermission = (): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_NOTI_PERMISSION_REQ, data: {} });
+    postMessageToApp({ type: REQ_NOTI_PERMISSION_REQ, data: {}});
   }, 100);
 };
 
 export const requestFCMToken = (): void => {
   setTimeout(() => {
-    postMessageToApp({ type: REQ_GET_FCM_TOKEN, data: {} });
+    postMessageToApp({ type: REQ_GET_FCM_TOKEN, data: {}});
   }, 100);
 };
 
 export const changeTargetUrl = ({ targetUrl }: { targetUrl: string }): void => {
-  postMessageToApp({ type: REQ_POST_TARGET_URL, data: { targetUrl } });
+  postMessageToApp({ type: REQ_POST_TARGET_URL, data: { targetUrl }});
 };
 
 export const getTargetUrl = (): void => {
@@ -134,5 +134,5 @@ export const getExternalUrlList = (): void => {
 };
 
 export const requestExternalUrl = ({ targetUrl }: { targetUrl: string }): void => {
-  postMessageToApp({ type: REQ_POST_EXTERNAL_URL, data: { targetUrl } });
+  postMessageToApp({ type: REQ_POST_EXTERNAL_URL, data: { targetUrl }});
 };

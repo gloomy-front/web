@@ -10,7 +10,7 @@ export const STATUS_CODE = {
 };
 
 export type ApiData<T> = {
-  data: T;
+  result: T;
   message: string | number;
   status: string | number;
 }
@@ -22,7 +22,7 @@ export type ApiReturn<T> = ApiSuccess<T> | ApiFail<T>
 
 function checkAuthToken(reqConfig?: any): AxiosRequestConfig | void {
   // const authToken = Cookies.get(process.env.LOGIN_TOKEN_NAME as string) || '';
-  const authToken = '';
+  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJzdWIiOjQ1MywibmFtZSI6Im9qdzk3MDcyNUBuYXZlci5jb20iLCJpYXQiOjE2NzU2MDQwMjZ9.Szlepkj86_I5FBA3IyFg1kLXoUnfw-KGjOaLkCFc8ao';
 
   if (typeof window !== 'undefined' && !authToken) {
     window.location.replace('/');

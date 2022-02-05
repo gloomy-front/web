@@ -9,7 +9,7 @@ export const GLOOMY_TOKEN = 'gloomyToken';
 export const API_URL = 'https://gomingout.com';
 export const KAKAO_KEY = '473b1a6bbe9f9cceeffa8a5a384fae27';
 
-export const POST_LIST_SIZE = 5;
+export const FEED_LIST_SIZE = 20;
 export const HOUR_TO_MIN = 60;
 export const DAY_TO_HOUR = 24;
 export const WEEK_TO_DAY = 7;
@@ -25,15 +25,15 @@ export const DECLARATION_LIST: { [key: string]: string } = {
 };
 
 export const CATEGORY_LIST: { [key: string]: string } = {
-  total: '모든 고민',
-  chat: '💬 잡담',
-  family: '🏡 가족',
-  friend: '👥 친구',
-  company: '💼 직장/이직',
-  employ: '📑 취업',
-  study: '📚 학업/시험',
-  heteroLove: '👫 연애(이성애)',
-  homoLove: '🌈 연애(동성애)',
+  ALL: '모든 고민',
+  CHAT: '💬 잡담',
+  FAMILY: '🏡 가족',
+  FRIEND: '👥 친구',
+  COMPANY: '💼 직장/이직',
+  EMPLOY: '📑 취업',
+  STUDY: '📚 학업/시험',
+  HETERO_LOVE: '👫 연애(이성애)',
+  HOMO_LOVE: '🌈 연애(동성애)',
 };
 
 export const NOTIFICATION_LIST: { [key: string]: string } = {

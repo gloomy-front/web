@@ -10,13 +10,12 @@ import { isApp, isIphone } from '@/utils/index';
 import { Title, Span, Icon } from '@/components/atoms';
 import { Loading } from '@/components/molcules';
 
-
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
   width: 100%;
   height: 100vh;
   margin: 0 auto;
-  background-color: #FEFEDF;
+  background-color: #fefedf;
 `;
 
 const TextArea = styled.div`
@@ -50,8 +49,8 @@ const TitleDiv = styled.div`
 
 declare const window: Window &
   typeof globalThis & {
-  Kakao: any;
-};
+    Kakao: any;
+  };
 
 export default function LoginTemplate(): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -80,8 +79,10 @@ export default function LoginTemplate(): JSX.Element {
       <TextArea>
         <Span style={{ fontSize: '16px', marginBottom: '6px' }}>{'슬펐던 일, 답답한 고민 모두'}</Span>
         <TitleDiv>
-          <Title style={{ color: 'black', fontSize: '28px', fontWeight: 800, fontFamily: 'Gowun Dodum' }}>{'고밍아웃'}</Title>
-          <Icon.GomingOut height={'35px'} style={{ marginBottom: '14px', marginLeft: '5px' }}/>
+          <Title style={{ color: 'black', fontSize: '28px', fontWeight: 800, fontFamily: 'Gowun Dodum' }}>
+            {'고밍아웃'}
+          </Title>
+          <Icon.GomingOut height={'35px'} style={{ marginBottom: '14px', marginLeft: '5px' }} />
         </TitleDiv>
       </TextArea>
       <img
@@ -91,24 +92,30 @@ export default function LoginTemplate(): JSX.Element {
       />
       <LoginButtonSection>
         <LoginButtonArea onClick={kakaoLogin}>
-          <Icon.Kakao style={{ position: 'relative', left: '30px' }} height={'22px'}/>
-          <Span style={{
-            fontSize: '16px',
-            display: 'block',
-            width: '100%',
-            textAlign: 'center',
-            marginRight: '10px'
-          }}>{'카카오로 로그인'}</Span>
+          <Icon.Kakao style={{ position: 'relative', left: '30px' }} height={'22px'} />
+          <Span
+            style={{
+              fontSize: '16px',
+              display: 'block',
+              width: '100%',
+              textAlign: 'center',
+              marginRight: '10px',
+            }}
+          >
+            {'카카오로 로그인'}
+          </Span>
         </LoginButtonArea>
         <Span style={{ color: COLOR.GRAY05, fontSize: '12px', marginTop: '13px' }}>
           {'시작하면 '}
           <Span style={{ color: COLOR.GRAY05, fontSize: '12px', textDecoration: 'underline' }}>{'이용약관'}</Span>
           {' 및 '}
-          <Span style={{ color: COLOR.GRAY05, fontSize: '12px', textDecoration: 'underline' }}>{'개인정보취급방침'}</Span>
+          <Span style={{ color: COLOR.GRAY05, fontSize: '12px', textDecoration: 'underline' }}>
+            {'개인정보취급방침'}
+          </Span>
           {'에 동의하게 됩니다.'}
         </Span>
       </LoginButtonSection>
-      {isLoading && <Loading/>}
+      {isLoading && <Loading />}
     </MainContainer>
   );
 }

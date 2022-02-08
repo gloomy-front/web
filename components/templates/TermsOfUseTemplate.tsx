@@ -1,15 +1,15 @@
+import router from 'next/router';
 import styled from 'styled-components';
 import { Layout } from '@/styles/index';
-import router from 'next/router';
 import { Title, Icon } from '@/components/atoms';
-import { useUrlParams } from '@/utils/index';
+import { stackRouterBack } from '@/utils/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: ${({ theme }) => theme.GRAY02};
+  background-color: ${({ theme }) => theme.WHITE};
 `;
 
 const HeaderContainer = styled.header`
@@ -45,9 +45,10 @@ export default function TermsOfUseTemplate(): JSX.Element {
       <MainContainer>
         <HeaderContainer>
           <HeaderNav>
-            <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer', marginLeft: '16px' }} />
-            <Title style={{ fontWeight: 'bold' }}>{'이용약관'}</Title>
-            <Icon.Back style={{ cursor: 'pointer', marginRight: '16px', visibility: 'hidden' }} />
+            <Icon.Back onClick={() => stackRouterBack(router)} style={{ cursor: 'pointer', marginLeft: '16px' }} />
+            <Title style={{ fontWeight: 'bold', position: 'absolute', left: '50%', transform: 'translate(-50%)' }}>
+              {'이용약관'}
+            </Title>
           </HeaderNav>
         </HeaderContainer>
         <ContentSection>

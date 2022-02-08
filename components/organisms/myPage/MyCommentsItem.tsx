@@ -54,9 +54,9 @@ export default function MyCommentsItem({ post }: { post: any }): JSX.Element {
     <>
       {/* 피드 상세 진입점 */}
       <ItemSection onClick={() => router.push(`/community/detail/${post.pk}`)}>
-        <Title style={{ marginBottom: '8px' }}>
+        <Title style={{ marginBottom: '8px', fontWeight: 400 }}>
           {'💬 '}
-          {post.title}
+          {post.comments}
         </Title>
         <ContentSection>
           <CategoryBox>{post.category}</CategoryBox>

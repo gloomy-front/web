@@ -1,8 +1,8 @@
+import router from 'next/router';
 import styled from 'styled-components';
 import { Layout, COLOR } from '@/styles/index';
-import router from 'next/router';
 import { Title, Icon, Span } from '@/components/atoms';
-import { useUrlParams } from '@/utils/index';
+import { stackRouterPush, stackRouterBack } from '@/utils/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -13,7 +13,10 @@ const MainContainer = styled.main`
 `;
 
 const HeaderContainer = styled.header`
-  ${Layout.flexRowBetweenCenter};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: ${({ theme }) => theme.WHITE};
   width: 100%;
   height: 56px;
@@ -42,24 +45,25 @@ export default function SettingTemplate(): JSX.Element {
     <>
       <MainContainer>
         <HeaderContainer>
-          <Icon.Back onClick={() => router.back()} style={{ cursor: 'pointer', marginLeft: '16px' }} />
-          <Title style={{ fontWeight: 'bold' }}>{'설정'}</Title>
-          <Icon.Back style={{ cursor: 'pointer', marginRight: '16px', visibility: 'hidden' }} />
+          <Icon.Back onClick={() => stackRouterBack(router)} style={{ cursor: 'pointer', marginLeft: '16px' }} />
+          <Title
+            style={{
+              fontWeight: 'bold',
+              position: 'absolute',
+              left: '50%',
+              transform: 'translate(-50%)',
+            }}
+          >
+            {'설정'}
+          </Title>
         </HeaderContainer>
-
-        <ButtonContainer>
+        <ButtonContainer onClick={() => stackRouterPush(router, '/myPage/setting/termsOfUse')}>
           <Span style={{ fontSize: '15px', marginLeft: '16px', color: COLOR.GRAY07 }}>{'이용약관'}</Span>
-          <Icon.ArrowNext
-            onClick={() => router.push('/myPage/setting/termsOfUse')}
-            style={{ cursor: 'pointer', marginRight: '11px' }}
-          />
+          <Icon.ArrowNext style={{ cursor: 'pointer', marginRight: '11px' }} />
         </ButtonContainer>
-        <ButtonContainer>
+        <ButtonContainer onClick={() => stackRouterPush(router, '/myPage/setting/privacyPolicy')}>
           <Span style={{ fontSize: '15px', marginLeft: '16px', color: COLOR.GRAY07 }}>{'개인정보 처리방침'}</Span>
-          <Icon.ArrowNext
-            onClick={() => router.push('/myPage/setting/privacyPolicy')}
-            style={{ cursor: 'pointer', marginRight: '11px' }}
-          />
+          <Icon.ArrowNext style={{ cursor: 'pointer', marginRight: '11px' }} />
         </ButtonContainer>
         <ButtonContainer>
           <Span style={{ fontSize: '15px', marginLeft: '16px', color: COLOR.GRAY07 }}>{'버전'}</Span>

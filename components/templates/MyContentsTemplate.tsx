@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import router from 'next/router';
+import styled from 'styled-components';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
 import { AsyncBoundary, BoardLoading, MyContents, BottomNav, Tab } from '@/components/organisms';
@@ -24,6 +24,7 @@ const HeaderNav = styled.section`
   ${Layout.flexRowBetweenCenter};
   width: 100%;
 `;
+
 const ContentContainer = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;

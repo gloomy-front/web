@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Layout } from '@/styles/index';
 import { Title, Icon } from '@/components/atoms';
-import { AsyncBoundary, BoardLoading, MyComments, BottomNav, Tab } from '@/components/organisms';
+import { AsyncBoundary, MyCommentsLaoding, MyComments, BottomNav, Tab } from '@/components/organisms';
 import { useUrlParams } from '@/utils/index';
 
 const MainContainer = styled.main`
@@ -10,7 +10,6 @@ const MainContainer = styled.main`
   width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-
   background-color: ${({ theme }) => theme.WHITE};
 `;
 
@@ -34,6 +33,7 @@ const ContentContainer = styled.section`
 const ButtonArea = styled.div`
   cursor: pointer;
 `;
+
 export default function MyCommentsTemplate(): JSX.Element {
   const params = useUrlParams({ tab: 'myComments' });
   const router = useRouter();
@@ -50,7 +50,11 @@ export default function MyCommentsTemplate(): JSX.Element {
         </HeaderContainer>
         <Tab initTab={params.tab} />
         <ContentContainer>
-          <AsyncBoundary pendingFallback={<BoardLoading />} isRefresh={true} style={{ height: 'calc(100vh - 140px)' }}>
+          <AsyncBoundary
+            pendingFallback={<MyCommentsLaoding />}
+            isRefresh={true}
+            style={{ height: 'calc(100vh - 140px)' }}
+          >
             <MyComments />
           </AsyncBoundary>
         </ContentContainer>

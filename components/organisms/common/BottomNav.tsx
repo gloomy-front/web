@@ -34,9 +34,13 @@ export default function BottomNav(): JSX.Element {
         </ButtonArea>
 
         <ButtonArea onClick={() => stackRouterPush(router, '/community/new')}>
-          <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
-            <Icon.WriteIcon/>
-          </Tooltip>
+          {firstPath === 'community' ? (
+            <Tooltip content="🔮 나누고 싶은 생각이 있나요?">
+              <Icon.WriteIcon />
+            </Tooltip>
+          ) : (
+            <Icon.WriteIcon />
+          )}
         </ButtonArea>
 
         <ButtonArea onClick={() => router.push('/myPage/myContents')}>

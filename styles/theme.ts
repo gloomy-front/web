@@ -72,5 +72,11 @@ export const Layout = {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-  `
+  `,
+  flexRowStartEnd: css`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+  `,
 };

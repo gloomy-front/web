@@ -7,3 +7,4 @@ export { default as MyCommentsTemplate } from './MyCommentsTemplate';
 export { default as SettingTemplate } from './SettingTemplate';
 export { default as TermsOfUseTemplate } from './TermsOfUseTemplate';
 export { default as PrivacyPolicyTemplate } from './PrivacyPolicyTemplate';
+export { default as NotificationTemplate } from './NotificationTemplate';

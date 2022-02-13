@@ -28,3 +28,4 @@ export { default as GomingOut } from './GomingOut';
 export { default as Bell } from './Bell';
 export { default as Camera } from './Camera';
 export { default as Folder } from './Folder';
+export { default as Location } from './Loaction';

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { Icon, Span, Title } from '@/components/atoms';
+import { Declaration } from '@/components/organisms';
 import { COLOR, Layout } from '@/styles/index';
 import { useCalcRegisterDate } from '@/hooks/index';
-import { stackRouterBack, stackRouterPush } from '@/utils/index';
+import { stackRouterBack } from '@/utils/index';
+import { useGetFeedDetail } from '@/api/index';
+import { CATEGORY_LIST } from '@/constants/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -14,15 +17,18 @@ const MainContainer = styled.main`
   margin: 0 auto;
   padding-bottom: 56px;
 `;
+
 const HeaderContainer = styled.section`
   width: 100%;
   box-sizing: border-box;
   padding: 24px 16px 8px 11px;
 `;
+
 const HeaderNav = styled.section`
   ${Layout.flexRowBetweenCenter};
   width: 100%;
 `;
+
 const TitleSection = styled.section`
   ${Layout.flexColStartStart};
   width: 100%;
@@ -30,6 +36,7 @@ const TitleSection = styled.section`
   box-sizing: border-box;
   border-bottom: ${({ theme }) => `1px solid ${theme.GRAY02}`};
 `;
+
 const CategoryBox = styled.section`
   ${Layout.flexRowCenter};
   height: 20px;
@@ -40,26 +47,32 @@ const CategoryBox = styled.section`
   background-color: ${({ theme }) => theme.GRAY02};
   margin-bottom: 8px;
 `;
+
 const ImageSection = styled.section`
   ${Layout.flexRowCenter};
   width: 100%;
   height: 306px;
   padding-top: 16px;
 `;
+
 const ContentSection = styled.section`
+  width: 100%;
   padding: 16px;
   color: ${({ theme }) => theme.BLACK};
   font-size: 15px;
   word-break: keep-all;
   white-space: pre-line;
   line-height: 22px;
+  box-sizing: border-box;
 `;
+
 const ButtonArea = styled.section`
   ${Layout.flexRowStartCenter};
   width: 100%;
   box-sizing: border-box;
   padding: 11px 16px 32px 16px;
 `;
+
 const LikeButton = styled.button`
   color: ${({ theme }) => theme.WHITE};
   width: 82px;
@@ -68,11 +81,13 @@ const LikeButton = styled.button`
   border-radius: 10px;
   border: none;
 `;
+
 const CommentSection = styled.section`
   width: 100%;
   height: 152px;
   border-top: 6px solid ${({ theme }) => theme.GRAY02};
 `;
+
 const FooterContainer = styled.section`
   ${Layout.flexRowCenter};
   position: fixed;
@@ -83,10 +98,12 @@ const FooterContainer = styled.section`
   padding: 10px 16px;
   box-sizing: border-box;
 `;
+
 const FooterSection = styled.section`
   ${Layout.flexRowCenter};
   width: 100%;
 `;
+
 const CommentInput = styled.input`
   box-sizing: border-box;
   color: ${({ theme }) => theme.GRAY04};
@@ -95,6 +112,7 @@ const CommentInput = styled.input`
   padding: 7px 8px;
   border: 1px solid ${({ theme }) => theme.GRAY10};
 `;
+
 const CommentPostButton = styled.button`
   color: ${({ theme }) => theme.GRAY04};
   box-sizing: border-box;
@@ -108,32 +126,37 @@ const CommentPostButton = styled.button`
 
 const DetailPostTemplate = (): JSX.Element => {
   const router = useRouter();
-  const [registerDate] = useCalcRegisterDate(post.createdAt ?? '');
+  const feedId = parseInt(router.query['postId'] as string ?? '0');
+  const [showDeclaration, setShowDeclaration] = useState<boolean>(false);
+  const { data: feed } = useGetFeedDetail(feedId);
+  const [registerDate] = useCalcRegisterDate(feed.createdAt ?? '');
+
   return (
     <MainContainer>
       <HeaderContainer>
         <HeaderNav>
           <Icon.Back onClick={() => stackRouterBack(router)} height={'14px'} style={{ cursor: 'pointer' }}/>
-          <Icon.More onClick={() => console.log(alert('more'))} style={{ cursor: 'pointer' }}/>
+          <Icon.More onClick={() => setShowDeclaration(true)} style={{ cursor: 'pointer' }}/>
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>
-        <CategoryBox>{post.category}</CategoryBox>
-        <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{post.title}</Title>
+        <CategoryBox>{CATEGORY_LIST[feed.category]}</CategoryBox>
+        <Title style={{ wordBreak: 'keep-all', paddingBottom: '8px' }}>{feed.title}</Title>
         <Span style={{ fontSize: '10px', color: COLOR.GRAY05 }}>{registerDate}</Span>
       </TitleSection>
+      {feed.imageURLs.length > 0 &&
       <ImageSection>
-        {post.thumbnail && (
-          <img
-            src={'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg'}
-            alt={'contentImage'}
-            style={{ width: '100%', height: '306px', objectFit: 'cover' }}
-          />
-        )}
+        <img
+          src={feed.imageURLs[0]}
+          alt={'contentImage'}
+          style={{ width: '100%', objectFit: 'cover' }}
+        />
       </ImageSection>
-      <ContentSection>{post.content}</ContentSection>
+      }
+      <ContentSection>{feed.content}</ContentSection>
       <ButtonArea>
-        <LikeButton onClick={() => stackRouterPush(router, `/community/detail/${post.pk}`)}>❤️ 공감 {post.likeCount}</LikeButton>
+        <LikeButton>❤️
+          공감 {feed.likeCount}</LikeButton>
       </ButtonArea>
       <CommentSection></CommentSection>
       <FooterContainer>
@@ -142,23 +165,8 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
+      {showDeclaration && <Declaration closeDispatch={() => setShowDeclaration(false)}/>}
     </MainContainer>
   );
 };
 export default DetailPostTemplate;
-
-const post = {
-  pk: 5,
-  title: '나 아까 노티드 도넛먹고 우울한게 좀 나아졌어',
-  content: `아까 안국역쪽 들렀는데 거기 웨이팅이 별로 없대?
-    그래서 들어가니까 초코 푸딩도넛 품절 아니길래 잽싸게 사먹었다
-    휴 역시 달달한게 우울에는 직빵인듯
-    힘내자 내자신아
-    너네들도 힘내라`,
-  likeCount: 4,
-  commentCount: 4,
-  createdAt: '2021-10-30 17:32',
-  thumbnail: 'https://imagescdn.gettyimagesbank.com/500/20/659/317/0/1221635151.jpg',
-  color: 'purple',
-  category: '직장/이직',
-};

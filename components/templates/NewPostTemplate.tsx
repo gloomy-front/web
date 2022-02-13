@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { COLOR, Layout } from '@/styles/index';
 import { COLOR_TYPE } from '@/types/index';
 import { Span, Icon, Input, TextArea } from '@/components/atoms';
-import { SelectCategory, PhotoPermissionRequestPopup } from '@/components/organisms';
+import { SelectCategory, PhotoPermissionRequestPopup, PhotoPermissionBlockedPopup } from '@/components/organisms';
 import { AppAuthorContext } from '@/provider/index';
 import { isApp, stackRouterBack } from '@/utils/index';
 import { checkPermission } from '@/hooks/index';
 import { CATEGORY_LIST } from '@/constants/index';
-import PhotoPermissionBlockedPopup from '../organisms/common/PhotoPermissionBlockedPopup';
+import { usePostFeed, usePostFeedImage } from '@/api/index';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartStart};
@@ -86,6 +86,9 @@ export default function NewPostTemplate(): JSX.Element {
   const [showPhotoPermissionBlockedPopup, setShowPhotoPermissionBlockedPopup] = useState<boolean>(false);
   const authData = useContext(AppAuthorContext);
 
+  const [postFeed] = usePostFeed();
+  const [postFeedImage] = usePostFeedImage();
+
   const methods = useForm<{ category: string; title: string; content: string; postImages: Array<Image> }>({
     defaultValues: {
       category: '',
@@ -95,7 +98,7 @@ export default function NewPostTemplate(): JSX.Element {
     }
   });
   const { handleSubmit, register, watch, setValue } = methods;
-  const [watchImages, watchContent, watchCategory] = watch(['postImages', 'content', 'category']);
+  const [watchTitle, watchImages, watchContent, watchCategory] = watch(['title', 'postImages', 'content', 'category']);
 
   useEffect(() => {
     if (isApp()) {
@@ -126,17 +129,28 @@ export default function NewPostTemplate(): JSX.Element {
     }
   }, [authData, showPhotoPermissionRequestPopup, showPhotoPermissionBlockedPopup]);
 
-  const requestNewPost = useCallback(async ({ content }) => {
-    // console.log('New!');
-  }, []);
+  const requestNewPost = useCallback(async () => {
+    const res = await postFeed({
+      title: watchTitle,
+      category: watchCategory,
+      content: watchContent
+    });
+
+    if (res?.code === 200) {
+      // const files = watchImages.map(image => image.filePath);
+      // await postFeedImage({ feedId: res.result.id, files });
+      await router.replace(`/community/detail/${res.result.id}`);
+    }
+
+  }, [watchCategory, watchTitle, watchContent, watchImages]);
 
   const onError = useCallback(({ category, title, content }) => {
     if (title) {
-      alert('title');
+      alert('제목을 입력해주세요.');
     } else if (category) {
-      alert('category');
+      alert('카테고리를 선택해주세요.');
     } else if (content) {
-      alert('content');
+      alert('내용을 입력해주세요.');
     }
   }, []);
 
@@ -187,7 +201,7 @@ export default function NewPostTemplate(): JSX.Element {
           style={{ cursor: 'pointer', marginBottom: '3px', width: '30px', height: '40px', lineHeight: '70px' }}
           onClick={() => stackRouterBack(router)}
         >
-          <Icon.Back height={'14px'} />
+          <Icon.Back height={'14px'}/>
         </div>
         <CloseButton disabled={watchContent.length < 1}
                      onClick={handleSubmit(requestNewPost, onError)}>{'저장'}</CloseButton>

@@ -29,8 +29,8 @@ export default function BottomNav(): JSX.Element {
   return (
     <>
       <BottomContainer>
-        <ButtonArea onClick={() => router.push('/community?locate=home')}>
-          <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09} />
+        <ButtonArea onClick={() => router.push('/community')}>
+          <Icon.Home fill={firstPath === 'community' ? COLOR.BLACK : COLOR.GRAY09}/>
         </ButtonArea>
 
         <ButtonArea onClick={() => stackRouterPush(router, '/community/new')}>
@@ -43,8 +43,8 @@ export default function BottomNav(): JSX.Element {
           )}
         </ButtonArea>
 
-        <ButtonArea onClick={() => router.push('/community?locate=profile')}>
-          <Icon.Mypage fill={router.query['locate'] === 'profile' ? COLOR.BLACK : COLOR.GRAY09} />
+        <ButtonArea onClick={() => router.push('/myPage/myContents')}>
+          <Icon.Mypage fill={firstPath === 'myPage' ? COLOR.BLACK : COLOR.GRAY09}/>
         </ButtonArea>
       </BottomContainer>
     </>

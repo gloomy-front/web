@@ -47,3 +47,8 @@ export const NOTIFICATION_DESCRIPTION: { [key: string]: string } = {
   COMMENT: '개의 댓글이 달렸습니다.',
   NESTED_COMMENT: '개의 답댓글이 달렸습니다.',
 };
+
+export const MYPAGE_TAB: { [key: string]: string } = {
+  myContents: '작성한 글',
+  myComments: '작성한 댓글',
+};

@@ -8,7 +8,8 @@ import { checkPermission } from '@/hooks/index';
 import { isApp, isIphone } from '@/utils/index';
 
 import { Title, Span, Icon } from '@/components/atoms';
-import { Loading } from '@/components/molcules';
+import { Loading, Popup } from '@/components/molcules';
+import { LoginProps } from '@/pages/kakao/login';
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -42,6 +43,15 @@ const LoginButtonArea = styled.div`
   border-radius: 10px;
   cursor: pointer;
 `;
+const PopUpContainer = styled.div`
+  padding: 20px;
+`;
+
+const PopUpContent = styled.p`
+  font-size: 14px;
+  margin: 8px;
+  color: ${({ theme }) => theme.GRAY05};
+`;
 
 const TitleDiv = styled.div`
   ${Layout.flexRowStartCenter}
@@ -52,9 +62,14 @@ declare const window: Window &
     Kakao: any;
   };
 
-export default function LoginTemplate(): JSX.Element {
+export default function LoginTemplate({ error }: LoginProps): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  useEffect(() => {
+    if (error) {
+      setIsOpenPopup(true);
+    }
+  }, []);
   useEffect(() => {
     if (isApp() && isIphone()) {
       checkPermission({ permissionType: 'ATT' });
@@ -115,7 +130,24 @@ export default function LoginTemplate(): JSX.Element {
           {'에 동의하게 됩니다.'}
         </Span>
       </LoginButtonSection>
-      {isLoading && <Loading />}
+      {isOpenPopup && (
+        <Popup
+          type="ONE"
+          useClose={false}
+          successTitle={'다시시도'}
+          successCallback={() => {
+            setIsOpenPopup(false);
+            kakaoLogin();
+          }}
+        >
+          <PopUpContainer>
+            <Title style={{ fontSize: '24px', marginBottom: '10px' }}>{'로그인 실패'}</Title>
+            <PopUpContent> {error}</PopUpContent>
+
+            <PopUpContent style={{ fontSize: '12px' }}>* 이 내용은 카카오톡 서버에서 발송되었습니다</PopUpContent>
+          </PopUpContainer>
+        </Popup>
+      )}
     </MainContainer>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import { API_URL } from '@/constants/index';
+import { API_URL, GLOOMY_TOKEN } from '@/constants/index';
 import { fetcherSSR } from '@/utils/ssrFetcher';
 
 interface IKakaoLoginResponse {
@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  ctx.res.setHeader('set-Cookie', `token=${result.token ?? ''}; path=/;`);
+  ctx.res.setHeader('set-Cookie', `${GLOOMY_TOKEN}=${result.token ?? ''}; path=/;`);
 
   return {
     redirect: {

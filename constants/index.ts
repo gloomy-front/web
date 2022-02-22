@@ -7,7 +7,7 @@ export const SITE_URL =
   API_ENV === 'development' ? 'https://d1gbspr5q497yq.cloudfront.net' : 'https://d1gbspr5q497yq.cloudfront.net';
 export const GLOOMY_TOKEN = 'gloomyToken';
 export const API_URL = 'https://gomingout.com';
-export const KAKAO_KEY = '473b1a6bbe9f9cceeffa8a5a384fae27';
+export const KAKAO_KEY = '343faed407d9718984e4cd32202042ac';
 
 export const FEED_LIST_SIZE = 20;
 export const HOUR_TO_MIN = 60;

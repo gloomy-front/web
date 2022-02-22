@@ -38,10 +38,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   })(data);
 
   if (statusCode !== 200) {
-    console.error(message);
     return {
       redirect: {
-        destination: '/',
+        destination: `/kakao/login?error=${message}`,
         permanent: false,
       },
     };

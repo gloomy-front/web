@@ -1,6 +1,7 @@
 import React from 'react';
-import { LoginTemplate } from '@/components/templates';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+
+import { LoginTemplate } from '@/components/templates';
 
 export interface LoginProps {
   error: string;

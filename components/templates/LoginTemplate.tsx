@@ -43,6 +43,7 @@ const LoginButtonArea = styled.div`
   border-radius: 10px;
   cursor: pointer;
 `;
+
 const PopUpContainer = styled.div`
   padding: 20px;
 `;

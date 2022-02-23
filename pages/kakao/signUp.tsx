@@ -1,14 +1,15 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import { API_URL, GLOOMY_TOKEN } from '@/constants/index';
+import { API_URL, GLOOMY_TOKEN, GLOOMY_REFRESH_TOKEN } from '@/constants/index';
 import { fetcherSSR } from '@/utils/ssrFetcher';
 
 interface IKakaoLoginResponse {
   id: number;
   email: string;
   username: string;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export default function signUpPage(): JSX.Element {
@@ -46,7 +47,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  ctx.res.setHeader('set-Cookie', `${GLOOMY_TOKEN}=${result.token ?? ''}; path=/;`);
+  ctx.res.setHeader(
+    'set-Cookie',
+    `${GLOOMY_TOKEN}=${result.accessToken ?? ''}; path=/; ${GLOOMY_REFRESH_TOKEN}=${
+      result.refreshToken ?? ''
+    }; Expires=Wed; Secure; HttpOnly; SameSite=Strict`,
+  );
 
   return {
     redirect: {

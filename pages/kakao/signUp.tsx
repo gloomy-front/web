@@ -28,31 +28,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     redirect_uri: `${protocol}://${host}/kakao/signUp`,
   };
 
-  const {
-    code: statusCode,
-    result,
-    message,
-  } = await fetcherSSR<IKakaoLoginResponse>({
+  const { code: statusCode, result } = await fetcherSSR<IKakaoLoginResponse>({
     method: 'POST',
     url: `${API_URL}/kakao/signUp`,
     ctx,
   })(data);
 
-  if (statusCode !== 200) {
-    return {
-      redirect: {
-        destination: `/kakao/login?error=${message}`,
-        permanent: false,
-      },
-    };
-  }
+  console.log(result);
 
-  ctx.res.setHeader(
-    'set-Cookie',
-    `${GLOOMY_TOKEN}=${result.accessToken ?? ''}; path=/; ${GLOOMY_REFRESH_TOKEN}=${
-      result.refreshToken ?? ''
-    }; Expires=Wed; Secure; HttpOnly; SameSite=Strict`,
-  );
+  ctx.res.setHeader('set-Cookie', `${GLOOMY_TOKEN}=${result?.accessToken ?? ''}; path=/;`);
+  ctx.res.setHeader('set-Cookie', `${GLOOMY_REFRESH_TOKEN}=${result?.refreshToken ?? ''}; path=/;`);
 
   return {
     redirect: {

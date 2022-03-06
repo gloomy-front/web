@@ -1,5 +1,8 @@
 import { COLOR } from '@/styles/color';
 
+export * from './messageType';
+export * from './feed';
+
 export interface Image {
   filePath: string;
   filePK: number;
@@ -12,5 +15,4 @@ export enum ActionType {
 
 export type COLOR_TYPE = typeof COLOR;
 
-export * from './messageType';
-export * from './feed';
+export type DateFormatType = 'sec' | 'min' | 'hour' | 'day';

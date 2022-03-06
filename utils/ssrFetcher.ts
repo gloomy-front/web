@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
+import { GLOOMY_TOKEN } from '@/constants/index';
 
 type ApiData<T> = {
   result: T;
@@ -26,7 +27,7 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
   const apiURL = `${url}`;
   return (data?: any): FetchReturnType<T> => {
     return new Promise((resolve) => {
-      const token = '';
+      const token = ctx.req.cookies[GLOOMY_TOKEN] ?? '';
       const generalConfig = token
         ? {
             headers: {
@@ -46,7 +47,7 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
           .get(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            throw (response.data);
           });
       } else if (method === 'POST') {
         axios
@@ -55,21 +56,21 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
             resolve(res.data);
           })
           .catch(({ response }) => {
-            resolve(response.data);
+            throw (response.data);
           });
       } else if (method === 'PUT') {
         axios
           .put(apiURL, data, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            throw (response.data);
           });
       } else if (method === 'DELETE') {
         axios
           .delete(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            throw (response.data);
           });
       }
     });

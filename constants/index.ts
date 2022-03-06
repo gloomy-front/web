@@ -4,7 +4,9 @@ const { publicRuntimeConfig } = getConfig();
 const { API_ENV } = publicRuntimeConfig;
 
 export const SITE_URL =
-  API_ENV === 'development' ? 'https://d1gbspr5q497yq.cloudfront.net' : 'https://d1gbspr5q497yq.cloudfront.net';
+  API_ENV === 'development' ? 'http://localhost:3000' : 'https://d1gbspr5q497yq.cloudfront.net';
+// export const SITE_URL =
+//   API_ENV === 'development' ? 'https://d1gbspr5q497yq.cloudfront.net' : 'https://d1gbspr5q497yq.cloudfront.net';
 export const GLOOMY_TOKEN = 'gloomyToken';
 export const GLOOMY_REFRESH_TOKEN = 'gloomyRefreshToken';
 export const API_URL = 'https://gomingout.com';

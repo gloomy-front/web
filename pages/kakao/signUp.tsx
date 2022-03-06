@@ -1,8 +1,8 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
 
-import { API_URL, GLOOMY_TOKEN, GLOOMY_REFRESH_TOKEN } from '@/constants/index';
-import { fetcherSSR } from '@/utils/ssrFetcher';
+import { API_URL, GLOOMY_TOKEN, GLOOMY_REFRESH_TOKEN, SITE_URL } from '@/constants/index';
+import { fetcherSSR, getExpiresDate } from '@/utils/index';
 
 interface IKakaoLoginResponse {
   id: number;
@@ -17,32 +17,34 @@ export default function signUpPage(): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const {
-    query: { code },
-    req: { headers },
-  } = ctx;
-  const protocol = headers.referer?.split('://')[0];
-  const { host } = headers;
-  const data = {
-    code,
-    redirect_uri: `${protocol}://${host}/kakao/signUp`,
-  };
+  const { query: { code }} = ctx;
+  const data = { code, redirect_uri: `${SITE_URL}/kakao/signUp` };
 
-  const { code: statusCode, result } = await fetcherSSR<IKakaoLoginResponse>({
+  const { result } = await fetcherSSR<IKakaoLoginResponse>({
     method: 'POST',
     url: `${API_URL}/kakao/signUp`,
     ctx,
   })(data);
 
-  console.log(result);
+  if (result?.refreshToken && result?.accessToken) {
+    const expireDate = getExpiresDate(30);
 
-  ctx.res.setHeader('set-Cookie', `${GLOOMY_TOKEN}=${result?.accessToken ?? ''}; path=/;`);
-  ctx.res.setHeader('set-Cookie', `${GLOOMY_REFRESH_TOKEN}=${result?.refreshToken ?? ''}; path=/;`);
+    ctx.res.setHeader('set-Cookie',
+      [`${GLOOMY_REFRESH_TOKEN}=${result?.refreshToken ?? ''}; path=/; expires=${expireDate}; sameSite=lax;`,
+        `${GLOOMY_TOKEN}=${result?.accessToken ?? ''}; path=/; expires=${expireDate}; sameSite=lax;`]);
+
+    return {
+      redirect: {
+        destination: '/community',
+        permanent: false,
+      },
+    };
+  }
 
   return {
     redirect: {
-      destination: '/community',
+      destination: '/kakao/login',
       permanent: false,
-    },
+    }
   };
 };

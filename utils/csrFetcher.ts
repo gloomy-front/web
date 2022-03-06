@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { API_URL } from '@/constants/index';
+import Cookies from 'js-cookie';
+
+import { API_URL, GLOOMY_TOKEN } from '@/constants/index';
 
 export const STATUS_CODE = {
   BAD_REQUEST: 400,
@@ -21,8 +23,7 @@ type ApiFail<T> = ApiData<T>
 export type ApiReturn<T> = ApiSuccess<T> | ApiFail<T>
 
 function checkAuthToken(reqConfig?: any): AxiosRequestConfig | void {
-  // const authToken = Cookies.get(process.env.LOGIN_TOKEN_NAME as string) || '';
-  const authToken = 'eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJzdWIiOjQ1MywibmFtZSI6Im9qdzk3MDcyNUBuYXZlci5jb20iLCJpYXQiOjE2NzU2MDQwMjZ9.Szlepkj86_I5FBA3IyFg1kLXoUnfw-KGjOaLkCFc8ao';
+  const authToken = Cookies.get(GLOOMY_TOKEN) || '';
 
   if (typeof window !== 'undefined' && !authToken) {
     window.location.replace('/');

@@ -47,7 +47,7 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
           .get(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            throw (response.data);
+            resolve(response.data);
           });
       } else if (method === 'POST') {
         axios
@@ -56,21 +56,21 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
             resolve(res.data);
           })
           .catch(({ response }) => {
-            throw (response.data);
+            resolve(response.data);
           });
       } else if (method === 'PUT') {
         axios
           .put(apiURL, data, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            throw (response.data);
+            resolve(response.data);
           });
       } else if (method === 'DELETE') {
         axios
           .delete(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            throw (response.data);
+            resolve(response.data);
           });
       }
     });

@@ -7,8 +7,9 @@ import { Declaration } from '@/components/organisms';
 import { COLOR, Layout } from '@/styles/index';
 import { useCalcRegisterDate } from '@/hooks/index';
 import { stackRouterBack } from '@/utils/index';
-import { useGetFeedDetail } from '@/api/index';
+import { useGetFeedDetail, useGetUserDetail } from '@/api/index';
 import { CATEGORY_LIST } from '@/constants/index';
+import PostUpdateDelete from "@/components/organisms/community/PostUpdateDelete";
 
 const MainContainer = styled.main`
   ${Layout.flexColStartCenter};
@@ -128,7 +129,9 @@ const DetailPostTemplate = (): JSX.Element => {
   const router = useRouter();
   const feedId = parseInt(router.query['postId'] as string ?? '0');
   const [showDeclaration, setShowDeclaration] = useState<boolean>(false);
+  const [showPostUpdateDelete, setShowUpdateDelete] = useState<boolean>(false);
   const { data: feed } = useGetFeedDetail(feedId);
+  const { data: userDetail } = useGetUserDetail();
   const [registerDate] = useCalcRegisterDate(feed.createdAt ?? '');
 
   return (
@@ -136,7 +139,8 @@ const DetailPostTemplate = (): JSX.Element => {
       <HeaderContainer>
         <HeaderNav>
           <Icon.Back onClick={() => stackRouterBack(router)} height={'14px'} style={{ cursor: 'pointer' }}/>
-          <Icon.More onClick={() => setShowDeclaration(true)} style={{ cursor: 'pointer' }}/>
+          {/*<Icon.More onClick={() => setShowDeclaration(true)} style={{ cursor: 'pointer' }}/>*/}
+          <Icon.More onClick={() => setShowUpdateDelete(true)} style={{ cursor: 'pointer' }}/>
         </HeaderNav>
       </HeaderContainer>
       <TitleSection>
@@ -165,7 +169,8 @@ const DetailPostTemplate = (): JSX.Element => {
           <CommentPostButton>등록</CommentPostButton>
         </FooterSection>
       </FooterContainer>
-      {showDeclaration && <Declaration closeDispatch={() => setShowDeclaration(false)}/>}
+      {/*{showDeclaration && <Declaration closeDispatch={() => setShowDeclaration(false)}/>}*/}
+      {showPostUpdateDelete && <PostUpdateDelete closeDispatch={() => setShowUpdateDelete(false)}/>}
     </MainContainer>
   );
 };

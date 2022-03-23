@@ -16,6 +16,14 @@ export interface IFeed {
   deletedAt: string;
 }
 
+export interface IUser {
+  dateOfBirth: string;
+  id: string;
+  email: string;
+  imageUrl: string;
+  sex: string;
+}
+
 export type FeedListType = {
   content: Array<IFeed>;
 }

@@ -2,11 +2,9 @@ import { useMutation, postWithToken } from '@/utils/index';
 
 const uploadImageAPI = ({ feedId, files }: { feedId: number, files: Array<string> }) => {
   const data = new FormData();
-  for (let i = 0; i < files.length; i++) {
-    data.append('file', files[i]);
-  }
+  data.append('file', files[0]);
 
-  return postWithToken(`/feed/image/${feedId}`, data, { 'content-type': 'multipart/form-data' });
+  return postWithToken(`/feed/image/${feedId}`, { images: data }, { 'content-type': 'multipart/form-data' });
 };
 
 export const usePostFeedImage = () => {

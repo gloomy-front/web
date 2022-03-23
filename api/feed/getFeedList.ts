@@ -7,10 +7,10 @@ export type FeedListType = {
   content: Array<IFeed>;
 };
 
-export const getFeedList = () => {
+export const getFeedList = (category: string) => {
   const getKey = (pageIndex: number, previousPageData: null | ApiData<FeedListType>) => {
     if (previousPageData && !previousPageData.result.content.length) return null;
-    return `/feed?page=${pageIndex}&sort=date`;
+    return `/feed?page=${pageIndex}&sort=date&category=${category}`;
   };
 
   const { data, size, isValidating, setSize, mutate } = useSWRInfinite<ApiData<FeedListType>>(getKey, getWithToken,

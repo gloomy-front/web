@@ -87,7 +87,7 @@ export default function NewPostTemplate(): JSX.Element {
   const authData = useContext(AppAuthorContext);
 
   const [postFeed] = usePostFeed();
-  const [postFeedImage] = usePostFeedImage();
+  // const [postFeedImage] = usePostFeedImage();
 
   const methods = useForm<{ category: string; title: string; content: string; postImages: Array<Image> }>({
     defaultValues: {
@@ -137,8 +137,10 @@ export default function NewPostTemplate(): JSX.Element {
     });
 
     if (res?.code === 200) {
-      // const files = watchImages.map(image => image.filePath);
-      // await postFeedImage({ feedId: res.result.id, files });
+      if (watchImages.length > 0) {
+        const files = watchImages.map(image => image.filePath);
+        // await postFeedImage({ feedId: res.result.id, files });
+      }
       await router.replace(`/community/detail/${res.result.id}`);
     }
 
@@ -166,7 +168,6 @@ export default function NewPostTemplate(): JSX.Element {
         setIsLoading(false);
 
         if (typeof (e?.target?.result) === 'string') {
-          // dispatch({ filePath: e?.target?.result ?? '', filePK: res.data.filePK });
           setValue('postImages', [{ filePath: e?.target?.result ?? '', filePK: '0' }]);
 
           if (inputRef.current !== null) {

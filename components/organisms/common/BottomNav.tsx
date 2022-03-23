@@ -4,6 +4,7 @@ import { Layout, COLOR } from '@/styles/index';
 import { Icon } from '@/components/atoms';
 import { Tooltip } from '@/components/molcules';
 import { stackRouterPush } from '@/utils/index';
+import { requestFCMToken } from '@/hooks/index';
 
 const BottomContainer = styled.div`
   ${Layout.flexRowCenter};
@@ -25,7 +26,7 @@ const ButtonArea = styled.div`
 export default function BottomNav(): JSX.Element {
   const router = useRouter();
   const firstPath = router.pathname.split('/')[1];
-
+  // alert(requestFCMToken());
   return (
     <>
       <BottomContainer>

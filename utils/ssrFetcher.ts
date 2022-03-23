@@ -23,6 +23,10 @@ type ApiFail<T> = ApiData<T>;
 type ApiReturn<T> = ApiSuccess<T> | ApiFail<T>;
 type FetchReturnType<T> = Promise<ApiReturn<T>>;
 
+const timeoutAxios = axios.create({
+  timeout: 5000,
+});
+
 export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: RequestProps) => {
   const apiURL = `${url}`;
   return (data?: any): FetchReturnType<T> => {
@@ -43,11 +47,11 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
             ...config,
           };
       if (method === 'GET') {
-        axios
+        timeoutAxios
           .get(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            resolve(response?.data ?? { result: '' });
           });
       } else if (method === 'POST') {
         axios
@@ -56,21 +60,21 @@ export const fetcherSSR = <T>({ method = 'GET', url = '/', config = {}, ctx }: R
             resolve(res.data);
           })
           .catch(({ response }) => {
-            resolve(response.data);
+            resolve(response?.data ?? { result: '' });
           });
       } else if (method === 'PUT') {
-        axios
+        timeoutAxios
           .put(apiURL, data, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            resolve(response?.data ?? { result: '' });
           });
       } else if (method === 'DELETE') {
-        axios
+        timeoutAxios
           .delete(apiURL, generalConfig)
           .then((res) => resolve(res.data))
           .catch(({ response }) => {
-            resolve(response.data);
+            resolve(response?.data ?? { result: '' });
           });
       }
     });

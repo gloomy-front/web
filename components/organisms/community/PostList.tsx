@@ -17,10 +17,10 @@ const BoundarySection = styled.section`
 
 export default function PostList(): JSX.Element {
   const router = useRouter();
-  const category = parseInt(router.query['category'] as string ?? String('ALL'));
+  const category = router.query['category'] as string ?? String('ALL');
   const target = useRef<HTMLDivElement>(null);
 
-  const { data: refreshFeeds, loading, setSize, mutate } = getFeedList();
+  const { data: refreshFeeds, loading, setSize } = getFeedList(category);
 
   const { count, setCount } = useInfiniteScroll({
     target: target,
@@ -40,7 +40,7 @@ export default function PostList(): JSX.Element {
 
   useEffect(() => {
     setCount(() => 0);
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     if (count > 0) {

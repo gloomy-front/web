@@ -79,7 +79,7 @@ const PopupContents = styled.section`
 
   max-width: 600px;
   width: 100%;
-  min-height: 200px;
+  min-height: 150px;
 
   paddingTop: 16px;
   border-top-left-radius: 24px;
